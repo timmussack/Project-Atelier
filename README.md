@@ -1,6 +1,6 @@
 # FEC
 
-A project created by Tim Mussack, Joe Lin, and
+A project created by Tim Mussack, Joe Lin, and Darrien willig
 
 ## Before Starting Work on this Reposity
 
