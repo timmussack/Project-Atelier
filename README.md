@@ -20,3 +20,7 @@ Update your repo daily:
 If you get a divergent branch error:
 
     git config pull.rebase false
+
+Pushing changes:
+
+    git push origin <branchName>
