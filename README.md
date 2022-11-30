@@ -10,4 +10,4 @@ Update your repo daily:
 
 git pull upstream master
 
-joe
+Tim Mussack Joe Lin
