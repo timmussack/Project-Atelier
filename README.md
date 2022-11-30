@@ -21,6 +21,6 @@ If you get a divergent branch error:
 
     git config pull.rebase false
 
-Pushing changes:
+git pull upstream main
 
     git push origin <branchName>
