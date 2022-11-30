@@ -2,13 +2,13 @@
 
 A project created by Tim Mussack, Joe Lin, and
 
-# Before Starting Work on this Reposity
+## Before Starting Work on this Reposity
 
 Create your own branch:
 
     git checkout -b <branchName>
 
-# Updating the Repo
+## Updating the Repo
 
 Give git a reference to this repo:
 
