@@ -9,3 +9,5 @@ git remote add upstream https://github.com/RFE2210-Amaryllis/FEC.git
 Update your repo daily:
 
 git pull upstream master
+
+Tim Mussack
