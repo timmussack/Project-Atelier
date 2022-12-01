@@ -1,0 +1,4 @@
+{
+  "extends": "airbnb",
+  "ignorePatterns": ["bundle.js", "index.jsx"]
+}
