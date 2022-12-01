@@ -1,12 +1,21 @@
 # FEC
 
-A project created by Tim Mussack, Joe Lin, and Darrien willig
+A project created by Tim Mussack, Joe Lin, and Darrien Willig
 
 ## Before Starting Work on this Reposity
 
 Create your own branch:
 
     git checkout -b <branchName>
+
+Install dependencies:
+
+    npm install
+
+Start your server and client
+
+    npm run server-dev
+    npm run client-dev
 
 ## Updating the Repo
 
