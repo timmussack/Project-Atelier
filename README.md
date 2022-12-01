@@ -2,7 +2,7 @@
 
 A project created by Tim Mussack, Joe Lin, and Darrien Willig
 
-## Before Starting Work on this Reposity
+## Before Starting Work on this Repo
 
 Create your own branch:
 
