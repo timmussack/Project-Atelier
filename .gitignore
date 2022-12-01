@@ -1,4 +1,4 @@
 node_modules/
 .env
-
+Client/src/components/App.jsx
 bundle.js
