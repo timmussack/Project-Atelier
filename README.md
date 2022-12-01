@@ -1,4 +1,4 @@
-# FEC
+# Front End Capstone
 
 A project created by Tim Mussack, Joe Lin, and Darrien willig
 
