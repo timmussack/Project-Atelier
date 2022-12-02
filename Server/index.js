@@ -27,7 +27,7 @@ app.get('/products/:product_id', (req, res) => {
       res.json(response.data);
     })
     .catch((error) => {
-      console.error('Error in server line 25', error);
+      console.error('Error getting product data request', error);
     });
 });
 
@@ -43,12 +43,30 @@ app.get('/reviews/meta', (req, res) => {
       res.json(response.data);
     })
     .catch((error) => {
-      console.error('Error in server line 25', error);
+      console.error('Error on Getting review meta request', error);
     });
 });
 
 
-// ------------------------------------------------------ //
+// ----------------Product Styles Request--------------------------- //
+app.get('/products/:product_id/styles', (req, res) => {
+  const { id } = req.query;
+  axios.get(`${url}products/${id}/styles`, {
+    headers: {
+      Authorization: `${key}`,
+    },
+  })
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      console.error('Error in Product styles request', error);
+      res.sendStatus(404).end()
+    });
+});
+//--------------------------------------------------------------//
+
+
 
 
 const port = process.env.PORT;
