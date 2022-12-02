@@ -1,13 +1,17 @@
 import axios from 'axios';
 import * as React from 'react';
 import Ratings from './RnR/ratings.jsx';
+import MainView from './ProductDetails/MainView.jsx'
 
 const { useState, useEffect } = React;
 
 export default function App() {
-  const [data, setData] = useState([]);
   const [rating, setRating] = useState(3);
   const [stars, setStars] = useState([]);
+  const [product, setProduct] = useState(37311);
+  const [productData, setProductData] = useState({});
+  const [metaData, setMetaData] = useState({});
+
 
   // need to change to use data from get request on page load
   // set state of product rating
@@ -32,25 +36,53 @@ export default function App() {
     return result;
   };
 
-  useEffect(() => {
-    axios.get('/products', {
+  const getProductData = (productId) => {
+    axios.get('/products/:product_id', {
       params: {
-        page: 1,
-        count: 5,
+        'id': productId
       },
     })
-      .then((response) => {
-        setStars(createStars(rating));
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log('Error in client from get request', error);
-      });
+    .then((response) => {
+      setStars(createStars(rating));
+      let newProduct = response.data
+      setProductData(newProduct)
+    })
+    .catch((error) => {
+      console.log('Error in client from get request', error);
+    });
+  }
+
+
+  const getReviewMeta = (productId) => {
+    axios.get('/reviews/meta', {
+      params: {
+        'id': productId
+      },
+    })
+    .then((response) => {
+      console.log('Succesful request for meta data');
+      setMetaData(response.data);
+    })
+    .catch((error) => {
+      console.log('Error in client from get request', error);
+    });
+  }
+
+
+  useEffect(() => {
+    getProductData(product)
+    getReviewMeta(product)
+    //getreviews
+    //get question stuff
   }, []);
 
   return (
-    <div>
-      <h1>test</h1>
+    <div id= 'app'>
+      <MainView
+        product={product}
+        productData={productData}
+        reviewMeta={metaData} />
+
       <Ratings stars={stars} rating={rating} />
     </div>
   );
