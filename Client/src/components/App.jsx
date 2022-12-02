@@ -1,12 +1,7 @@
 import axios from 'axios';
-<<<<<<< HEAD
-import * as react from 'react';
-import React from 'react';
-import QA from './Q&A/QA.jsx';
-=======
+import QA from './Q&A/QAContainer.jsx';
 import * as React from 'react';
 import Ratings from './RnR/ratings.jsx';
->>>>>>> 8d11734e4c6e32c6f5538c51f8cd3a9686867786
 
 const { useState, useEffect } = React;
 
@@ -57,11 +52,8 @@ export default function App() {
   return (
     <div>
       <h1>test</h1>
-<<<<<<< HEAD
       <QA />
-=======
       <Ratings stars={stars} rating={rating} />
->>>>>>> 8d11734e4c6e32c6f5538c51f8cd3a9686867786
     </div>
   );
 }
