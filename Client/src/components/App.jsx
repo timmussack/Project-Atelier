@@ -1,5 +1,7 @@
 import axios from 'axios';
 import * as react from 'react';
+import React from 'react';
+import QA from './Q&A/QA.jsx';
 
 const { useState, useEffect } = react;
 
@@ -23,6 +25,7 @@ export default function App() {
   return (
     <div>
       <h1>test</h1>
+      <QA />
     </div>
   );
 }
