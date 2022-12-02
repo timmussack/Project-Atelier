@@ -52,7 +52,7 @@ export default function App() {
   return (
     <div>
       <h1>test</h1>
-      <QA />
+      <QA product={product} />
       <Ratings stars={stars} rating={rating} />
     </div>
   );
