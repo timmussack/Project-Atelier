@@ -66,7 +66,39 @@ app.get('/products/:product_id/styles', (req, res) => {
 });
 //--------------------------------------------------------------//
 
+//----------------------QA-----------------------------------//
 
+//Gets list of questions with answers given a product id
+app.get('/qa/questions', (req, res) => {
+  const { product_id, page, count } = req.query;
+  axios.get(`${url}qa/questions?product_id=${product_id}&page=${page}&count=${count}`, {
+    headers: {
+      Authorization: `${key}`,
+    },
+  })
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      console.error('Error in server line 25', error);
+    });
+});
+
+//Gets list of answers given a question id
+app.get('/qa/questions/:question_id/answers', (req, res) => {
+  const { question_id } = req.query;
+  axios.get(`${url}qa/questions/${question_id}/answers`, {
+    headers: {
+      Authorization: `${key}`,
+    },
+  })
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      console.error('Error in server line 25', error);
+    });
+});
 
 
 const port = process.env.PORT;
