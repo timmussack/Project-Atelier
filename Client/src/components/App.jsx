@@ -1,11 +1,12 @@
 import axios from 'axios';
 import * as React from 'react';
-import Ratings from './RnR/ratings.jsx';
+import MainRnR from './RnR/MainRnR.jsx';
 import MainView from './ProductDetails/MainView.jsx'
 
 const { useState, useEffect } = React;
 
 export default function App() {
+  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(3);
   const [stars, setStars] = useState([]);
   const [product, setProduct] = useState(37311);
@@ -68,8 +69,32 @@ export default function App() {
     });
   }
 
+  const averageRating = (arrOfRatings) => {
+    var result = 0;
+
+    for (let i = 0; i < arrOfRatings.length; i++) {
+      result += arrOfRatings[i].rating
+    }
+    return (result/arrOfRatings.length);
+  }
+
+  const getReviews = (id) => {
+    axios.get('/reviews', {
+      params: {
+        product_id: id,
+      },
+    })
+      .then((response) => {
+        setReviews(response.data.results);
+        setRating(averageRating(response.data.results));
+      })
+      .catch((error) => {
+        console.log('Error retrieving reviews');
+      })
+  }
 
   useEffect(() => {
+    getReviews(product);
     getProductData(product)
     getReviewMeta(product)
     //getreviews
@@ -83,7 +108,7 @@ export default function App() {
         productData={productData}
         reviewMeta={metaData} />
 
-      <Ratings stars={stars} rating={rating} />
+      <MainRnR rating={rating} reviews={reviews} productID={product}/>
     </div>
   );
 }

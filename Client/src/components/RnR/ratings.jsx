@@ -1,9 +1,13 @@
 import React from 'react';
+import Stars from './Stars.jsx';
 
-export default function Ratings ({ rating, stars }) {
+const Ratings = ({ rating, stars }) => {
+
   return (
-    <div>
-      <p>{stars.length}</p>
-    </div>
-  )
-}
+  <div>
+    <p>{rating}</p>
+    <Stars rating={rating} stars={stars} />
+  </div>
+)};
+
+export default Ratings;
