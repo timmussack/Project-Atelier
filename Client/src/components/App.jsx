@@ -7,7 +7,7 @@ const { useState, useEffect } = React;
 
 export default function App() {
   const [reviews, setReviews] = useState([]);
-  const [rating, setRating] = useState(3);
+  const [avgRating, setAvgRating] = useState(0);
   const [product, setProduct] = useState(37311);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({});
@@ -55,11 +55,12 @@ export default function App() {
     axios.get('/reviews', {
       params: {
         product_id: id,
+        count: 50,
       },
     })
       .then((response) => {
         setReviews(response.data.results);
-        setRating(averageRating(response.data.results));
+        setAvgRating(averageRating(response.data.results));
       })
       .catch((error) => {
         console.log('Error retrieving reviews');
@@ -68,8 +69,8 @@ export default function App() {
 
   useEffect(() => {
     getReviews(product);
-    getProductData(product)
-    getReviewMeta(product)
+    getProductData(product);
+    getReviewMeta(product);
     //getreviews
     //get question stuff
   }, []);
@@ -81,7 +82,11 @@ export default function App() {
         productData={productData}
         reviewMeta={metaData} />
 
-      <MainRnR rating={rating} reviews={reviews} productID={product}/>
+      <MainRnR
+      rating={avgRating}
+      reviews={reviews}
+      productID={product}
+      metaData={metaData} />
     </div>
   );
 }

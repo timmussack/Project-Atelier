@@ -20,7 +20,7 @@ const ReviewEntry = ({review, rating}) => {
       <ReviewBody body={review.body}/>
 
       <p>
-        {review.recommend ? ('This user recommends this product') : (null) }
+        {review.recommend ? ('I recommend this product ✓') : (null) }
       </p>
 
       <div>
