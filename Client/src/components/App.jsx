@@ -1,40 +1,16 @@
 import axios from 'axios';
 import * as React from 'react';
-import Ratings from './RnR/ratings.jsx';
+import MainRnR from './RnR/MainRnR.jsx';
 import MainView from './ProductDetails/MainView.jsx'
 
 const { useState, useEffect } = React;
 
 export default function App() {
-  const [rating, setRating] = useState(3);
-  const [stars, setStars] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
   const [product, setProduct] = useState(37311);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({});
-
-
-  // need to change to use data from get request on page load
-  // set state of product rating
-  // invoke this function in useeffect
-  const createStars = (productRating) => {
-    const result = [];
-    let count = 0;
-    const roundedRating = (Math.round(productRating * 4) / 4).toFixed(2);
-
-    while (count < 5) {
-      if (roundedRating >= 1) {
-        result.push('placeholder for fullstar image');
-        count++;
-      } else if (roundedRating === 0.5) {
-        result.push('placeholder for halfstar image');
-        count++;
-      } else {
-        result.push('placeholder for emptystar image');
-        count++;
-      }
-    }
-    return result;
-  };
 
   const getProductData = (productId) => {
     axios.get('/products/:product_id', {
@@ -43,7 +19,6 @@ export default function App() {
       },
     })
     .then((response) => {
-      setStars(createStars(rating));
       let newProduct = response.data
       setProductData(newProduct)
     })
@@ -51,7 +26,6 @@ export default function App() {
       console.log('Error in client from get request', error);
     });
   }
-
 
   const getReviewMeta = (productId) => {
     axios.get('/reviews/meta', {
@@ -68,10 +42,35 @@ export default function App() {
     });
   }
 
+  const averageRating = (arrOfRatings) => {
+    var result = 0;
+
+    for (let i = 0; i < arrOfRatings.length; i++) {
+      result += arrOfRatings[i].rating
+    }
+    return (result/arrOfRatings.length);
+  }
+
+  const getReviews = (id) => {
+    axios.get('/reviews', {
+      params: {
+        product_id: id,
+        count: 50,
+      },
+    })
+      .then((response) => {
+        setReviews(response.data.results);
+        setAvgRating(averageRating(response.data.results));
+      })
+      .catch((error) => {
+        console.log('Error retrieving reviews');
+      })
+  }
 
   useEffect(() => {
-    getProductData(product)
-    getReviewMeta(product)
+    getReviews(product);
+    getProductData(product);
+    getReviewMeta(product);
     //getreviews
     //get question stuff
   }, []);
@@ -83,7 +82,11 @@ export default function App() {
         productData={productData}
         reviewMeta={metaData} />
 
-      <Ratings stars={stars} rating={rating} />
+      <MainRnR
+      rating={avgRating}
+      reviews={reviews}
+      productID={product}
+      metaData={metaData} />
     </div>
   );
 }

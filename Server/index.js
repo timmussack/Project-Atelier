@@ -66,7 +66,21 @@ app.get('/products/:product_id/styles', (req, res) => {
 });
 //--------------------------------------------------------------//
 
-
+// getting reviews
+app.get('/reviews', (req, res) => {
+  const { product_id, count } = req.query;
+  axios.get(`${url}reviews?product_id=${product_id}&count=${count}`, {
+    headers: {
+      Authorization: `${key}`,
+    },
+  })
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      console.error('Error in server line 43');
+    });
+})
 
 
 const port = process.env.PORT;
