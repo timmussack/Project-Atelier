@@ -18,7 +18,7 @@ const HeaderContainer = styled.div`
 const SearchBarContainer = styled.div`
   position: relative;
   width: 20%;
-  padding-right: 50px
+  padding-right: 50px;
 `
 
 const SearchBar = styled.input`
