@@ -13,6 +13,8 @@ const QATitle = styled.div`
   margin: 10px 20px;
   font-size: 12px;
 `;
+QATitle.displayName = 'QATitle';
+
 
 export default function QAContainer( { product } ) {
   const [QAs, setQAs] = useState([]);
@@ -33,7 +35,7 @@ export default function QAContainer( { product } ) {
         setQAs(data);
       })
       .catch((error) => {
-        console.log('Error in client from getQAs request', error);
+        //console.log('Error in client from getQAs request', error);
       });
   };
 
