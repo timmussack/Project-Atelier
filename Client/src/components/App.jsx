@@ -83,7 +83,7 @@ export default function App() {
         productData={productData}
         reviewMeta={metaData} />
 
-      <QA product={product} />
+      <QA product={product} productData={productData}/>
 
       <MainRnR
       rating={avgRating}

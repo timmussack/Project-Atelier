@@ -20,13 +20,13 @@ const AddQuestion = styled.button`
   cursor: pointer;
 `;
 
-export default function QAButton() {
+export default function QAButton( { showQModal, setShowQModal }) {
 
   return (
     <div>
       <MoreAnswers onClick={()=> alert('Get more answers')}>MORE ANSWERED QUESTIONS</MoreAnswers>
 
-      <AddQuestion  onClick={()=> alert('Open modal')}>ADD A QUESTION  +</AddQuestion>
+      <AddQuestion  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>
   )
 

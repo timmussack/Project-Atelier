@@ -5,6 +5,7 @@ import React from 'react';
 import QuestionList from './QAList.jsx';
 import QASearch from './QASearch.jsx';
 import QAButtons from './QAButtons.jsx';
+import QuestionModal from './QuestionModal.jsx';
 
 const { useState, useEffect } = react;
 
@@ -16,8 +17,9 @@ const QATitle = styled.div`
 QATitle.displayName = 'QATitle';
 
 
-export default function QAContainer( { product } ) {
+export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
+  const [showQModal, setShowQModal] = useState(false);
 
 
   const getQAs = (productId) => {
@@ -57,7 +59,8 @@ export default function QAContainer( { product } ) {
       </QATitle>
       <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
       <QuestionList QAs={ QAs }/>
-      <QAButtons />
+      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal}/>
+      <QAButtons showQModal={showQModal} setShowQModal={setShowQModal}/>
     </>
   );
 }
