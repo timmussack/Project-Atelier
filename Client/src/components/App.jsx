@@ -1,4 +1,5 @@
 import axios from 'axios';
+import QA from './Q&A/QAContainer.jsx';
 import * as React from 'react';
 import MainRnR from './RnR/MainRnR.jsx';
 import MainView from './ProductDetails/MainView.jsx'
@@ -34,7 +35,7 @@ export default function App() {
       },
     })
     .then((response) => {
-      console.log('Succesful request for meta data');
+      //console.log('Successful request for meta data');
       setMetaData(response.data);
     })
     .catch((error) => {
@@ -81,6 +82,8 @@ export default function App() {
         product={product}
         productData={productData}
         reviewMeta={metaData} />
+
+      <QA product={product} productData={productData}/>
 
       <MainRnR
       rating={avgRating}
