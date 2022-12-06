@@ -7,6 +7,7 @@ import QASearch from './QASearch.jsx';
 import QAButtons from './QAButtons.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
+
 const { useState, useEffect } = react;
 
 const QATitle = styled.div`
@@ -20,14 +21,14 @@ QATitle.displayName = 'QATitle';
 export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
-
+  const [loadMoreQ, setLoadMoreQ] = useState(2);
 
   const getQAs = (productId) => {
     axios.get('/qa/questions', {
       params: {
         product_id: productId,
         page: 1,
-        count: 10,
+        count: 100,
       },
     })
       .then((response) => {
@@ -35,6 +36,7 @@ export default function QAContainer( { product, productData } ) {
           return b.question_helpfulness - a.question_helpfulness
         })
         setQAs(data);
+        console.log(data);
       })
       .catch((error) => {
         //console.log('Error in client from getQAs request', error);
@@ -57,10 +59,14 @@ export default function QAContainer( { product, productData } ) {
       <QATitle>
         QUESTIONS & ANSWERS
       </QATitle>
+
       <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
-      <QuestionList QAs={ QAs }/>
+
+      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ}/>
+
       <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal}/>
-      <QAButtons showQModal={showQModal} setShowQModal={setShowQModal}/>
+
+      <QAButtons loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
     </>
   );
 }

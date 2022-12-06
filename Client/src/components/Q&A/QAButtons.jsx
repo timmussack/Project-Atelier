@@ -5,7 +5,7 @@ import React from 'react';
 
 const { useState, useEffect } = react;
 
-const MoreAnswers = styled.button`
+const MoreAnsweredQs = styled.button`
   background: transparent;
   margin: 20px 10px 20px 20px;
   height: 40px;
@@ -20,11 +20,11 @@ const AddQuestion = styled.button`
   cursor: pointer;
 `;
 
-export default function QAButton( { showQModal, setShowQModal }) {
+export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ }) {
 
   return (
     <div>
-      <MoreAnswers onClick={()=> alert('Get more answers')}>MORE ANSWERED QUESTIONS</MoreAnswers>
+      <MoreAnsweredQs onClick={()=> setLoadMoreQ(loadMoreQ += 2)}>MORE ANSWERED QUESTIONS</MoreAnsweredQs>
 
       <AddQuestion  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>

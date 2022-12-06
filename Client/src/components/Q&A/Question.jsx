@@ -3,6 +3,7 @@ import React from 'react';
 import Answer from './Answer.jsx';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import AnswerModal from './AnswerModal.jsx';
 
 const QuestionContainer = styled.div`
   font-family: Helvetica, Sans-Serif;
@@ -70,10 +71,11 @@ const MoreButton = styled.button`
   margin: 0px 0px 15px 35px;
 `;
 
-export default function Question( { QA }) {
+export default function Question( { QA, product, productData }) {
   const [answers, setAnswers] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [buttonText, setButtonText] = useState('LOAD MORE ANSWERS');
+  const [showAModal, setShowAModal] = useState(false);
 
   const getAnswers = (questionId) => {
     axios.get('/qa/questions/:question_id/answers', {
@@ -114,7 +116,7 @@ export default function Question( { QA }) {
           <Yes onClick={() => alert('Helpful up vote.')}> Yes </Yes>
           <Votes> ({QA.question_helpfulness}) </Votes>
           <Spacer> | </Spacer>
-          <AddAnswer onClick={() => alert('Add an answer.')}>Add Answer</AddAnswer>
+          <AddAnswer onClick={() => setShowAModal(!showAModal)}>Add Answer</AddAnswer>
         </QuestionExtras>
       </QuestionContainer>
 
@@ -133,6 +135,8 @@ export default function Question( { QA }) {
         </Answers>
       </AnswerWrapper>
       {answers.length > 2 ? <MoreButton onClick={() => handleShowMore()}>{buttonText}</MoreButton> : null}
+
+      <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} />
     </>
   );
 }

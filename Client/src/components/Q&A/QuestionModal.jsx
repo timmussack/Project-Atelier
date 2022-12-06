@@ -6,7 +6,8 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const QModal = styled.div`
-  //display: none;
+  display: flex;
+  flex-direction: column;
   font-family: Helvetica, Sans-Serif;
   position: fixed;
   z-index: 1;
@@ -15,21 +16,21 @@ const QModal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 `;
 
 const QModalContent = styled.div`
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 1px solid black;
+  width: 65%;
 `;
 
 const ModalButton = styled.button`
   background: transparent;
   border: 1px solid;
+  margin-right: 20px;
 `;
 
 
@@ -37,6 +38,11 @@ export default function QuestionModal({ productData, product, showQModal, setSho
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+
+  const handleAddQuestion = (question, nickname, email, product) => {
+    console.log(question, nickname, email, product)
+  }
+
   let modalContent;
 
   if (showQModal) {
@@ -47,15 +53,22 @@ export default function QuestionModal({ productData, product, showQModal, setSho
         <p>About the {productData.name}</p>
         <form>
           <label>
-            Your Question*
-            <input style={{height: '100px'}} size="90" placeholder='' onChange={e => {
+            <div> Your question* </div>
+            <textarea maxlength='1000' value={question} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
             setQuestion(e.target.value)
-             }} />
+             }}> </textarea>
           </label>
 
           <label>
-            What is your nickname*
+            <div> What is your nickname* </div>
             <input size="60" placeholder='Example: jackson11!' onChange={e => {
+            setNickname(e.target.value)
+            }} />
+          </label>
+
+          <label>
+            <div> Your email* </div>
+            <input size="60" placeholder='Example: jack@email.com' onChange={e => {
             setNickname(e.target.value)
             }} />
           </label>
@@ -63,9 +76,13 @@ export default function QuestionModal({ productData, product, showQModal, setSho
         </form>
 
       <ModalButton onClick={() => {
-        //onEdit(question, nickname, email, product)
+        handleAddQuestion(question, nickname, email, product)
         setShowQModal(!showQModal)
       }}>Submit Question</ModalButton>
+
+      <ModalButton onClick={() => {
+        setShowQModal(!showQModal)
+      }}>Close without submission</ModalButton>
       </QModalContent>
       </QModal>
     );

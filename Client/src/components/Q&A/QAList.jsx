@@ -6,14 +6,14 @@ import Question from './Question.jsx';
 
 const { useState, useEffect } = react;
 
-export default function QuestionList( { QAs }) {
-//console.log('QAs in QuestionList', QAs)
+export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ }) {
+
   return (
     <div>
-      {QAs.map((QA) => {
+      {QAs.filter((item, index) => index < loadMoreQ).map((QA) => {
         return (
           <div key={QA.question_id}>
-            <Question QA={QA} />
+            <Question QA={QA} product={product} productData={productData} />
           </div>
         )
      })}
@@ -21,4 +21,6 @@ export default function QuestionList( { QAs }) {
   )
 
 };
+
+
 
