@@ -4,13 +4,13 @@ import styled from 'styled-components'
 
 const HeaderContainer = styled.div`
   display: flex;
-  position: relative;
   justify-content: space-between;
   align-items: center;
   background-color: #4f4f4f;
-  margin-right: 200px;
-  margin-left: 200px;
+  width: 75%;
+  max-width: 900px
   height: 80px;
+  margin: 0 auto;
 
 `
 

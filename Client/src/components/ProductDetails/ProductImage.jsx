@@ -113,9 +113,10 @@ const ProductImage = ({styles, defaultStyle}) => {
               className="right-arrow"
               onClick={(e) => handleRightArrowClick(e)}/>
           }
-        <img src={currentImage} alt="" />
-
-
+          <img src={currentImage} alt="" />
+        </div>
+        <div className="left_3">
+          <h3>Title of item</h3>
         </div>
       </div>
     </div>

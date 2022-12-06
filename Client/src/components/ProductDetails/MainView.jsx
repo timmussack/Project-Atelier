@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ProductImage from './ProductImage.jsx';
+import Description from './Description.jsx'
 
 
 const MainView = ({ product, productData, reviewMeta}) => {
@@ -48,6 +49,9 @@ const Container = styled.div`
         styles={styles}
         defaultStyle={defaultStyle}
         />
+      <Description
+        productData={productData} />
+
     </div>
 
   )
