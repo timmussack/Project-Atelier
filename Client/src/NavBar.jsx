@@ -7,9 +7,9 @@ const HeaderContainer = styled.div`
   position: relative;
   justify-content: space-between;
   align-items: center;
-  background-color: grey;
-  margin-right: 150px;
-  margin-left: 150px;
+  background-color: #4f4f4f;
+  margin-right: 200px;
+  margin-left: 200px;
   height: 80px;
 
 `
