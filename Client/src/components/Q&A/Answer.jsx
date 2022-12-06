@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
+import AnswerPhotos from './AnswerPhotos.jsx';
+
+const { useState, useEffect } = React;
 
 const AnswerContainer = styled.div`
   font-family: Helvetica, Sans-Serif;
@@ -54,7 +57,13 @@ const ReportAnswer = styled.div`
   cursor: pointer;
 `;
 
-export default function Question( { answer }) {
+const APhotos = styled.div`
+  padding: 0px 5px 10px 0px;
+`;
+
+export default function Answer( { answer }) {
+  const [reported, setReported] = useState(false);
+  const [helpful, setHelpful] = useState(false);
 
   const formatDate = (data) => {
     let date = new Date(data);
@@ -62,26 +71,48 @@ export default function Question( { answer }) {
     let month = date.toLocaleString('default', { month: 'long' });
     let day = date.getDate();
     return month + ' ' + day + ', ' + year;
-  }
+  };
+
+  const handleReport = (answerId) => {
+    setReported(true)
+    console.log(answerId)
+  };
+
+  const handleAnswerHelpful = (answerId) => {
+    setHelpful(true)
+    console.log(answerId)
+  };
 
   return (
     <AnswerContainer>
+
       <AnswerMain>
         {answer.body}
       </AnswerMain>
-      {/* <AnswerPhotos>
-        {photoContent}
-      </AnswerPhotos> */}
+
+      <APhotos>
+        <AnswerPhotos photos={answer.photos}/>
+      </APhotos>
+
       <AnswerExtras>
-        <AnsweredBy> {answer.answerer_name}, </AnsweredBy>
+        {answer.answerer_name === 'Seller' ? <AnsweredBy> by <strong>{answer.answerer_name}</strong>, </AnsweredBy> : <AnsweredBy> by {answer.answerer_name}, </AnsweredBy>}
+
         <AnswerDate> {formatDate(answer.date)} </AnswerDate>
+
         <Spacer1> | </Spacer1>
+
         <Helpful> Helpful? </Helpful>
-        <Yes onClick={() => alert('Helpful up vote.')}> Yes </Yes>
+
+        {!helpful ? <Yes onClick={() => handleAnswerHelpful(answer.answer_id)}> Yes </Yes> : <Yes> Yes </Yes>}
+
         <Votes> ({answer.helpfulness}) </Votes>
+
         <Spacer2> | </Spacer2>
-        <ReportAnswer onClick={() => alert('Report an answer.')}> Report </ReportAnswer>
+
+        {!reported ? <ReportAnswer onClick={() => handleReport(answer.answer_id)}> Report </ReportAnswer> : <ReportAnswer> Reported </ReportAnswer>}
+
       </AnswerExtras>
+
     </AnswerContainer>
   );
 }

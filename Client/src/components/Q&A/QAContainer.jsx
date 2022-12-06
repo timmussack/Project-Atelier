@@ -21,7 +21,7 @@ QATitle.displayName = 'QATitle';
 export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
-  const [loadMoreQ, setLoadMoreQ] = useState(2);
+  const [loadMoreQ, setLoadMoreQ] = useState(false);
 
   const getQAs = (productId) => {
     axios.get('/qa/questions', {
@@ -39,7 +39,7 @@ export default function QAContainer( { product, productData } ) {
         console.log(data);
       })
       .catch((error) => {
-        //console.log('Error in client from getQAs request', error);
+        console.log('Error in client from getQAs request', error);
       });
   };
 

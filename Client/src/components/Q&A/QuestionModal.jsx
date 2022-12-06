@@ -54,7 +54,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
         <form>
           <label>
             <div> Your question* </div>
-            <textarea maxlength='1000' value={question} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
+            <textarea maxLength='1000' value={question} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
             setQuestion(e.target.value)
              }}> </textarea>
           </label>

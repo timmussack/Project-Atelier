@@ -6,18 +6,30 @@ import Question from './Question.jsx';
 
 const { useState, useEffect } = react;
 
+const QAWrapper = styled.div`
+  text-overflow: ellipsis;
+  max-height: 80vh;
+  overflow-y: auto;
+`;
+
 export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ }) {
 
   return (
-    <div>
-      {QAs.filter((item, index) => index < loadMoreQ).map((QA) => {
+    <QAWrapper>
+      {!loadMoreQ ? QAs.filter((item, index) => index < 4).map((QA) => {
         return (
           <div key={QA.question_id}>
             <Question QA={QA} product={product} productData={productData} />
           </div>
         )
-     })}
-    </div>
+     }) : QAs.map((QA) => {
+      return (
+        <div key={QA.question_id}>
+          <Question QA={QA} product={product} productData={productData} />
+        </div>
+      )
+   })}
+    </QAWrapper>
   )
 
 };

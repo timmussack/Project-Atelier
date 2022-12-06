@@ -15,6 +15,7 @@ const QuestionContainer = styled.div`
 
 const QuestionMain = styled.div`
   font-weight: bold;
+  max-width: 70vh;
 `;
 
 const QuestionExtras = styled.div`
@@ -47,6 +48,7 @@ const AddAnswer = styled.div`
 `;
 
 const AnswerWrapper = styled.div`
+  max-width: 80vh;
   display: flex;
   flex-direction: row;
   margin: 0px 0px 0px 0px;
@@ -71,25 +73,57 @@ const MoreButton = styled.button`
   margin: 0px 0px 15px 35px;
 `;
 
+const NoAnswers = styled.div`
+  font-family: Helvetica, Sans-Serif;
+  font-size: 10px;
+  padding: 0px 0px 15px 20px;
+`;
+
 export default function Question( { QA, product, productData }) {
   const [answers, setAnswers] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [buttonText, setButtonText] = useState('LOAD MORE ANSWERS');
   const [showAModal, setShowAModal] = useState(false);
+  const [helpful, setHelpful] = useState(false);
+
+  //This function is used to sort the answers by helpfulness before they become the answers state.
+  const sortByHelpfulness = (a, b) => {
+    const resultA = a.helpfulness;
+    const resultB = b.helpfulness;
+    let comparison = 0;
+    if (resultA > resultB) {
+      comparison = -1;
+    } else {
+      comparison = 1;
+    }
+    return comparison;
+  }
+
+  //This function moves answers from the "Seller" to the front of the answer array before they become the answers state.
+  const moveSellerToFront = (answersArray) => {
+    for (let i = 0; i < answersArray.length; i++) {
+      if (answersArray[i].answerer_name.toLowerCase() === 'seller') {
+        answersArray = answersArray.splice(i, 1).concat(answersArray);
+      }
+    }
+    return answersArray;
+  }
 
   const getAnswers = (questionId) => {
     axios.get('/qa/questions/:question_id/answers', {
       params: {
         question_id: questionId,
         page: 1,
-        count: 5,
+        count: 100,
       },
     })
       .then((response) => {
-        let data = response.data.results.sort((a, b) => {
-          return b.helpfulness - a.helpfulness
-        })
-        setAnswers(data);
+        let firstSortData = response.data.results.sort(sortByHelpfulness);
+        let secondSortData = moveSellerToFront(firstSortData);
+        // let data = response.data.results.sort((a, b) => {
+        //   return b.helpfulness - a.helpfulness
+        // })
+        setAnswers(secondSortData);
       })
       .catch((error) => {
         console.log('Error in client from getAnswers request', error);
@@ -105,23 +139,37 @@ export default function Question( { QA, product, productData }) {
     !loadMore ? setButtonText('COLLAPSE ANSWERS') : setButtonText('LOAD MORE ANSWERS')
   };
 
+  const handleQuestionHelpful = (questionId) => {
+    setHelpful(true);
+    console.log(questionId)
+  };
+
   return (
     <>
       <QuestionContainer>
+
         <QuestionMain>
           Q: {QA.question_body}
         </QuestionMain>
+
         <QuestionExtras>
+
           <Helpful>Helpful?</Helpful>
-          <Yes onClick={() => alert('Helpful up vote.')}> Yes </Yes>
+
+          {!helpful ? <Yes onClick={() => handleQuestionHelpful(QA.question_id)}> Yes </Yes> : <Yes> Yes </Yes>}
+
           <Votes> ({QA.question_helpfulness}) </Votes>
+
           <Spacer> | </Spacer>
+
           <AddAnswer onClick={() => setShowAModal(!showAModal)}>Add Answer</AddAnswer>
+
         </QuestionExtras>
+
       </QuestionContainer>
 
       <AnswerWrapper>
-        <A>A:</A>
+        {answers.length === 0 ? <NoAnswers>This question has not been answered.</NoAnswers> : <A>A:</A>}
         <Answers>
           {!loadMore ? answers.filter((item, index) => index < 2).map((answer) => {
             return (

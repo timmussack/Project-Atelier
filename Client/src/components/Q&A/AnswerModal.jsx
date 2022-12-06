@@ -54,7 +54,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
         <form>
           <label>
             <div> Your Answer* </div>
-            <textarea maxlength='1000' value={answer} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
+            <textarea maxLength='1000' value={answer} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
             setAnswer(e.target.value)
              }}> </textarea>
           </label>
