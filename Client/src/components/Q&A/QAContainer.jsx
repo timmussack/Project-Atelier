@@ -3,12 +3,20 @@ import * as react from 'react';
 import styled, { css } from 'styled-components';
 import React from 'react';
 import QuestionList from './QAList.jsx';
+import QASearch from './QASearch.jsx';
+import QAButtons from './QAButtons.jsx';
 
 const { useState, useEffect } = react;
 
+const QATitle = styled.div`
+  font-family: Helvetica, Sans-Serif;
+  margin: 10px 20px;
+  font-size: 12px;
+`;
+
 export default function QAContainer( { product } ) {
   const [QAs, setQAs] = useState([]);
-  const [answers, setAnswers] = useState([]);
+
 
   const getQAs = (productId) => {
     axios.get('/qa/questions', {
@@ -19,25 +27,13 @@ export default function QAContainer( { product } ) {
       },
     })
       .then((response) => {
-        setQAs(response.data.results)
-        //console.log(response.data);
+        let data = response.data.results.sort((a, b) => {
+          return b.question_helpfulness - a.question_helpfulness
+        })
+        setQAs(data);
       })
       .catch((error) => {
         console.log('Error in client from getQAs request', error);
-      });
-  };
-
-  const getAnswers = (questionId) => {
-    axios.get('/qa/questions/:question_id/answers', {
-      params: {
-        question_id: questionId,
-      },
-    })
-      .then((response) => {
-        setAnswers(response.data.results);
-      })
-      .catch((error) => {
-        console.log('Error in client from getAnswers request', error);
       });
   };
 
@@ -45,10 +41,21 @@ export default function QAContainer( { product } ) {
     getQAs(product);
   }, []);
 
+  const handleSearch = (search) => {
+    console.log(search);
+    setQAs(
+      QAs.filter(QA => QA.question_body.toLowerCase().includes(search.toLowerCase()))
+    )
+  };
+
   return (
     <>
-      <div> QUESTIONS & ANSWERS </div>
-      <QuestionList QAs={QAs}/>
+      <QATitle>
+        QUESTIONS & ANSWERS
+      </QATitle>
+      <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
+      <QuestionList QAs={ QAs }/>
+      <QAButtons />
     </>
   );
 }
