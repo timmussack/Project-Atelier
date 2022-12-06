@@ -5,9 +5,9 @@ import App from './App';
 describe('App Component', () => {
   it('should have hello world message', () => {
     const { getByText } = render(<App />);
-    expect(getByText('test')).toMatchInlineSnapshot(`
+    expect(getByText('Product Details')).toMatchInlineSnapshot(`
       <h1>
-        test
+        Product Details
       </h1>
     `);
   });
