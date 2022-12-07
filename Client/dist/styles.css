@@ -28,7 +28,6 @@ body {
 
 .container {
   width: 75%;
-  max-width: 900px;
   margin: 0 auto;
   padding-top: 5px;
   /* margin-left: 200px;
@@ -66,8 +65,8 @@ body {
 
 .left_2 img {
 
-  width: 555px;
-  height: 555px;
+  width: 700px;
+  height: 700px;
   object-fit: fill
 }
 
