@@ -27,7 +27,7 @@ const ReviewTiles = ({reviews, filter, metaData, rating}) => {
           if (index < display) {
             return <ReviewEntry review={review} key={index}/>
           } else {
-            return;
+            return
           }
         })};
       </div>
