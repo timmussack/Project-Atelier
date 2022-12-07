@@ -13,7 +13,7 @@ const Reviews = ({reviews, metaData}) => {
     let sortBy = e.target.value;
 
     for (let option in filter) {
-      if (sortBy = option) {
+      if (sortBy === option) {
         filter[sortBy] = true;
       } else {
         filter[sortBy] = false;
