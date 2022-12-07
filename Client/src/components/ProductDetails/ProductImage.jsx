@@ -184,13 +184,13 @@ const ProductImage = ({styles, defaultStyle}) => {
             photoIndex !== 0 &&
             <FaAngleLeft
               className="left-arrow"
-              onClick={(e) => handleLeftArrowClick(e)}/>
+              onClick={moveThumbnailsUp}/>
           }
           {
             defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
             <FaAngleRight
               className="right-arrow"
-              onClick={(e) => handleRightArrowClick(e)}/>
+              onClick={moveThumbnailsDown}/>
           }
           <img src={currentImage} alt="" />
         </div>
