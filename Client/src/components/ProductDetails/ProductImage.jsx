@@ -13,10 +13,10 @@ const ProductImage = ({styles, defaultStyle}) => {
 
 
   const moveThumbnailsUp = (e) => {
-    let image = carouselArray[0];
-    let tempArray = carouselArray.slice(1);
-    tempArray.push(image);
-    setCarouselArray(tempArray);
+    let index = photoIndex - 1
+    setPhotoIndex(index);
+    setCurrentImage(defaultStyle.photos[index].url);
+
   };
 
 
@@ -24,10 +24,9 @@ const ProductImage = ({styles, defaultStyle}) => {
 
 
   const moveThumbnailsDown = (e) => {
-    let image = carouselArray[carouselArray.length - 1];
-    let tempArray = carouselArray.slice(0, -1);
-    tempArray.unshift(image);
-    setCarouselArray(tempArray);
+    let index = photoIndex + 1
+    setPhotoIndex(index);
+    setCurrentImage(defaultStyle.photos[index].url);
   };
 
 
