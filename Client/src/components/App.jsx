@@ -3,7 +3,7 @@ import QA from './Q&A/QAContainer.jsx';
 import * as React from 'react';
 import MainRnR from './RnR/MainRnR.jsx';
 import MainView from './ProductDetails/MainView.jsx'
-
+import NavBar from '../NavBar.jsx'
 const { useState, useEffect } = React;
 
 export default function App() {
@@ -78,6 +78,7 @@ export default function App() {
 
   return (
     <div id= 'app'>
+      <NavBar/>
       <MainView
         product={product}
         productData={productData}
