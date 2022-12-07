@@ -1,9 +1,105 @@
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
 
 .app {
-  font-family: "San Francisco";
-  font-weight: 400;
-  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+
+}
+
+.slider {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 1000px;
+  height: 600px;
+  border-radius: 10px;
+}
+
+
+
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 5px;
+  /* margin-left: 200px;
+  padding-top: 20px; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.left {
+  display: flex;
+}
+
+.left_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.img_wrap {
+  width:  70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.img_wrap img {
+  width: 70px;
+  height: 70px;
+  object-fit: fill;
+}
+
+.left_2 {
+  position: relative;
+  padding-left: 0.5em;
+}
+
+.left_2 img {
+
+  width: 700px;
+  height: 700px;
+  object-fit: fill
+}
+
+.left_3 {
+  position: relative;
+  padding-left: 0.5em;
+}
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: rgb(255, 0, 0);
+  z-index: 6;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: rgb(255, 0, 0);
+  z-index: 6;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+
+
+.active {
+  border: 2px solid red;
+  border-radius: 2px;
 }
