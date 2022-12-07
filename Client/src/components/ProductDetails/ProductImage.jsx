@@ -10,7 +10,6 @@ const ProductImage = ({styles, defaultStyle}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [photoIndex, setPhotoIndex] = useState(0);
   const [thumbnailArray, setThumbnailArray] = useState([]);
-  const [carouselArray, setCarouselArray] = useState([]);
   const [showItems, setShowItems] = useState(6);
   const [thumbnailDown, setThumbnailDown] = useState(false);
   const [thumbnailUp, setThumbnailUp] = useState(false);
@@ -50,7 +49,7 @@ const ProductImage = ({styles, defaultStyle}) => {
   console.log(`Current ShowItems: ${showItems}`);
 
   const moveThumbnailsDown = (e) => {
-      if (showItems === thumbnailArray.length - 1) {
+      if (showItems === thumbnailArray.length - 1 || showItems === thumbnailArray.length) {
         let index = photoIndex + 1
         setPhotoIndex(index);
         setCurrentImage(thumbnailArray[index]);
@@ -80,7 +79,6 @@ const ProductImage = ({styles, defaultStyle}) => {
       temp.push(image.thumbnail_url);
     })
     setThumbnailArray(temp);
-    setCarouselArray(temp);
   }
 
 
