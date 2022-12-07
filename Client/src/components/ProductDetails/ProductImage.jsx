@@ -9,25 +9,79 @@ import styled from 'styled-components';
 const ProductImage = ({styles, defaultStyle}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [thumbnailArray, setThumbnailArray] = useState([]);
   const [carouselArray, setCarouselArray] = useState([]);
+  const [showItems, setShowItems] = useState(6);
+  const [thumbnailDown, setThumbnailDown] = useState(false);
+  const [thumbnailUp, setThumbnailUp] = useState(false);
+  const [startingIndex, setStartingIndex] = useState(0);
 
+  console.log(thumbnailArray.length)
 
   const moveThumbnailsUp = (e) => {
-    let index = photoIndex - 1
-    setPhotoIndex(index);
-    setCurrentImage(defaultStyle.photos[index].url);
+    if (showItems === 6) {
+      let index = photoIndex - 1
+      setPhotoIndex(index);
+      setCurrentImage(thumbnailArray[index]);
+    } else {
+      let index = photoIndex - 1
+      setPhotoIndex(index);
+      setCurrentImage(thumbnailArray[index]);
+      console.log(`index inside thumbs up: ${index}`);
+      setStartingIndex(startingIndex - 1);
+      setShowItems(showItems - 1);
+      setThumbnailUp(true);
+    }
 
+    // if (index <= 4) {
+    //   setStartingIndex(startingIndex - 1);
+    //   setShowItems(showItems - 1);
+    //   setThumbnailUp(true);
+    // } else if (index < 4) {
+    //   setStartingIndex(startingIndex - 1);
+    //   setShowItems(showItems - 1);
+    // } else if (index === 0) {
+    //   setStartingIndex(0);
+    //   setThumbnailUp(false);
+    // }
   };
 
-
-
-
+  console.log(`Current Starting Index: ${startingIndex}`);
+  console.log(`Current ShowItems: ${showItems}`);
 
   const moveThumbnailsDown = (e) => {
-    let index = photoIndex + 1
-    setPhotoIndex(index);
-    setCurrentImage(defaultStyle.photos[index].url);
+      if (showItems === thumbnailArray.length - 1) {
+        let index = photoIndex + 1
+        setPhotoIndex(index);
+        setCurrentImage(thumbnailArray[index]);
+      } else {
+        setStartingIndex(startingIndex + 1)
+        setShowItems(showItems + 1);
+        setThumbnailDown(true);
+        let index = photoIndex + 1
+        setPhotoIndex(index);
+        setCurrentImage(thumbnailArray[index]);
+        console.log(`index inside thumbs down: ${index}`);
+      }
+    // if (index >= 7) {
+    //   setStartingIndex(startingIndex + 1)
+    //   setShowItems(showItems + 1);
+    //   setThumbnailDown(true);
+    // } else if (index === thumbnailArray.length -1) {
+    //   setStartingIndex(index);
+    //   setThumbnailDown(false);
+    // }
+
   };
+
+  const createThumbnailArray = () => {
+    var temp = [];
+    defaultStyle.photos.forEach((image) => {
+      temp.push(image.thumbnail_url);
+    })
+    setThumbnailArray(temp);
+    setCarouselArray(temp);
+  }
 
 
 
@@ -40,7 +94,7 @@ const ProductImage = ({styles, defaultStyle}) => {
         firstImage = 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'
       }
       setCurrentImage(firstImage);
-      setCarouselArray(styles);
+      createThumbnailArray()
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
@@ -48,7 +102,7 @@ const ProductImage = ({styles, defaultStyle}) => {
   }, [defaultStyle])
 
   const handleClick = (image, index) => {
-    setCurrentImage(image.url);
+    setCurrentImage(image);
     setPhotoIndex(index);
   }
 
@@ -56,13 +110,13 @@ const ProductImage = ({styles, defaultStyle}) => {
   const handleLeftArrowClick = (event) => {
     let index = photoIndex - 1
     setPhotoIndex(index);
-    setCurrentImage(defaultStyle.photos[index].url);
+    setCurrentImage(thumbnailArray[index]);
   }
 
   const handleRightArrowClick = (event) => {
     let index = photoIndex + 1
     setPhotoIndex(index);
-    setCurrentImage(defaultStyle.photos[index].url);
+    setCurrentImage(thumbnailArray[index]);
   }
 
   return (
@@ -70,28 +124,56 @@ const ProductImage = ({styles, defaultStyle}) => {
       <div className="left">
         <div className="left_1">
           {
-            photoIndex !== 0 &&
+            thumbnailArray.length && photoIndex !== 0 &&
             < div
               style={{paddingLeft: "35%"}}
               onClick={moveThumbnailsUp}>
               <FaAngleUp />
             </div>
           }
-          { defaultStyle.photos &&
-            defaultStyle.photos.map((image, index) => {
-              return (
-                <div
-                  className={index === photoIndex ? "img_wrap active" : "img_wrap"}
-                  key={index}
-                  onClick={() => handleClick(image, index)}
-                  >
-                  <img src={image.thumbnail_url} alt="" />
-                </div>
-              )
+          { thumbnailArray.length &&
+            thumbnailArray.map((image, index) => {
+              if (thumbnailDown) {
+                  while (index >= startingIndex &&  index <= showItems) {
+                    return (
+                      <div
+                        className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                        key={index}
+                        onClick={() => handleClick(image, index)}
+                        >
+                        <img src={image} alt="" />
+                      </div>
+                    )
+                  }
+              } else if (thumbnailUp) {
+                while (index >= startingIndex && index <= showItems) {
+                  return (
+                    <div
+                      className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                      key={index}
+                      onClick={() => handleClick(image, index)}
+                      >
+                      <img src={image} alt="" />
+                    </div>
+                  )
+                }
+              } else {
+                while (index <= showItems) {
+                  return (
+                    <div
+                      className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                      key={index}
+                      onClick={() => handleClick(image, index)}
+                      >
+                      <img src={image} alt="" />
+                    </div>
+                  )
+                }
+              }
             })
           }
           {
-            defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
+            thumbnailArray.length && photoIndex !== thumbnailArray.length -1 &&
             <div
               style={{paddingLeft: "35%"}}
               onClick={moveThumbnailsDown}>
