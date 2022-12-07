@@ -1,4 +1,20 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
+
+const MoreReviews = styled.button`
+  background: transparent;
+  margin: 20px 10px 20px 20px;
+  height: 40px;
+  border: 1px solid;
+  cursor: pointer;
+`;
+
+const AddReviewButton = styled.button`
+  background: transparent;
+  height: 40px;
+  border: 1px solid;
+  cursor: pointer;
+`;
 
 const AddReview = ({ display, reviews, metaData, rating, displayHandler }) => {
 
@@ -9,12 +25,12 @@ const AddReview = ({ display, reviews, metaData, rating, displayHandler }) => {
     <div>
       {reviews.length > display ? (
         <div className="reviewButtons">
-          <button onClick={() => displayHandler()}>More Reviews</button>
-          <button onClick={() => addHandler()}>Add Your Review</button>
+          <MoreReviews onClick={() => displayHandler()}>MORE REVIEWS</MoreReviews>
+          <AddReviewButton onClick={() => addHandler()}>ADD A REVIEW +</AddReviewButton>
         </div>
       ) : (
         <div className="reviewButtons">
-          <button onClick={() => addHandler()}>Add Your Review</button>
+          <AddReviewButton onClick={() => addHandler()}>ADD A REVIEW +</AddReviewButton>
         </div>
       ) }
     </div>
