@@ -1,20 +1,17 @@
 import React from 'react';
 
-const PhotoModal = ({ url }) => {
-  return (
-    <div className="image-modal-aaron">
-      <div className={props.nightShift === 'nightShiftOn' ? 'image-modal-content2-dark' : 'image-modal-content2'}>
-        <div className="image-modal-header">
+const PhotoModal = ({ url, zoom, setZoom }) => {
+
+  if (zoom) {
+    return (
+      <div>
+        <div>
+          <img src={url} onClick={() => setZoom(!zoom)}/>
         </div>
-        <div className="image-modal-body2">
-          <img id="displayedModalImage" src={props.photo} onClick={props.hide} alt={`${props.photo}`}/>
-        </div>
-        <div className="image-modal-footer">
-          <button className="image-button" onClick={props.hide}>close</button>
-        </div>
+        <button onClick={() => setZoom(!zoom)}>Close Photo</button>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default PhotoModal;

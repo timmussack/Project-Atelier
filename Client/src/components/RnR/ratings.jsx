@@ -1,6 +1,16 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import styled, { css } from 'styled-components';
 
+const Formatting = styled.div`
+  margin: 10px 20px;
+  font-family: Helvetica, Sans-Serif;
+  font-size: 12px;
+`;
+const LargeRating = styled.div`
+  font-size: 60px;
+  font-weight: bold;
+`
 const Ratings = ({ rating, reviews, metaData }) => {
   const recommendOrNah = (reviewData) => {
     let recommended = 0;
@@ -15,12 +25,10 @@ const Ratings = ({ rating, reviews, metaData }) => {
   }
 
   return (
-  <div>
-    <h1> Rating Breakdown: </h1>
-    <p>{rating}</p>
-    <Stars rating={rating} />
+  <Formatting>
+    <div><LargeRating>{rating} <Stars rating={rating}/> </LargeRating> </div>
     <div>{recommendOrNah(reviews)}% of reviews recommended this item</div>
-  </div>
+  </Formatting>
 )};
 
 export default Ratings;

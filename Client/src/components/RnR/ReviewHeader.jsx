@@ -4,9 +4,9 @@ import Stars from './Stars.jsx';
 const ReviewHeader = ({rating, user, date}) => {
   return (
     <>
-      <Stars rating={rating}/>
-      <p>{user}</p>
-      <p>{date}</p>
+      <p>
+        <Stars rating={rating}/>  {user} {date}
+      </p>
     </>
   )
 };
