@@ -96,7 +96,7 @@ export default function Answer( { answer }) {
       </APhotos>
 
       <AnswerExtras>
-        {answer.answerer_name === 'Seller' ? <AnsweredBy> by <strong>{answer.answerer_name}</strong>, </AnsweredBy> : <AnsweredBy> by {answer.answerer_name}, </AnsweredBy>}
+        {answer.answerer_name.toLowerCase() === 'seller' ? <AnsweredBy> by <strong>Seller</strong>, </AnsweredBy> : <AnsweredBy> by {answer.answerer_name}, </AnsweredBy>}
 
         <AnswerDate> {formatDate(answer.date)} </AnswerDate>
 
