@@ -16,6 +16,7 @@ export default function QuestionList( { QAs, product, productData, loadMoreQ, se
 
   return (
     <QAWrapper>
+
       {!loadMoreQ ? QAs.filter((item, index) => index < 2).map((QA) => {
         return (
           <div key={QA.question_id}>
@@ -29,9 +30,9 @@ export default function QuestionList( { QAs, product, productData, loadMoreQ, se
         </div>
       )
    })}
+
     </QAWrapper>
   )
-
 };
 
 

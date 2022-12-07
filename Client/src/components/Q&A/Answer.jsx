@@ -5,7 +5,6 @@ import AnswerPhotos from './AnswerPhotos.jsx';
 const { useState, useEffect } = React;
 
 const AnswerContainer = styled.div`
-  font-family: Helvetica, Sans-Serif;
   display: flex;
   flex-direction: column;
   padding-bottom: 15px;
@@ -116,7 +115,4 @@ export default function Answer( { answer }) {
 
     </AnswerContainer>
   );
-}
-
-// {answer.photos} is and array of objects
-//   {id: 5342584, url: 'http://res.cloudinary.com/dvpmx7xsz/
+};

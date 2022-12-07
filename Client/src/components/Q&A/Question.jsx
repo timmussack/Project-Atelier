@@ -6,11 +6,10 @@ import axios from 'axios';
 import AnswerModal from './AnswerModal.jsx';
 
 const QuestionContainer = styled.div`
-  font-family: Helvetica, Sans-Serif;
   display: flex;
   justify-content: space-between;
   padding-bottom: 15px;
-  margin: 0px 20px 0px 20px;
+  margin: auto;
 `;
 
 const QuestionMain = styled.div`
@@ -51,16 +50,14 @@ const AnswerWrapper = styled.div`
   text-overflow: ellipsis;
   max-height: 50vh;
   overflow-y: auto;
-  max-width: 80vh;
+  max-width: auto;
   display: flex;
   flex-direction: row;
-  margin: 0px 0px 0px 0px;
+  margin: auto;
 `;
 
 const A = styled.div`
-  font-family: Helvetica, Sans-Serif;
   font-weight: bold;
-  padding-left: 20px;
 `;
 
 const Answers = styled.div`
@@ -73,13 +70,12 @@ const MoreButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  margin: 0px 0px 15px 35px;
+  margin: 0px 0px 15px 16px;
 `;
 
 const NoAnswers = styled.div`
-  font-family: Helvetica, Sans-Serif;
   font-size: 10px;
-  padding: 0px 0px 15px 40px;
+  padding-bottom: 15px;
 `;
 
 export default function Question( { QA, product, productData }) {
@@ -98,19 +94,19 @@ export default function Question( { QA, product, productData }) {
       comparison = -1;
     } else {
       comparison = 1;
-    }
+    };
     return comparison;
-  }
+  };
 
   //This function moves answers from the "Seller" to the front of the answer array before they become the answers state.
   const moveSellerToFront = (answersArray) => {
     for (let i = 0; i < answersArray.length; i++) {
       if (answersArray[i].answerer_name.toLowerCase() === 'seller') {
         answersArray = answersArray.splice(i, 1).concat(answersArray);
-      }
-    }
+      };
+    };
     return answersArray;
-  }
+  };
 
   const getAnswers = (questionId) => {
     axios.get('/qa/questions/:question_id/answers', {
@@ -123,9 +119,6 @@ export default function Question( { QA, product, productData }) {
       .then((response) => {
         let firstSortData = response.data.results.sort(sortByHelpfulness);
         let secondSortData = moveSellerToFront(firstSortData);
-        // let data = response.data.results.sort((a, b) => {
-        //   return b.helpfulness - a.helpfulness
-        // })
         setAnswers(secondSortData);
       })
       .catch((error) => {
@@ -190,4 +183,4 @@ export default function Question( { QA, product, productData }) {
       <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} />
     </>
   );
-}
+};

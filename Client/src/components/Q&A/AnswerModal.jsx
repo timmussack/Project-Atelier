@@ -8,7 +8,6 @@ const { useState, useEffect } = react;
 const AModal = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Helvetica, Sans-Serif;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -24,7 +23,7 @@ const AModalContent = styled.div`
   margin: auto;
   padding: 20px;
   border: 1px solid black;
-  width: 65%;
+  width: 50%;
 `;
 
 const ModalButton = styled.button`
@@ -33,6 +32,9 @@ const ModalButton = styled.button`
   margin-right: 20px;
 `;
 
+const ModalForm = styled.form`
+  overflow: auto;
+`;
 
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA }) {
   const [answer, setAnswer] = useState('');
@@ -41,49 +43,58 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
 
   const handleAddAnswer = (answer, nickname, email, questionId) => {
     console.log(answer, nickname, email, questionId)
-  }
+  };
 
   let modalContent;
 
   if (showAModal) {
     modalContent = (
       <AModal>
+
         <AModalContent>
-        <h3>Submit your answer</h3>
-        <p>{productData.name}: {QA.question_body}</p>
-        <form>
-          <label>
-            <div> Your Answer* </div>
-            <textarea maxLength='1000' value={answer} style={{width: '500px', height: '200px'}} size="90" placeholder='' onChange={e => {
-            setAnswer(e.target.value)
-             }}> </textarea>
-          </label>
 
-          <label>
-            <div> What is your nickname* </div>
-            <input size="60" placeholder='Example: jack543!' onChange={e => {
-            setNickname(e.target.value)
-            }} />
-          </label>
+          <h3>Submit your answer</h3>
 
-          <label>
-            <div> Your email* </div>
-            <input size="60" placeholder='Example: jack@email.com' onChange={e => {
-            setEmail(e.target.value)
-            }} />
-          </label>
-          <p>For privacy reasons, do not use your full name or email address</p>
-        </form>
+          <p>{productData.name}: {QA.question_body}</p>
 
-      <ModalButton onClick={() => {
-        handleAddAnswer(answer, nickname, email, QA.question_id)
-        setShowAModal(!showAModal)
-      }}>Submit Answer</ModalButton>
+          <ModalForm>
 
-      <ModalButton onClick={() => {
-        setShowAModal(!showAModal)
-      }}>Close without submission</ModalButton>
-      </AModalContent>
+            <label>
+              <div> Your Answer* </div>
+              <textarea maxLength='1000' value={answer} style={{width: '90%', height: '200px'}} onChange={e => {
+              setAnswer(e.target.value)
+              }}> </textarea>
+            </label>
+
+            <label>
+              <div> What is your nickname* </div>
+              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jack543!' onChange={e => {
+              setNickname(e.target.value)
+              }} />
+            </label>
+
+            <label>
+              <div> Your email* </div>
+              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
+              setEmail(e.target.value)
+              }} />
+            </label>
+
+            <p>For privacy reasons, do not use your full name or email address</p>
+
+          </ModalForm>
+
+          <ModalButton onClick={() => {
+            handleAddAnswer(answer, nickname, email, QA.question_id)
+            setShowAModal(!showAModal)
+          }}>Submit Answer</ModalButton>
+
+          <ModalButton onClick={() => {
+            setShowAModal(!showAModal)
+          }}>Close without submission</ModalButton>
+
+        </AModalContent>
+
       </AModal>
     );
   } else {
@@ -91,14 +102,13 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
       <>
       </>
     )
-  }
+  };
 
   return (
     <>
       {modalContent}
     </>
   )
-
 };
 
 

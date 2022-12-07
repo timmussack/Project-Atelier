@@ -6,24 +6,21 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const PModal = styled.div`
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 `;
 
 const PModalContent = styled.div`
   margin: auto;
   display: block;
-  /* position: absolute;
-  left: 50%;
-  top: 50%; */
   width: auto;
   height: auto;
   max-width: 700px;
@@ -40,9 +37,8 @@ const ModalButton = styled.span`
 `;
 
 const ZoomPhoto = styled.img`
-  //position: relative
+  //may need to add styles later
 `;
-
 
 export default function PhotoModal({ url, showPModal, setShowPModal }) {
 
@@ -54,9 +50,9 @@ export default function PhotoModal({ url, showPModal, setShowPModal }) {
         <PModalContent>
           <ZoomPhoto
             src={url}
-            height='500px'
-            width='750px'
-            //image-resolution= 'from-image'
+            height='80%'
+            width='80%'
+            image-resolution= 'from-image'
             />
 
           <ModalButton onClick={() => {
@@ -71,12 +67,11 @@ export default function PhotoModal({ url, showPModal, setShowPModal }) {
       <>
       </>
     )
-  }
+  };
 
   return (
     <>
       {modalContent}
     </>
   )
-
 };

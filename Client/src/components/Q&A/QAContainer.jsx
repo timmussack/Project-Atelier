@@ -11,12 +11,18 @@ import QuestionModal from './QuestionModal.jsx';
 const { useState, useEffect } = react;
 
 const QATitle = styled.div`
-  font-family: Helvetica, Sans-Serif;
-  margin: 10px 20px;
+  margin-top: 40px;
   font-size: 12px;
 `;
+
 QATitle.displayName = 'QATitle';
 
+const QAWrapper = styled.div`
+  font-family: Helvetica, Sans-Serif;
+  position:relative ;
+  width: 75%;
+  margin: 0 auto;
+`;
 
 export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
@@ -36,10 +42,9 @@ export default function QAContainer( { product, productData } ) {
           return b.question_helpfulness - a.question_helpfulness
         })
         setQAs(data);
-        //console.log(data);
       })
       .catch((error) => {
-        //console.log('Error in client from getQAs request', error);
+        console.log('Error in client from getQAs request', error);
       });
   };
 
@@ -55,7 +60,7 @@ export default function QAContainer( { product, productData } ) {
   };
 
   return (
-    <>
+    <QAWrapper>
       <QATitle>
         QUESTIONS & ANSWERS
       </QATitle>
@@ -67,6 +72,6 @@ export default function QAContainer( { product, productData } ) {
       <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal}/>
 
       <QAButtons loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
-    </>
+    </QAWrapper>
   );
-}
+};

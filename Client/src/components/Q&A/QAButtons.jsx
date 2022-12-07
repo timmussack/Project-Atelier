@@ -7,7 +7,7 @@ const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
   background: transparent;
-  margin: 20px 10px 20px 20px;
+  margin: 20px 10px 30px 0px;
   height: 40px;
   border: 1px solid;
   cursor: pointer;
@@ -21,13 +21,12 @@ const AddQuestion = styled.button`
 `;
 
 export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ }) {
-  const [buttonText, setButtonText] = useState('MORE ANSWERED QUESTIONS')
+  const [buttonText, setButtonText] = useState('MORE ANSWERED QUESTIONS');
 
   const handleMoreAnsweredQs = () => {
-    setLoadMoreQ(!loadMoreQ)
-    !loadMoreQ ? setButtonText('COLLAPSE QUESTIONS') : setButtonText('MORE ANSWERED QUESTIONS')
-  }
-
+    setLoadMoreQ(!loadMoreQ);
+    !loadMoreQ ? setButtonText('COLLAPSE QUESTIONS') : setButtonText('MORE ANSWERED QUESTIONS');
+  };
 
   return (
     <div>
@@ -36,5 +35,4 @@ export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoa
       <AddQuestion  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>
   )
-
 };

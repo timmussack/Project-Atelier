@@ -14,22 +14,20 @@ export default function AnswerPhotos({photos, showPModal, setShowPModal}) {
     return (
       <>
         <div>
-        {photos.map((photo, index) => {
-          return <img
-          style={{cursor: 'pointer'}}
-          onClick={() => handlePhotoClick(photo)}
-          src={photo.url}
-          key={index}
-          height='100px'
-          width='150px'
-          />
-        })}
-      </div>
+          {photos.map((photo, index) => {
+            return <img
+            style={{cursor: 'pointer'}}
+            onClick={() => handlePhotoClick(photo)}
+            src={photo.url}
+            key={index}
+            height='10%'
+            width='10%'
+            />
+          })}
+        </div>
 
-      <PhotoModal showPModal={showPModal} setShowPModal={setShowPModal} url={photoUrl} />
-
+        <PhotoModal showPModal={showPModal} setShowPModal={setShowPModal} url={photoUrl} />
       </>
-
     )
-  }
+  };
 };
