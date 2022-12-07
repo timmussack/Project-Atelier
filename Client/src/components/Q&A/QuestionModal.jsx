@@ -21,7 +21,7 @@ const QModal = styled.div`
 
 const QModalContent = styled.div`
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: auto;
   padding: 20px;
   border: 1px solid black;
   width: 65%;
