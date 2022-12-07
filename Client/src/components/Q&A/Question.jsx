@@ -48,6 +48,9 @@ const AddAnswer = styled.div`
 `;
 
 const AnswerWrapper = styled.div`
+  text-overflow: ellipsis;
+  max-height: 50vh;
+  overflow-y: auto;
   max-width: 80vh;
   display: flex;
   flex-direction: row;
@@ -76,7 +79,7 @@ const MoreButton = styled.button`
 const NoAnswers = styled.div`
   font-family: Helvetica, Sans-Serif;
   font-size: 10px;
-  padding: 0px 0px 15px 20px;
+  padding: 0px 0px 15px 40px;
 `;
 
 export default function Question( { QA, product, productData }) {

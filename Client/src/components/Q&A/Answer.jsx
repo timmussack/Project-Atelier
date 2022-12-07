@@ -64,6 +64,7 @@ const APhotos = styled.div`
 export default function Answer( { answer }) {
   const [reported, setReported] = useState(false);
   const [helpful, setHelpful] = useState(false);
+  const [showPModal, setShowPModal] = useState(false);
 
   const formatDate = (data) => {
     let date = new Date(data);
@@ -91,7 +92,7 @@ export default function Answer( { answer }) {
       </AnswerMain>
 
       <APhotos>
-        <AnswerPhotos photos={answer.photos}/>
+        <AnswerPhotos showPModal={showPModal} setShowPModal={setShowPModal} photos={answer.photos}/>
       </APhotos>
 
       <AnswerExtras>

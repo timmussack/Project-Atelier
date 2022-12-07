@@ -36,10 +36,10 @@ export default function QAContainer( { product, productData } ) {
           return b.question_helpfulness - a.question_helpfulness
         })
         setQAs(data);
-        console.log(data);
+        //console.log(data);
       })
       .catch((error) => {
-        console.log('Error in client from getQAs request', error);
+        //console.log('Error in client from getQAs request', error);
       });
   };
 
