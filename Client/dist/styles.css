@@ -67,12 +67,16 @@ body {
 
   width: 700px;
   height: 700px;
-  object-fit: fill
+  object-fit: fill;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 .left_3 {
   position: relative;
   padding-left: 0.5em;
+  width: max-content;
 }
 .right-arrow {
   position: absolute;
@@ -102,4 +106,19 @@ body {
 .active {
   border: 2px solid red;
   border-radius: 2px;
+}
+
+
+.stylelist  {
+  display:flex;
+  list-style:none;
+  justify-content: space-evenly;
+  gap: 10px;
+  padding-left: unset;
+}
+
+.stylelist :is(img) {
+border-radius: 50%;
+width: 60px;
+height: 60px;
 }

@@ -6,7 +6,7 @@ import ProductImage from './ProductImage.jsx';
 import Description from './Description.jsx'
 
 
-const MainView = ({ product, productData, reviewMeta}) => {
+const MainView = ({ product, productData, reviewMeta, rating}) => {
   const [styles, setStyles] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState({});
 
@@ -46,8 +46,10 @@ const Container = styled.div`
   return (
     <div className="mainView">
       <ProductImage
+        productData={productData}
         styles={styles}
         defaultStyle={defaultStyle}
+        rating={rating}
         />
       <Description
         productData={productData} />

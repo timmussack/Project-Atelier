@@ -82,7 +82,8 @@ export default function App() {
       <MainView
         product={product}
         productData={productData}
-        reviewMeta={metaData} />
+        reviewMeta={metaData}
+        rating={avgRating} />
 
       <QA product={product} productData={productData}/>
 

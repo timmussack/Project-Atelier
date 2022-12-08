@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import styled from 'styled-components';
+import Stars from '../RnR/Stars.jsx'
 // import Carousel from './Carousel.jsx'
 
 
-const ProductImage = ({styles, defaultStyle}) => {
+const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [photoIndex, setPhotoIndex] = useState(0);
   const [thumbnailArray, setThumbnailArray] = useState([]);
@@ -15,7 +16,7 @@ const ProductImage = ({styles, defaultStyle}) => {
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
 
-  console.log(thumbnailArray.length)
+  console.log(styles)
 
   const moveThumbnailsUp = (e) => {
     if (showItems === 6) {
@@ -195,7 +196,20 @@ const ProductImage = ({styles, defaultStyle}) => {
           <img src={currentImage} alt="" />
         </div>
         <div className="left_3">
-          <h3>Title of item</h3>
+          <Stars rating={rating} />
+          <h1>{productData.category}</h1>
+          <h1>{productData.name}</h1>
+          <a>${productData.default_price}</a>
+          <ul className="stylelist">
+            {
+              styles.map((style, index) => {
+                return (
+                  <li><img src={style.photos[0].thumbnail_url}></img></li>
+                )
+              })
+            }
+          </ul>
+          <></>
         </div>
       </div>
     </div>
