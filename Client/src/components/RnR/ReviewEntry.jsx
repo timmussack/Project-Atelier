@@ -47,6 +47,8 @@ const ReviewEntry = ({review, rating}) => {
         {review.response ? (`Response from seller:${review.response}`) : (null)}
       </div>
 
+      <p>{review.helpfulness} users found this review helpful</p>
+
       <ReviewFooter helpfulness={review.helpfulness}/>
     </Formatting>
   )

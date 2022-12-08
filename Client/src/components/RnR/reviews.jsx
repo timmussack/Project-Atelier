@@ -13,7 +13,6 @@ const Formatting = styled.div`
 const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
 
   const optionHandler = (e) => {
-    console.log('asdsa')
     axios.get('/reviews', {
       params: {
         product_id: product,

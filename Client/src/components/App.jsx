@@ -95,5 +95,5 @@ export default function App() {
       metaData={metaData}
       productData={productData} />
     </div>
-  );
+  )
 }

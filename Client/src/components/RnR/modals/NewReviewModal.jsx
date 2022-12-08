@@ -32,6 +32,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [reccomend, setReccomend] = useState(false);
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState([]);
+
 
   if (showAddReview) {
     return (
@@ -39,37 +41,59 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
         <RModalContent>
           <h2>Write Your Review</h2>
           <h3>About the {productData.name}</h3>
-          <form>
+          <form method="post">
             <label>Overall Rating</label>
 
-            <label>Do you recommend this product?*
-              <ModalButton onClick={() => setReccomend(true)}>Yes</ModalButton>
-              <ModalButton onClick={() => setReccomend(false)}>No</ModalButton>
+            <label>Do you recommend this product?
+              <ModalButton>
+                <input required type="radio" name="yesNo" value="yes" onClick={() => setReccomend(true)}/>Yes
+              </ModalButton>
+              <ModalButton>
+                <input required type="radio" name="yesNo" value="no" onClick={() => setReccomend(false)}/>No
+              </ModalButton>
             </label>
 
-            <label>Review Summary
-              <input size="60" placeholder="Example: Best Purchase Ever!"/>
+            <br></br>
+
+            <label required>Review Summary
+              <br></br>
+              <input type="text" required maxLength="60" placeholder="Example: Best Purchase Ever!"/>
             </label>
 
-            <label required>Review Body
-              <input size="1000" placeholder="Why did you like the product or not?" onChange={e => setUserReview(e.target.value)}/>
+            <br></br>
+
+            <label>Review Body
+              <input type="text" size="200" maxLength="1000" style={{height: '100px'}} placeholder="Why did you like the product or not?" onChange={e => setUserReview(e.target.value)} required/>
             </label>
+            {userReview.length < 50 ? (
+              <p id="review-counter">Minimum required characters left: {50-userReview.length}</p>
+            ) : (
+              <p id="review-counter">Minimum reached</p>
+            ) }
+
+            <br></br>
 
             <label>Upload Your Photos
-
+              <input type="file" name="images" multiple/>
             </label>
 
-            <label required>Your Nickname
-              <input size="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)}/>
+            <br></br>
+
+            <label>Your Nickname
+              <input type="text" maxLength="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)} required/>
+              <p>For privacy reasons, do not use your full name or email address</p>
             </label>
 
-            <label required>Your Email
-              <input size="60" placeholder="Example: jackson11@email.com" onChange={e => setEmail(e.target.value)}/>
+            <br></br>
+
+            <label>Your Email
+              <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" maxLength="60" placeholder="Example: jackson11@email.com" onChange={e => setEmail(e.target.value)} required/>
+              <p>For authentication reasons, you will not be emailed</p>
             </label>
 
-
+          <ModalButton type="submit" onSubmit={() => setShowAddReview(!showAddReview)}>Submit Review</ModalButton>
+          <ModalButton type="submit" onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
           </form>
-          <ModalButton onClick={() => setShowAddReview(!showAddReview)}>Submit Question</ModalButton>
          </RModalContent>
       </RModal>
     )
