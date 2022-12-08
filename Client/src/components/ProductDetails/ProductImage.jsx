@@ -9,6 +9,7 @@ import Stars from '../RnR/Stars.jsx'
 
 const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [currentImage, setCurrentImage] = useState('');
+  const [currentStyle, setCurrentStyle] = useState({})
   const [photoIndex, setPhotoIndex] = useState(0);
   const [thumbnailArray, setThumbnailArray] = useState([]);
   const [showItems, setShowItems] = useState(6);
@@ -16,7 +17,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
 
-  console.log(styles)
+  console.log(`Current style: ${JSON.stringify(currentStyle)}`)
 
   const moveThumbnailsUp = (e) => {
     if (showItems === 6) {
@@ -32,22 +33,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
       setShowItems(showItems - 1);
       setThumbnailUp(true);
     }
-
-    // if (index <= 4) {
-    //   setStartingIndex(startingIndex - 1);
-    //   setShowItems(showItems - 1);
-    //   setThumbnailUp(true);
-    // } else if (index < 4) {
-    //   setStartingIndex(startingIndex - 1);
-    //   setShowItems(showItems - 1);
-    // } else if (index === 0) {
-    //   setStartingIndex(0);
-    //   setThumbnailUp(false);
-    // }
   };
-
-  console.log(`Current Starting Index: ${startingIndex}`);
-  console.log(`Current ShowItems: ${showItems}`);
 
   const moveThumbnailsDown = (e) => {
       if (showItems === thumbnailArray.length - 1 || showItems === thumbnailArray.length) {
@@ -74,15 +60,32 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
 
   };
 
-  const createThumbnailArray = () => {
-    var temp = [];
-    defaultStyle.photos.forEach((image) => {
-      temp.push(image.thumbnail_url);
-    })
-    setThumbnailArray(temp);
+  const createThumbnailArray = (style) => {
+    if (!style) {
+      var temp = [];
+      defaultStyle.photos.forEach((image) => {
+        temp.push(image.thumbnail_url);
+      })
+      setThumbnailArray(temp);
+    } else {
+      var temp = [];
+      style.photos.forEach((image) => {
+        temp.push(image.thumbnail_url);
+      })
+      setThumbnailArray(temp);
+    }
   }
 
 
+  const handleStyleChange = (style) => {
+    createThumbnailArray(style);
+    setCurrentImage(style.photos[0].url);
+    setPhotoIndex(0);
+    setShowItems(6);
+    setStartingIndex(0);
+    setThumbnailDown(false);
+    setThumbnailUp(false);
+  }
 
 
   useEffect(() => {
@@ -92,6 +95,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
       if (firstImage === null) {
         firstImage = 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'
       }
+      setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
       createThumbnailArray()
 
@@ -203,8 +207,23 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           <ul className="stylelist">
             {
               styles.map((style, index) => {
+                if (index === 0) {
+                  return (
+                    <li>
+                    <label for={index}>
+                      <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
+                        <img src={style.photos[0].thumbnail_url}/>
+                    </label>
+                  </li>
+                  )
+                }
                 return (
-                  <li><img src={style.photos[0].thumbnail_url}></img></li>
+                  <li>
+                    <label for={index}>
+                      <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
+                        <img src={style.photos[0].thumbnail_url}/>
+                    </label>
+                  </li>
                 )
               })
             }

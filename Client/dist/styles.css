@@ -113,7 +113,6 @@ body {
   display:flex;
   list-style:none;
   justify-content: space-evenly;
-  gap: 10px;
   padding-left: unset;
 }
 
@@ -121,4 +120,13 @@ body {
 border-radius: 50%;
 width: 60px;
 height: 60px;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+  margin: auto;
+}
+
+input[type='radio']:checked + img {
+  outline: 5px solid red;
 }
