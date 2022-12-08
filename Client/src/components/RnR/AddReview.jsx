@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import NewReviewModal from './modals/NewReviewModal.jsx'
 
 const MoreReviews = styled.button`
   background: transparent;
@@ -16,21 +17,21 @@ const AddReviewButton = styled.button`
   cursor: pointer;
 `;
 
-const AddReview = ({ display, reviews, metaData, rating, displayHandler }) => {
+const AddReview = ({ display, reviews, metaData, rating, displayHandler, product, productData }) => {
+  const [showAddReview, setShowAddReview] = useState(false);
 
-  const addHandler = () => {
-    console.log('placeholder for add reviews')
-  }
   return (
     <div>
       {reviews.length > display ? (
-        <div className="reviewButtons">
+        <div>
           <MoreReviews onClick={() => displayHandler()}>MORE REVIEWS</MoreReviews>
-          <AddReviewButton onClick={() => addHandler()}>ADD A REVIEW +</AddReviewButton>
+          <AddReviewButton onClick={() => setShowAddReview(!showAddReview)}>ADD A REVIEW +</AddReviewButton>
+          <NewReviewModal showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
         </div>
       ) : (
-        <div className="reviewButtons">
-          <AddReviewButton onClick={() => addHandler()}>ADD A REVIEW +</AddReviewButton>
+        <div>
+          <AddReviewButton onClick={() => setShowAddReview(!showAddReview)}>ADD A REVIEW +</AddReviewButton>
+          <NewReviewModal showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
         </div>
       ) }
     </div>

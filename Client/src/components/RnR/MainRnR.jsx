@@ -9,7 +9,7 @@ const RNRTitle = styled.div`
   font-size: 12px;
 `;
 
-const MainRnR = ({ rating, reviews, productID, metaData }) => {
+const MainRnR = ({ rating, reviews, product, metaData, productData, setReviews }) => {
 
   return (
   <>
@@ -19,7 +19,7 @@ const MainRnR = ({ rating, reviews, productID, metaData }) => {
     </div>
 
     <div>
-      <Reviews reviews={reviews} rating={rating} metaData={metaData}/>
+      <Reviews reviews={reviews} setReviews={setReviews} rating={rating} metaData={metaData} product={product} productData={productData}/>
     </div>
   </>
 )};

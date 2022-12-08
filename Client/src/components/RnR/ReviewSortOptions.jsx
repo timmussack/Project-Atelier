@@ -4,15 +4,15 @@ import styled, { css } from 'styled-components';
 const Formatting = styled.div`
 
 `
-const ReviewSortOptions = ({ reviews, optionHandler, filter, metaData }) => {
+const ReviewSortOptions = ({ reviews, optionHandler }) => {
 
   return (
     <div>
-      {reviews.length} reviews, Sort On
+      {reviews.length} reviews, Sort By
       <select onChange={(e) => optionHandler(e)}>
-        <option value='Relevant'> Relevant</option>
-        <option value='Helpful'> Helpful</option>
-        <option value='Newest'> Newest</option>
+        <option value='relevant'>Relevant</option>
+        <option value='helpful'>Helpful</option>
+        <option value='newest'>Newest</option>
       </select>
     </div>
   )

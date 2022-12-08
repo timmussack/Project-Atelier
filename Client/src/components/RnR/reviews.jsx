@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
 import ReviewTiles from './ReviewTiles.jsx';
 import ReviewSortOptions from './ReviewSortOptions.jsx'
+import axios from 'axios';
 
 const Formatting = styled.div`
   margin: 10px 20px;
@@ -9,30 +10,28 @@ const Formatting = styled.div`
   font-size: 12px;
 `;
 
-const Reviews = ({reviews, metaData}) => {
-
-  const [filter, setFilter] = useState({
-    Relevant: true,
-    Helpful: false,
-    Newest: false,
-  })
+const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
 
   const optionHandler = (e) => {
-    let sortBy = e.target.value;
-
-    for (let option in filter) {
-      if (sortBy === option) {
-        filter[sortBy] = true;
-      } else {
-        filter[sortBy] = false;
+    console.log('asdsa')
+    axios.get('/reviews', {
+      params: {
+        product_id: product,
+        count: 100,
+        sort: e.target.value,
       }
-    }
+    })
+      .then(response => {
+        console.log(response.data.results)
+        setReviews(response.data.results);
+      })
+      .catch(err => err);
   };
 
   return (
   <Formatting>
-    <ReviewSortOptions optionHandler={optionHandler} filter={filter} reviews={reviews} metaData={metaData}/>
-    <ReviewTiles reviews={reviews} metaData={metaData} filter={filter} />
+    <ReviewSortOptions optionHandler={optionHandler} reviews={reviews} />
+    <ReviewTiles reviews={reviews} metaData={metaData} product={product} productData={productData}/>
   </Formatting>
 )};
 

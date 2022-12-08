@@ -11,6 +11,11 @@ const PhotoModal = ({ url, zoom, setZoom }) => {
         <button onClick={() => setZoom(!zoom)}>Close Photo</button>
       </div>
     );
+  } else {
+    return (
+      <>
+      </>
+    )
   }
 };
 

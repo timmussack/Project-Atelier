@@ -68,8 +68,8 @@ app.get('/products/:product_id/styles', (req, res) => {
 
 // getting reviews
 app.get('/reviews', (req, res) => {
-  const { product_id, count } = req.query;
-  axios.get(`${url}reviews?product_id=${product_id}&count=${count}`, {
+  const { product_id, count, sort } = req.query;
+  axios.get(`${url}reviews?product_id=${product_id}&count=${count}&sort=${sort}`, {
     headers: {
       Authorization: `${key}`,
     },

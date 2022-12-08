@@ -56,7 +56,8 @@ export default function App() {
     axios.get('/reviews', {
       params: {
         product_id: id,
-        count: 50,
+        count: 100,
+        sort: 'relevant',
       },
     })
       .then((response) => {
@@ -88,9 +89,11 @@ export default function App() {
 
       <MainRnR
       rating={avgRating}
+      setReviews={setReviews}
       reviews={reviews}
-      productID={product}
-      metaData={metaData} />
+      product={product}
+      metaData={metaData}
+      productData={productData} />
     </div>
   );
 }
