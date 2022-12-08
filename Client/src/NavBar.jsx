@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import styled from 'styled-components'
 
 
@@ -40,11 +40,17 @@ const Logo = styled.h1`
 `
 
 const NavBar =  () => {
+  const [input, setInput] = useState('')
+
+  const handleInput = (e) => {
+    setInput(e.target.value)
+
+  }
   return (
     <HeaderContainer>
         <Logo>LogoHere</Logo>
         <SearchBarContainer>
-          <SearchBar type="text" name="searchQueryInput" placeholder="Search" value=""/>
+          <SearchBar type="text" name="searchQueryInput" placeholder="Search" value={input} onChange={(e) => {handleInput(e)}}/>
         </SearchBarContainer>
     </HeaderContainer>
 
