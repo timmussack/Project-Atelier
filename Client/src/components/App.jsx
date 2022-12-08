@@ -9,7 +9,7 @@ const { useState, useEffect } = React;
 export default function App() {
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
-  const [product, setProduct] = useState(37311);
+  const [product, setProduct] = useState(37319);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({});
 
@@ -26,7 +26,7 @@ export default function App() {
     .catch((error) => {
       console.log('Error in client from get request', error);
     });
-  }
+  };
 
   const getReviewMeta = (productId) => {
     axios.get('/reviews/meta', {
@@ -41,7 +41,7 @@ export default function App() {
     .catch((error) => {
       console.log('Error in client from get request', error);
     });
-  }
+  };
 
   const averageRating = (arrOfRatings) => {
     var result = 0;
@@ -66,7 +66,7 @@ export default function App() {
       .catch((error) => {
         console.log('Error retrieving reviews');
       })
-  }
+  };
 
   useEffect(() => {
     getReviews(product);

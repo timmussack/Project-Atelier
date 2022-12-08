@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = styled.input`
-  width: 96%;
+  width: 100%;
   height: 40px;
   border: transparent;
 `;
@@ -12,12 +12,15 @@ const SearchBar = styled.input`
 const Form = styled.form`
   display: flex;
   border: 1px solid;
-  margin: 10px 20px 15px 20px;
+  margin: 10px 0px 15px 0px;
 `;
 
 export default function Search( { handleSearch, product, getQAs } ) {
 
-  const styleIcon = { "padding-top": "13px" }
+  const styleIcon = {
+    "padding-top": "13px",
+    "padding-right": "10px"
+  };
 
   return (
     <Form>
@@ -29,4 +32,4 @@ export default function Search( { handleSearch, product, getQAs } ) {
         <FaSearch style={styleIcon}/>
     </Form>
   );
-}
+};

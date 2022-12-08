@@ -7,27 +7,34 @@ import QASearch from './QASearch.jsx';
 import QAButtons from './QAButtons.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
+
 const { useState, useEffect } = react;
 
 const QATitle = styled.div`
-  font-family: Helvetica, Sans-Serif;
-  margin: 10px 20px;
+  margin-top: 40px;
   font-size: 12px;
 `;
+
 QATitle.displayName = 'QATitle';
 
+const QAWrapper = styled.div`
+  font-family: Helvetica, Sans-Serif;
+  position:relative ;
+  width: 75%;
+  margin: 0 auto;
+`;
 
 export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
-
+  const [loadMoreQ, setLoadMoreQ] = useState(false);
 
   const getQAs = (productId) => {
     axios.get('/qa/questions', {
       params: {
         product_id: productId,
         page: 1,
-        count: 10,
+        count: 100,
       },
     })
       .then((response) => {
@@ -37,7 +44,7 @@ export default function QAContainer( { product, productData } ) {
         setQAs(data);
       })
       .catch((error) => {
-        //console.log('Error in client from getQAs request', error);
+        console.log(error, 'Error in client from getQAs request');
       });
   };
 
@@ -53,14 +60,18 @@ export default function QAContainer( { product, productData } ) {
   };
 
   return (
-    <>
+    <QAWrapper>
       <QATitle>
         QUESTIONS & ANSWERS
       </QATitle>
+
       <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
-      <QuestionList QAs={ QAs }/>
-      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal}/>
-      <QAButtons showQModal={showQModal} setShowQModal={setShowQModal}/>
-    </>
+
+      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} getQAs={getQAs}/>
+
+      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal} getQAs={getQAs}/>
+
+      <QAButtons loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
+    </QAWrapper>
   );
-}
+};
