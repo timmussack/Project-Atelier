@@ -112,10 +112,121 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
       res.json(response.data);
     })
     .catch((error) => {
-      console.error('Error in server line 115');
+      console.error('Error in server line 115', error);
     });
 });
 
+//Saves a new question to the database
+app.post('/qa/questions', (req, res) => {
+  const { body, name, email, product_id } = req.body;
+  axios({
+    method: 'post',
+    url: `${url}qa/questions`,
+    data: {
+      body: body,
+      name: name,
+      email: email,
+      product_id: product_id
+    },
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      res.sendStatus(404);
+      res.end('Not Found');
+      console.error(error, 'Error in server line 139');
+    });
+});
+
+//Saves an answer to the database
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  const { body, name, email, questionId } = req.body;
+  axios({
+    method: 'post',
+    url: `${url}qa/questions/${questionId}/answers`,
+    data: {
+      body: body,
+      name: name,
+      email: email,
+      photos: []
+    },
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      res.sendStatus(404);
+      res.end('Not Found');
+      console.error(error, 'Error in server line 163');
+    });
+});
+
+//Marks a question as helpful
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  const { question_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}qa/questions/${question_id}/helpful`,
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      console.error(error, 'Error in server line 180');
+    });
+});
+
+//Marks an answer as helpful
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  const { answer_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}qa/answers/${answer_id}/helpful`,
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      console.error(error, 'Error in server line 180');
+    });
+});
+
+//Reports an answer
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  const { answer_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}qa/answers/${answer_id}/report`,
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      console.error(error, 'Error in server line 180');
+    });
+});
+
+//Reports a question
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  const { question_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}qa/questions/${question_id}/report`,
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      console.error(error, 'Error in server line 180');
+    });
+});
 
 const port = process.env.PORT;
 app.listen(port, () => {
