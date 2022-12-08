@@ -36,13 +36,25 @@ const ModalForm = styled.form`
   overflow: auto;
 `;
 
-export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA }) {
+export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers }) {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
   const handleAddAnswer = (answer, nickname, email, questionId) => {
-    console.log(answer, nickname, email, questionId)
+    axios.post('/qa/questions/:question_id/answers', {
+      body: answer,
+      name: nickname,
+      email: email,
+      //photos: Need to implement adding photos to an answer
+      questionId: questionId
+    })
+    .then((response) => {
+      getAnswers(QA.question_id)
+    })
+    .catch((error) => {
+      console.log('Error in QuestionModal', error);
+    })
   };
 
   let modalContent;
@@ -57,41 +69,42 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
 
           <p>{productData.name}: {QA.question_body}</p>
 
-          <ModalForm>
+          <ModalForm onSubmit={() => {
+              handleAddAnswer(answer, nickname, email, QA.question_id);
+              setAnswer('');
+              setShowAModal(!showAModal);
+            }}>
 
             <label>
               <div> Your Answer* </div>
-              <textarea maxLength='1000' value={answer} style={{width: '90%', height: '200px'}} onChange={e => {
+              <textarea maxLength='1000' type='text' value={answer} style={{width: '90%', height: '200px'}} onChange={e => {
               setAnswer(e.target.value)
-              }}> </textarea>
+              }} required> </textarea>
             </label>
 
             <label>
               <div> What is your nickname* </div>
-              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jack543!' onChange={e => {
+              <input maxLength='60' type='text' style={{width: '90%', height: '15px'}} placeholder='Example: jack543!' onChange={e => {
               setNickname(e.target.value)
-              }} />
+              }} required/>
             </label>
 
             <label>
               <div> Your email* </div>
-              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
+              <input maxLength='60' type='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
               setEmail(e.target.value)
-              }} />
+              }} required/>
             </label>
 
             <p>For privacy reasons, do not use your full name or email address</p>
 
+            <ModalButton type='submit'>Submit Answer</ModalButton>
+
+            <ModalButton onClick={() => {
+              setShowAModal(!showAModal)
+            }}>Close without submission</ModalButton>
+
           </ModalForm>
-
-          <ModalButton onClick={() => {
-            handleAddAnswer(answer, nickname, email, QA.question_id)
-            setShowAModal(!showAModal)
-          }}>Submit Answer</ModalButton>
-
-          <ModalButton onClick={() => {
-            setShowAModal(!showAModal)
-          }}>Close without submission</ModalButton>
 
         </AModalContent>
 

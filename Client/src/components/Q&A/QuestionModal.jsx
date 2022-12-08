@@ -36,13 +36,24 @@ const ModalForm = styled.form`
   overflow: auto;
 `;
 
-export default function QuestionModal({ productData, product, showQModal, setShowQModal }) {
+export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
   const handleAddQuestion = (question, nickname, email, product) => {
-    console.log(question, nickname, email, product)
+    axios.post('/qa/questions', {
+      body: question,
+      name: nickname,
+      email: email,
+      product_id: product
+    })
+      .then((result) => {
+        getQAs(product);
+      })
+      .catch((error) => {
+        console.log('Error in QuestionModal', error);
+      })
   };
 
   let modalContent;
@@ -57,41 +68,43 @@ export default function QuestionModal({ productData, product, showQModal, setSho
 
           <p>About the {productData.name}</p>
 
-          <ModalForm>
+          <ModalForm onSubmit={(e) => {
+            e.preventDefault();
+            handleAddQuestion(question, nickname, email, product);
+            setQuestion('');
+            setShowQModal(!showQModal);
+          }}>
 
             <label>
               <div> Your question* </div>
-              <textarea maxLength='1000' value={question} style={{width: '90%', height: '200px'}} onChange={e => {
+              <textarea maxLength='1000' type='text' value={question} style={{width: '90%', height: '200px'}} onChange={e => {
               setQuestion(e.target.value)
-              }}> </textarea>
+              }} required> </textarea>
             </label>
 
             <label>
               <div> What is your nickname* </div>
-              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jackson11!' onChange={e => {
+              <input maxLength='60' type='text' style={{width: '90%', height: '15px'}} placeholder='Example: jackson11!' onChange={e => {
               setNickname(e.target.value)
-              }} />
+              }} required/>
             </label>
 
-            <label>
+            <label required>
               <div> Your email* </div>
-              <input maxLength='60' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
-              setNickname(e.target.value)
-              }} />
+              <input maxLength='60' type='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
+              setEmail(e.target.value)
+              }} required/>
             </label>
 
             <p>For privacy reasons, do not use your full name or email address</p>
 
-          </ModalForm>
-
-          <ModalButton onClick={() => {
-            handleAddQuestion(question, nickname, email, product)
-            setShowQModal(!showQModal)
-          }}>Submit Question</ModalButton>
+          <ModalButton type="submit">Submit Question</ModalButton>
 
           <ModalButton onClick={() => {
             setShowQModal(!showQModal)
           }}>Close without submission</ModalButton>
+
+        </ModalForm>
 
         </QModalContent>
 

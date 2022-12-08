@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
+import axios from 'axios';
 import AnswerPhotos from './AnswerPhotos.jsx';
 
 const { useState, useEffect } = React;
@@ -13,6 +14,7 @@ const AnswerContainer = styled.div`
 const AnswerMain = styled.div`
   font-size: 14px;
   padding-bottom: 10px;
+  max-width: 80vh;
 `;
 
 const AnswerExtras = styled.div`
@@ -60,7 +62,7 @@ const APhotos = styled.div`
   padding: 0px 5px 10px 0px;
 `;
 
-export default function Answer( { answer }) {
+export default function Answer( { answer, QA, getAnswers }) {
   const [reported, setReported] = useState(false);
   const [helpful, setHelpful] = useState(false);
   const [showPModal, setShowPModal] = useState(false);
@@ -73,14 +75,30 @@ export default function Answer( { answer }) {
     return month + ' ' + day + ', ' + year;
   };
 
-  const handleReport = (answerId) => {
+  const handleAnswerReport = (answerId) => {
     setReported(true)
-    console.log(answerId)
+    axios.put('/qa/answers/:answer_id/report', {
+      answer_id: answerId
+    })
+      .then((response) => {
+        getAnswers(QA.question_id);
+      })
+      .catch((error) => {
+        console.log(error, 'Error from reporting an answer')
+      })
   };
 
   const handleAnswerHelpful = (answerId) => {
     setHelpful(true)
-    console.log(answerId)
+    axios.put('/qa/answers/:answer_id/helpful', {
+      answer_id: answerId
+    })
+      .then((response) => {
+        getAnswers(QA.question_id);
+      })
+      .catch((error) => {
+        console.log(error, 'Error from marking answer as helpful')
+      })
   };
 
   return (
@@ -109,7 +127,7 @@ export default function Answer( { answer }) {
 
         <Spacer2> | </Spacer2>
 
-        {!reported ? <ReportAnswer onClick={() => handleReport(answer.answer_id)}> Report </ReportAnswer> : <ReportAnswer> Reported </ReportAnswer>}
+        {!reported ? <ReportAnswer onClick={() => handleAnswerReport(answer.answer_id)}> Report </ReportAnswer> : <ReportAnswer> Reported </ReportAnswer>}
 
       </AnswerExtras>
 

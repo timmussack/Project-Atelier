@@ -14,7 +14,7 @@ const QuestionContainer = styled.div`
 
 const QuestionMain = styled.div`
   font-weight: bold;
-  max-width: 70vh;
+  max-width: 80vh;
 `;
 
 const QuestionExtras = styled.div`
@@ -37,7 +37,7 @@ const Votes = styled.div`
   padding-right: 8px;
 `;
 
-const Spacer = styled.div`
+const Spacer1 = styled.div`
   padding-right: 8px;
 `;
 
@@ -78,12 +78,23 @@ const NoAnswers = styled.div`
   padding-bottom: 15px;
 `;
 
-export default function Question( { QA, product, productData }) {
+const Spacer2 = styled.div`
+  padding-right: 8px;
+`;
+
+const ReportQuestion = styled.div`
+  padding-right: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export default function Question( { QA, product, productData, getQAs }) {
   const [answers, setAnswers] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [buttonText, setButtonText] = useState('LOAD MORE ANSWERS');
   const [showAModal, setShowAModal] = useState(false);
   const [helpful, setHelpful] = useState(false);
+  const [reported, setReported] = useState(false);
 
   //This function is used to sort the answers by helpfulness before they become the answers state.
   const sortByHelpfulness = (a, b) => {
@@ -137,7 +148,28 @@ export default function Question( { QA, product, productData }) {
 
   const handleQuestionHelpful = (questionId) => {
     setHelpful(true);
-    console.log(questionId)
+    axios.put('/qa/questions/:question_id/helpful', {
+      question_id: questionId
+    })
+      .then((response) => {
+        getQAs(product);
+      })
+      .catch((error) => {
+        console.log(error, 'Error from marking question as helpful')
+      })
+  };
+
+  const handleQuestionReport = (questionId) => {
+    setReported(true)
+    axios.put('/qa/questions/:question_id/report', {
+      question_id: questionId
+    })
+      .then((response) => {
+        getQAs(product);
+      })
+      .catch((error) => {
+        console.log(error, 'Error from reporting a question')
+      })
   };
 
   return (
@@ -156,7 +188,11 @@ export default function Question( { QA, product, productData }) {
 
           <Votes> ({QA.question_helpfulness}) </Votes>
 
-          <Spacer> | </Spacer>
+          <Spacer1> | </Spacer1>
+
+          {!reported ? <ReportQuestion onClick={() => handleQuestionReport(QA.question_id)}> Report </ReportQuestion> : <ReportQuestion> Reported </ReportQuestion>}
+
+          <Spacer2> | </Spacer2>
 
           <AddAnswer onClick={() => setShowAModal(!showAModal)}>Add Answer</AddAnswer>
 
@@ -169,18 +205,18 @@ export default function Question( { QA, product, productData }) {
         <Answers>
           {!loadMore ? answers.filter((item, index) => index < 2).map((answer) => {
             return (
-                <Answer key={answer.answer_id} answer={answer} />
+                <Answer key={answer.answer_id} answer={answer} QA={QA} getAnswers={getAnswers}/>
             )
           }) : answers.map((answer) => {
             return (
-                <Answer key={answer.answer_id} answer={answer} />
+                <Answer key={answer.answer_id} answer={answer} QA={QA} getAnswers={getAnswers}/>
             )
           })}
         </Answers>
       </AnswerWrapper>
       {answers.length > 2 ? <MoreButton onClick={() => handleShowMore()}>{buttonText}</MoreButton> : null}
 
-      <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} />
+      <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>
   );
 };

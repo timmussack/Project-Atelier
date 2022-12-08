@@ -44,7 +44,7 @@ export default function QAContainer( { product, productData } ) {
         setQAs(data);
       })
       .catch((error) => {
-        console.log('Error in client from getQAs request', error);
+        console.log(error, 'Error in client from getQAs request');
       });
   };
 
@@ -67,9 +67,9 @@ export default function QAContainer( { product, productData } ) {
 
       <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
 
-      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ}/>
+      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} getQAs={getQAs}/>
 
-      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal}/>
+      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal} getQAs={getQAs}/>
 
       <QAButtons loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
     </QAWrapper>

@@ -12,7 +12,7 @@ const QAWrapper = styled.div`
   overflow-y: auto;
 `;
 
-export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ }) {
+export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ, getQAs }) {
 
   return (
     <QAWrapper>
@@ -20,16 +20,16 @@ export default function QuestionList( { QAs, product, productData, loadMoreQ, se
       {!loadMoreQ ? QAs.filter((item, index) => index < 2).map((QA) => {
         return (
           <div key={QA.question_id}>
-            <Question QA={QA} product={product} productData={productData} />
+            <Question QA={QA} product={product} productData={productData} getQAs={getQAs}/>
           </div>
         )
-     }) : QAs.map((QA) => {
-      return (
-        <div key={QA.question_id}>
-          <Question QA={QA} product={product} productData={productData} />
-        </div>
-      )
-   })}
+      }) : QAs.map((QA) => {
+        return (
+          <div key={QA.question_id}>
+            <Question QA={QA} product={product} productData={productData} getQAs={getQAs}/>
+          </div>
+        )
+      })}
 
     </QAWrapper>
   )
