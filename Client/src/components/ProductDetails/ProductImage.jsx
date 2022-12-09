@@ -4,12 +4,12 @@ import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import styled from 'styled-components';
 import Stars from '../RnR/Stars.jsx'
-// import Carousel from './Carousel.jsx'
+import Dropdown from './Dropdown.jsx'
 
 
 const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [currentImage, setCurrentImage] = useState('');
-  const [currentStyle, setCurrentStyle] = useState({})
+  const [currentStyle, setCurrentStyle] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
   const [thumbnailArray, setThumbnailArray] = useState([]);
   const [showItems, setShowItems] = useState(6);
@@ -17,7 +17,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
 
-  console.log(`Current style: ${JSON.stringify(currentStyle)}`)
+  console.log(`Current style: ${JSON.stringify(currentStyle.style_id)}`);
 
   const moveThumbnailsUp = (e) => {
     if (showItems === 6) {
@@ -228,7 +228,9 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
               })
             }
           </ul>
-          <></>
+          <div className="addToCartContainer">
+            <Dropdown productData={currentStyle}/>
+          </div>
         </div>
       </div>
     </div>
