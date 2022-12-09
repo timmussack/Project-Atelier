@@ -16,6 +16,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailDown, setThumbnailDown] = useState(false);
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
+  const [imageArray, setImageArray] = useState([])
 
 
 
@@ -23,11 +24,11 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
     if (showItems === 6) {
       let index = photoIndex - 1
       setPhotoIndex(index);
-      setCurrentImage(thumbnailArray[index]);
+      setCurrentImage(imageArray[index]);
     } else {
       let index = photoIndex - 1
       setPhotoIndex(index);
-      setCurrentImage(thumbnailArray[index]);
+      setCurrentImage(imageArray[index]);
       console.log(`index inside thumbs up: ${index}`);
       setStartingIndex(startingIndex - 1);
       setShowItems(showItems - 1);
@@ -39,14 +40,14 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
       if (showItems === thumbnailArray.length - 1 || showItems === thumbnailArray.length) {
         let index = photoIndex + 1
         setPhotoIndex(index);
-        setCurrentImage(thumbnailArray[index]);
+        setCurrentImage(imageArray[index]);
       } else {
         setStartingIndex(startingIndex + 1)
         setShowItems(showItems + 1);
         setThumbnailDown(true);
         let index = photoIndex + 1
         setPhotoIndex(index);
-        setCurrentImage(thumbnailArray[index]);
+        setCurrentImage(imageArray[index]);
         console.log(`index inside thumbs down: ${index}`);
       }
     // if (index >= 7) {
@@ -63,16 +64,22 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const createThumbnailArray = (style) => {
     if (!style) {
       var temp = [];
+      var temp2 = []
       defaultStyle.photos.forEach((image) => {
         temp.push(image.thumbnail_url);
+        temp2.push(image.url);
       })
       setThumbnailArray(temp);
+      setImageArray(temp2);
     } else {
       var temp = [];
+      var temp2 = [];
       style.photos.forEach((image) => {
         temp.push(image.thumbnail_url);
+        temp2.push(image.url);
       })
       setThumbnailArray(temp);
+      setImageArray(temp2);
     }
   }
 
@@ -106,7 +113,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   }, [defaultStyle])
 
   const handleClick = (image, index) => {
-    setCurrentImage(image);
+    setCurrentImage(imageArray[index]);
     setPhotoIndex(index);
   }
 
@@ -114,13 +121,13 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const handleLeftArrowClick = (event) => {
     let index = photoIndex - 1
     setPhotoIndex(index);
-    setCurrentImage(thumbnailArray[index]);
+    setCurrentImage(imageArray[index]);
   }
 
   const handleRightArrowClick = (event) => {
     let index = photoIndex + 1
     setPhotoIndex(index);
-    setCurrentImage(thumbnailArray[index]);
+    setCurrentImage(imageArray[index]);
   }
 
   return (

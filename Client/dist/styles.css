@@ -55,7 +55,7 @@ html, body {
 .img_wrap img {
   width: 70px;
   height: 70px;
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .left_2 {
@@ -67,7 +67,7 @@ html, body {
 
   width: 700px;
   height: 700px;
-  object-fit: fill;
+  object-fit: cover;
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
