@@ -11,38 +11,7 @@ export default function App() {
   const [avgRating, setAvgRating] = useState(0);
   const [product, setProduct] = useState(37315);
   const [productData, setProductData] = useState({});
-  const [metaData, setMetaData] = useState({
-    "product_id": "37319",
-    "ratings": {
-        "1": "3",
-        "2": "2",
-        "3": "9",
-        "4": "19",
-        "5": "12"
-    },
-    "recommended": {
-        "false": "16",
-        "true": "29"
-    },
-    "characteristics": {
-        "Size": {
-            "id": 125060,
-            "value": "1.7692307692307692"
-        },
-        "Width": {
-            "id": 125061,
-            "value": "1.8200000000000000"
-        },
-        "Comfort": {
-            "id": 125062,
-            "value": "1.7209302325581395"
-        },
-        "Quality": {
-            "id": 125063,
-            "value": "1.9183673469387755"
-        }
-    }
-});
+  const [metaData, setMetaData] = useState({"characteristics": {}});
 
   const getProductData = (productId) => {
     axios.get('/products/:product_id', {
