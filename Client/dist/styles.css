@@ -1,4 +1,4 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -28,7 +28,7 @@ body {
 
 .container {
   width: 75%;
-  margin: 0 auto;
+  margin-left: 20vw;
   padding-top: 5px;
   /* margin-left: 200px;
   padding-top: 20px; */
@@ -44,43 +44,51 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: auto;
+  z-index: 1
 }
 
 .img_wrap {
   width:  70px;
   height: 70px;
   cursor: pointer;
+  box-shadow: 3px 1px 5px black;
 }
 
 .img_wrap img {
   width: 70px;
   height: 70px;
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .left_2 {
   position: relative;
   padding-left: 0.5em;
+  margin-left: -100px
 }
 
 .left_2 img {
 
   width: 700px;
   height: 700px;
-  object-fit: fill
+  object-fit: cover;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 .left_3 {
   position: relative;
   padding-left: 0.5em;
+  width: max-content;
 }
 .right-arrow {
   position: absolute;
   top: 50%;
   right: 32px;
   font-size: 3rem;
-  color: rgb(255, 0, 0);
-  z-index: 6;
+  color: rgb(255, 255, 255);
+  z-index: 1;
   cursor: pointer;
   user-select: none;
 }
@@ -88,10 +96,10 @@ body {
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 32px;
+  left: 100px;
   font-size: 3rem;
-  color: rgb(255, 0, 0);
-  z-index: 6;
+  color: rgb(255, 255, 255);
+  z-index: 1;
   cursor: pointer;
   user-select: none;
 }
@@ -102,4 +110,53 @@ body {
 .active {
   border: 2px solid red;
   border-radius: 2px;
+}
+
+
+.stylelist  {
+  display:flex;
+  list-style:none;
+  justify-content: space-evenly;
+  padding-left: unset;
+}
+
+.stylelist :is(img) {
+border-radius: 50%;
+width: 60px;
+height: 60px;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+  margin: auto;
+}
+
+input[type='radio']:checked + img {
+  outline: 5px solid red;
+}
+
+.Dropdown {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+}
+
+#sizedropdown {
+  width: 65%;
+  height: 50px;
+}
+
+#qtydropdown {
+  width: 25%;
+  height: 50px;
+}
+
+#addtocartform {
+  width: 88%;
+  height: 50px;
+}
+
+#thumbnailArrow {
+  color: white;
+  font-size: xx-large;
 }

@@ -9,7 +9,7 @@ const { useState, useEffect } = React;
 export default function App() {
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
-  const [product, setProduct] = useState(37319);
+  const [product, setProduct] = useState(37315);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({});
 
@@ -82,7 +82,8 @@ export default function App() {
       <MainView
         product={product}
         productData={productData}
-        reviewMeta={metaData} />
+        reviewMeta={metaData}
+        rating={avgRating} />
 
       <QA product={product} productData={productData}/>
 
