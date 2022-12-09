@@ -6,6 +6,7 @@ const Dropdown = ({ currentStyle }) => {
   const [qtyValue, setQtyValue] = useState('default');
   const [sizeObj, setSizeObj] = useState({});
   const [qtyLength, setQtylength] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('')
 
 
   const handleSizeChange = (e) => {
@@ -13,6 +14,8 @@ const Dropdown = ({ currentStyle }) => {
       setSizeValue('');
       return;
     }
+    document.getElementById('sizedropdown').removeAttribute('size');
+    setErrorMessage('')
     setSizeValue(e.target.value);
     let sizeLength = sizeObj[e.target.value].quantity;
     if (sizeLength > 15) {
@@ -28,9 +31,14 @@ const Dropdown = ({ currentStyle }) => {
 
   const addToCart = (event) => {
     event.preventDefault();
-    console.log('Add to cart triggered');
-    console.log('size:', sizeValue);
-    console.log('qty:', qtyValue);
+    if (sizeValue === '') {
+      setErrorMessage('Please select size')
+      document.getElementById('sizedropdown').setAttribute('size', Object.keys(sizeObj).length)
+    } else {
+      console.log('Add to cart triggered');
+      console.log('size:', sizeValue);
+      console.log('qty:', qtyValue);
+    }
   }
 
 
@@ -67,9 +75,16 @@ const Dropdown = ({ currentStyle }) => {
     padding: 0.25em 1em;
   `;
 
+  const StyledError = styled.strong`
+    color: red;
+  `
+
 
   return (
   <>
+    {
+      <StyledError>{errorMessage}</StyledError>
+    }
     { Object.keys(sizeObj).length > 0 &&
       <div className="Dropdown">
         <select form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
