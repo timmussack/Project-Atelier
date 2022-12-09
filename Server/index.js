@@ -259,27 +259,27 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     });
 });
 
-app.post('/reviews', (req, res) => {
-  const { product_id, reccomend, summary, name, email, body } = req.body;
-  axios({
-    method: 'post',
-    url: `${url}reviews`
-    data: {
-      product_id: product_id,
-      reccomend: reccomend,
-      summary: summary,
-      name: name,
-      email: email,
-      body: body,
-    }
-  })
-  .then((response) => {
-    res.end();
-  })
-  .catch((err) => {
-    console.log('Error posting review in server', err)
-  })
-})
+// app.post('/reviews', (req, res) => {
+//   const { product_id, reccomend, summary, name, email, body } = req.body;
+//   axios({
+//     method: 'post',
+//     url: `${url}reviews`
+//     data: {
+//       product_id: product_id,
+//       reccomend: reccomend,
+//       summary: summary,
+//       name: name,
+//       email: email,
+//       body: body,
+//     }
+//   })
+//   .then((response) => {
+//     res.end();
+//   })
+//   .catch((err) => {
+//     console.log('Error posting review in server', err)
+//   })
+// })
 
 const port = process.env.PORT;
 app.listen(port, () => {
