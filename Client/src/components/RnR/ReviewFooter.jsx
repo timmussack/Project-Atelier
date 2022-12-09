@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import axios from 'axios';
 
 const Helpful = styled.div`
   padding-right: 5px;
@@ -21,13 +22,38 @@ const FooterFormatting = styled.div`
   font-size: 11px;
 `;
 
-const ReviewFooter = () => {
+const ReviewFooter = ({helpfulness, reviewID}) => {
+  const [helpful, setHelpful] = useState(false);
+  const [reported, setReported] = useState(false);
+
+  const reviewHelpful = (id) => {
+    setHelpful(true);
+
+    axios.put('/reviews/:review_id/helpful', { review_id: id })
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => {
+        console.log('Error marking review as helpful', err)
+      });
+  };
+
+  const reportReview = (id) => {
+    setReported(true);
+
+    axios.put('/reviews/:review_id/report', { review_id: id })
+      .then(info => info)
+      .catch((err) => {
+        console.log('Error reporting review', err)
+      });
+  };
+
   return (
     <FooterFormatting>
       <Helpful> Was this review helpful? </Helpful>
-      <Yes>Yes</Yes>
+      {!helpful ? (<Yes onClick={() => reviewHelpful(reviewID)}>Yes ({helpfulness})</Yes>) : (<Yes>Yes ({helpfulness += 1})</Yes>)}
       <Spacer2> | </Spacer2>
-      <Yes>No</Yes>
+      {!reported ? (<Yes onClick={() => reportReview(reviewID)}>Report</Yes>) : (<Yes>Reported</Yes>)}
     </FooterFormatting>
   )
 };

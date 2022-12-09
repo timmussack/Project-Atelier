@@ -5,9 +5,7 @@ import ReviewSortOptions from './ReviewSortOptions.jsx'
 import axios from 'axios';
 
 const Formatting = styled.div`
-  margin: 10px 20px;
-  font-family: Helvetica, Sans-Serif;
-  font-size: 12px;
+  width:100%
 `;
 
 const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
