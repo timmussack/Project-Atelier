@@ -17,7 +17,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
 
-  console.log(`Current style: ${JSON.stringify(currentStyle.style_id)}`);
+
 
   const moveThumbnailsUp = (e) => {
     if (showItems === 6) {
@@ -229,7 +229,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
             }
           </ul>
           <div className="addToCartContainer">
-            <Dropdown productData={currentStyle}/>
+            <Dropdown currentStyle={currentStyle}/>
           </div>
         </div>
       </div>
