@@ -52,6 +52,7 @@ html, body {
   width:  70px;
   height: 70px;
   cursor: pointer;
+  box-shadow: 3px 1px 5px black;
 }
 
 .img_wrap img {
