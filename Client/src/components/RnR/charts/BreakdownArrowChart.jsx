@@ -28,4 +28,4 @@ const BreakdownArrowChart = ({ metaData }) => {
   )
 };
 
-export BreakdownArrowChart;
+export default BreakdownArrowChart;
