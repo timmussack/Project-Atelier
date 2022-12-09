@@ -85,6 +85,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
     setStartingIndex(0);
     setThumbnailDown(false);
     setThumbnailUp(false);
+    setCurrentStyle(style)
   }
 
 

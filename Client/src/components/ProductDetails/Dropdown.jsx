@@ -3,26 +3,29 @@ import styled from 'styled-components';
 
 const Dropdown = ({ currentStyle }) => {
   const [sizeValue, setSizeValue] = useState('');
-  const [qtyValue, setQtyValue] = useState('1');
+  const [qtyValue, setQtyValue] = useState('default');
   const [sizeObj, setSizeObj] = useState({});
   const [qtyLength, setQtylength] = useState([]);
 
+
   const handleSizeChange = (e) => {
+    if (e.target.value === "default") {
+      setSizeValue('');
+      return;
+    }
     setSizeValue(e.target.value);
     let sizeLength = sizeObj[e.target.value].quantity;
     if (sizeLength > 15) {
       setQtylength(Array.from({length: 15}, (_, i) => i + 1));
-      setQtyValue('1')
     } else {
       setQtylength(Array.from({length: sizeLength}, (_, i) => i + 1));
-      setQtyValue('1');
     }
-
-
   }
+
   const handleQtyChange = (e) => {
     setQtyValue(e.target.value)
   }
+
   const addToCart = (event) => {
     event.preventDefault();
     console.log('Add to cart triggered');
@@ -44,7 +47,7 @@ const Dropdown = ({ currentStyle }) => {
 
   useEffect(() => {
     if (Object.keys(currentStyle).length > 0 ) {
-      createSizeObj()
+      createSizeObj();
     }
   }, [currentStyle])
 
@@ -73,7 +76,10 @@ const Dropdown = ({ currentStyle }) => {
             })
           }
         </select>
-        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)}>
+
+
+        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={sizeValue.length > 0 ? false : true}>
+        <option value="default">-</option>
         {
           qtyLength.map((number, index) => {
             return <option key={index} value={number}>{number}</option>
