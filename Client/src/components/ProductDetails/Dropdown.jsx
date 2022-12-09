@@ -53,6 +53,7 @@ const Dropdown = ({ currentStyle }) => {
     if (Object.keys(currentStyle).length > 0 ) {
       createSizeObj();
       setSizeValue('');
+      setQtyValue('default')
     }
   }, [currentStyle])
 
@@ -72,7 +73,7 @@ const Dropdown = ({ currentStyle }) => {
     { Object.keys(sizeObj).length > 0 &&
       <div className="Dropdown">
         <select form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
-          { 
+          {
             <option value="default">Select Size</option>
           }
           {
