@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
+import {MdArrowCircleUp, MdArrowCircleDown} from 'react-icons/md'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import styled from 'styled-components';
 import Stars from '../RnR/Stars.jsx'
@@ -137,9 +138,9 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           {
             thumbnailArray.length && photoIndex !== 0 &&
             < div
-              style={{paddingLeft: "35%"}}
+              style={{alignSelf: "center"}}
               onClick={moveThumbnailsUp}>
-              <FaAngleUp />
+              <MdArrowCircleUp id="thumbnailArrow"/>
             </div>
           }
           { thumbnailArray.length &&
@@ -186,9 +187,9 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           {
             thumbnailArray.length && photoIndex !== thumbnailArray.length -1 &&
             <div
-              style={{paddingLeft: "35%"}}
+              style={{alignSelf: "center"}}
               onClick={moveThumbnailsDown}>
-              <FaAngleDown />
+              <MdArrowCircleDown id="thumbnailArrow" />
             </div>
           }
         </div>

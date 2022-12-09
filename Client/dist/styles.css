@@ -28,7 +28,7 @@ html, body {
 
 .container {
   width: 75%;
-  margin: 0 auto;
+  margin-left: 20vw;
   padding-top: 5px;
   /* margin-left: 200px;
   padding-top: 20px; */
@@ -44,7 +44,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top: 5%;
+  margin: auto;
   z-index: 1
 }
 
@@ -87,7 +87,7 @@ html, body {
   top: 50%;
   right: 32px;
   font-size: 3rem;
-  color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
   z-index: 1;
   cursor: pointer;
   user-select: none;
@@ -98,7 +98,7 @@ html, body {
   top: 50%;
   left: 100px;
   font-size: 3rem;
-  color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
   z-index: 1;
   cursor: pointer;
   user-select: none;
@@ -154,4 +154,9 @@ input[type='radio']:checked + img {
 #addtocartform {
   width: 88%;
   height: 50px;
+}
+
+#thumbnailArrow {
+  color: white;
+  font-size: xx-large;
 }
