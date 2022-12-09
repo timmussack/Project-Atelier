@@ -44,10 +44,15 @@ const Dropdown = ({ currentStyle }) => {
     setSizeObj(obj)
   }
 
+  const disabled = () => {
+    return !sizeValue.length > 0 ? true : false
+  }
+
 
   useEffect(() => {
     if (Object.keys(currentStyle).length > 0 ) {
       createSizeObj();
+      setSizeValue('');
     }
   }, [currentStyle])
 
@@ -78,8 +83,11 @@ const Dropdown = ({ currentStyle }) => {
         </select>
 
 
-        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={sizeValue.length > 0 ? false : true}>
-        <option value="default">-</option>
+        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}>
+          {
+            disabled() ? <option value="default">-</option> : null
+          }
+
         {
           qtyLength.map((number, index) => {
             return <option key={index} value={number}>{number}</option>
