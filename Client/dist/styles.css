@@ -44,6 +44,8 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-top: 5%;
+  z-index: 1
 }
 
 .img_wrap {
@@ -61,6 +63,7 @@ html, body {
 .left_2 {
   position: relative;
   padding-left: 0.5em;
+  margin-left: -100px
 }
 
 .left_2 img {
@@ -92,7 +95,7 @@ html, body {
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 32px;
+  left: 100px;
   font-size: 3rem;
   color: rgb(255, 0, 0);
   z-index: 1;
