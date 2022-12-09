@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddReview from './AddReview.jsx';
+import ReviewSortOptions from './ReviewSortOptions.jsx';
 
 const ReviewTiles = ({reviews, filter, metaData, rating}) => {
   const [display, setDisplay] = useState(2);
@@ -26,7 +27,7 @@ const ReviewTiles = ({reviews, filter, metaData, rating}) => {
           if (index < display) {
             return <ReviewEntry review={review} key={index}/>
           } else {
-            return;
+            return
           }
         })};
       </div>

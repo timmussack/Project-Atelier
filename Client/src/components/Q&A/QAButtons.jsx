@@ -5,9 +5,9 @@ import React from 'react';
 
 const { useState, useEffect } = react;
 
-const MoreAnswers = styled.button`
+const MoreAnsweredQs = styled.button`
   background: transparent;
-  margin: 20px 10px 20px 20px;
+  margin: 20px 10px 30px 0px;
   height: 40px;
   border: 1px solid;
   cursor: pointer;
@@ -20,14 +20,19 @@ const AddQuestion = styled.button`
   cursor: pointer;
 `;
 
-export default function QAButton( { showQModal, setShowQModal }) {
+export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ }) {
+  const [buttonText, setButtonText] = useState('MORE ANSWERED QUESTIONS');
+
+  const handleMoreAnsweredQs = () => {
+    setLoadMoreQ(!loadMoreQ);
+    !loadMoreQ ? setButtonText('COLLAPSE QUESTIONS') : setButtonText('MORE ANSWERED QUESTIONS');
+  };
 
   return (
     <div>
-      <MoreAnswers onClick={()=> alert('Get more answers')}>MORE ANSWERED QUESTIONS</MoreAnswers>
+      <MoreAnsweredQs onClick={()=> handleMoreAnsweredQs()}>{buttonText}</MoreAnsweredQs>
 
       <AddQuestion  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>
   )
-
 };

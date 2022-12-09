@@ -7,8 +7,8 @@ const Stars = ({rating}) => {
     <StarRatings
       rating={rating}
       numOfStars={5}
-      starRatedColor={'rgb(0, 205, 60)'}
-      starDimension={'30px'}
+      starRatedColor={'rgb(54, 54, 54)'}
+      starDimension={'15px'}
       starSpacing={'4px'}
     />
   )
