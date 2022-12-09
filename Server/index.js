@@ -176,7 +176,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 179');
     });
 });
 
@@ -192,7 +192,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 195');
     });
 });
 
@@ -208,7 +208,7 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 211');
     });
 });
 
@@ -224,7 +224,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 227');
     });
 });
 
