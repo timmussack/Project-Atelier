@@ -43,7 +43,8 @@ const Container = styled.div`
   text-align: center;
 `
 
-  return (
+  return (<>
+    { Object.keys(defaultStyle).length > 0 ?
     <div className="mainView">
       <ProductImage
         productData={productData}
@@ -55,8 +56,9 @@ const Container = styled.div`
         productData={productData} />
 
     </div>
-
-  )
+    : <div class="lds-circle"><div></div></div>
+  }
+  </>)
 }
 
 export default MainView;
