@@ -6,22 +6,23 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
-  background: #253954;
+  background-color: #253954;
   color: white;
-  margin: 20px 10px 30px 0px;
   height: 50px;
   border: 1px solid;
+  width: 220px;
   cursor: pointer;
-  font-size: large;
+  font-weight: bold;
 `;
 
 const AddQuestion = styled.button`
-  background: #253954;
+  background-color: #253954;
   color: white;
   height: 50px;
   border: 1px solid;
+  width: 150px;
   cursor: pointer;
-  font-size: large;
+  font-weight: bold;
 `;
 
 export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ }) {

@@ -142,7 +142,7 @@ app.post('/qa/questions', (req, res) => {
 
 //Saves an answer to the database
 app.post('/qa/questions/:question_id/answers', (req, res) => {
-  const { body, name, email, questionId } = req.body;
+  const { body, name, email, photos, questionId } = req.body;
   axios({
     method: 'post',
     url: `${url}qa/questions/${questionId}/answers`,
@@ -150,7 +150,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       body: body,
       name: name,
       email: email,
-      photos: []
+      photos: photos
     },
     headers: {Authorization: `${key}`}
   })
@@ -162,7 +162,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       res.end('Not Found');
       console.error(error, 'Error in server line 163');
     });
-});
+ });
 
 //Marks a question as helpful
 app.put('/qa/questions/:question_id/helpful', (req, res) => {

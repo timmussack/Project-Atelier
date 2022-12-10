@@ -22,6 +22,7 @@ const QAWrapper = styled.div`
   position:relative ;
   width: 50%;
   margin: 0 auto;
+  padding-bottom: 40px;
 `;
 
 export default function QAContainer( { product, productData } ) {

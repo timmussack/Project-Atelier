@@ -36,6 +36,10 @@ const ModalForm = styled.form`
   overflow: auto;
 `;
 
+const Note = styled.p`
+  font-size: 10px;
+`;
+
 export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -89,7 +93,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
               }} required/>
             </label>
 
-            <p style={{fontSize: '12px'}}>For authentication reasons, you will not be emailed</p>
+            <Note>For privacy reasons, do not use your full name or email address.</Note>
 
             <label required>
               <div> Your email* </div>
@@ -98,7 +102,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
               }} required/>
             </label>
 
-            <p style={{fontSize: '12px'}}>For privacy reasons, do not use your full name or email address</p>
+            <Note>For authentication reasons, you will not be emailed.</Note>
 
           <ModalButton type="submit">Submit Question</ModalButton>
 
