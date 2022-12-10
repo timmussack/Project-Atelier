@@ -48,20 +48,20 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
   const [imageURL, setImageURL] = useState('');
 
   const handleAddAnswer = (answer, nickname, email, imageURL, questionId, file) => {
-    console.log(imageURL);
-    // axios.post('/qa/questions/:question_id/answers', {
-    //   body: answer,
-    //   name: nickname,
-    //   email: email,
-    //   //photos: Need to implement adding photos to an answer
-    //   questionId: questionId
-    // })
-    // .then((response) => {
-    //   getAnswers(QA.question_id)
-    // })
-    // .catch((error) => {
-    //   console.log('Error in QuestionModal', error);
-    // })
+    //console.log(imageURL);
+    axios.post('/qa/questions/:question_id/answers', {
+      body: answer,
+      name: nickname,
+      email: email,
+      //photos: Need to implement adding photos to an answer
+      questionId: questionId
+    })
+    .then((response) => {
+      getAnswers(QA.question_id)
+    })
+    .catch((error) => {
+      console.log('Error in QuestionModal', error);
+    })
   };
 
   let modalContent;

@@ -8,7 +8,7 @@ const { useState, useEffect } = react;
 
 const QAWrapper = styled.div`
   text-overflow: ellipsis;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow-y: auto;
 `;
 

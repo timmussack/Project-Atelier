@@ -14,13 +14,13 @@ const AnswerContainer = styled.div`
 const AnswerMain = styled.div`
   font-size: 14px;
   padding-bottom: 10px;
-  max-width: 80vh;
+  max-width: 50vh;
 `;
 
 const AnswerExtras = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 11px;
+  font-size: 12px;
 `;
 
 const Helpful = styled.div`

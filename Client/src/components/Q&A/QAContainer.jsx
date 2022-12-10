@@ -20,7 +20,7 @@ QATitle.displayName = 'QATitle';
 const QAWrapper = styled.div`
   font-family: Helvetica, Sans-Serif;
   position:relative ;
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
 `;
 

@@ -14,7 +14,8 @@ const QuestionContainer = styled.div`
 
 const QuestionMain = styled.div`
   font-weight: bold;
-  max-width: 80vh;
+  max-width: 50vh;
+  font-size: 16px;
 `;
 
 const QuestionExtras = styled.div`
@@ -74,8 +75,9 @@ const MoreButton = styled.button`
 `;
 
 const NoAnswers = styled.div`
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: 15px;
+  padding-left: 20px;
 `;
 
 const Spacer2 = styled.div`
@@ -165,7 +167,7 @@ export default function Question( { QA, product, productData, getQAs }) {
       question_id: questionId
     })
       .then((response) => {
-        getQAs(product);
+        //getQAs(product);
       })
       .catch((error) => {
         console.log(error, 'Error from reporting a question')

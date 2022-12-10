@@ -16,12 +16,12 @@ export default function AnswerPhotos({photos, showPModal, setShowPModal}) {
         <div>
           {photos.map((photo, index) => {
             return <img
-            style={{cursor: 'pointer'}}
+            style={{maxWidth: "130px", marginRight: "16px", border: "1px solid", marginBottom: "19px"}}
             onClick={() => handlePhotoClick(photo)}
             src={photo.url}
             key={index}
-            height='10%'
-            width='10%'
+            height='100%'
+            width='100%'
             />
           })}
         </div>
