@@ -68,8 +68,8 @@ app.get('/products/:product_id/styles', (req, res) => {
 
 // getting reviews
 app.get('/reviews', (req, res) => {
-  const { product_id, count } = req.query;
-  axios.get(`${url}reviews?product_id=${product_id}&count=${count}`, {
+  const { product_id, count, sort } = req.query;
+  axios.get(`${url}reviews?product_id=${product_id}&count=${count}&sort=${sort}`, {
     headers: {
       Authorization: `${key}`,
     },
@@ -227,6 +227,59 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
       console.error(error, 'Error in server line 227');
     });
 });
+
+//Reports a review
+app.put('/reviews/:review_id/report', (req, res) => {
+  var { review_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}reviews/${review_id}/report`,
+    headers: {Authorization: `${key}`}
+  })
+    .then(result => {
+      res.end();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+//Marks review as helpful
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  var { review_id } = req.body;
+  axios({
+    method: 'put',
+    url: `${url}reviews/${review_id}/helpful`,
+    headers: {Authorization: `${key}`}
+  })
+    .then(result => {
+      res.end();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+
+// app.post('/reviews', (req, res) => {
+//   const { product_id, reccomend, summary, name, email, body } = req.body;
+//   axios({
+//     method: 'post',
+//     url: `${url}reviews`
+//     data: {
+//       product_id: product_id,
+//       reccomend: reccomend,
+//       summary: summary,
+//       name: name,
+//       email: email,
+//       body: body,
+//     }
+//   })
+//   .then((response) => {
+//     res.end();
+//   })
+//   .catch((err) => {
+//     console.log('Error posting review in server', err)
+//   })
+// })
 
 const port = process.env.PORT;
 app.listen(port, () => {

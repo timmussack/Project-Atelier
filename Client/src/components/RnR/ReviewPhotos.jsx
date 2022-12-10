@@ -3,27 +3,24 @@ import PhotoModal from './modals/PhotoModal.jsx';
 
 const ReviewPhotos = ({photos}) => {
   const [zoom, setZoom] = useState(false);
+  const [image, setImage] = useState('');
 
-  if (zoom) {
-    return (
-      <>
-      {photos.map((photo, index) => {
-        return <PhotoModal url={photo.url} key={index} zoom={zoom} setZoom={setZoom}/>
-      })}
-      </>
-    )
-  } else {
+  if (photos.length) {
     return (
       <>
       {photos.map((photo, index) => {
         return <img
         src={photo.url}
         key={index}
-        height='50px'
-        width='100px'
         alt={null}
+        style={{maxWidth: "130px", marginRight: "16px", border: "1px solid", marginBottom: "19px"}}
+        onClick={() => {
+          setImage(photo.url);
+          setZoom(true);
+        }}
         />
       })}
+      <PhotoModal url={image} zoom={zoom} setZoom={setZoom}/>
       </>
     )
   }

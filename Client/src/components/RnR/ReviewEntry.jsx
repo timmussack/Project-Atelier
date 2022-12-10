@@ -6,16 +6,17 @@ import ReviewBody from './ReviewBody.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 
-const TitleMain = styled.div`
-  font-size: 15px;
-  font-weight: bold;
-`;
-
 const Formatting = styled.div`
   font-family: Helvetica, Sans-Serif;
   font-size: 12px;
+  padding-bottom: 1em;
 `;
 
+const TitleMain = styled.div`
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: 1em;
+`;
 
 const ReviewEntry = ({review, rating}) => {
 
@@ -31,13 +32,15 @@ const ReviewEntry = ({review, rating}) => {
     <Formatting>
       <ReviewHeader summary={review.summary} rating={review.rating} user={review.reviewer_name} date={formatDate(review.date)}/>
 
-      <TitleMain> {review.summary.slice(0, 60)} </TitleMain>
+      <TitleMain>{review.summary.slice(0, 60)}</TitleMain>
 
-      <ReviewBody body={review.body}/>
+      <ReviewBody body={review.body} summary={review.summary.slice(0, 60)}/>
 
       <div>
-        {review.recommend ? ('✓ I recommend this product') : (null) }
+        {review.recommend ? ('✔ I recommend this product') : (null) }
       </div>
+
+      <br></br>
 
       <div>
         <ReviewPhotos photos={review.photos}/>
@@ -47,9 +50,10 @@ const ReviewEntry = ({review, rating}) => {
         {review.response ? (`Response from seller:${review.response}`) : (null)}
       </div>
 
-      <ReviewFooter helpfulness={review.helpfulness}/>
+      <ReviewFooter helpfulness={review.helpfulness} reviewID={review.review_id}/>
+      <hr style={{marginTop: "2em", border: "1px solid", borderColor: "rgb(54, 54, 54)"}}></hr>
     </Formatting>
   )
-};
+}
 
 export default ReviewEntry;
