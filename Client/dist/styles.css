@@ -80,7 +80,7 @@ html, body {
 .left_3 {
   position: relative;
   padding-left: 0.5em;
-  width: max-content;
+  width: 354px;
 }
 .right-arrow {
   position: absolute;
@@ -114,16 +114,27 @@ html, body {
 
 
 .stylelist  {
-  display:flex;
-  list-style:none;
-  justify-content: space-evenly;
-  padding-left: unset;
+  /* background: gray; */
+  width: 300px;
+  /* height: 30%; */ /* height given for illustration */
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  list-style: none;
+  gap: 7px;
+  padding-bottom: 23px;
+  padding-left: inherit;
 }
 
 .stylelist :is(img) {
 border-radius: 50%;
 width: 60px;
 height: 60px;
+}
+
+.stylelist :is(li) {
+  flex: 0 0 0;
+  height: 58px;
 }
 
 input[type="radio"] {
