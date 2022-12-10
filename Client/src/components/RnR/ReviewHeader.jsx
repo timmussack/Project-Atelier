@@ -1,12 +1,19 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import styled, { css } from 'styled-components';
+
+const UsernameDate = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const ReviewHeader = ({rating, user, date}) => {
   return (
     <>
-      <p>
-        <Stars rating={rating}/>  {user} {date}
-      </p>
+      <Stars rating={rating}/>
+      <UsernameDate>
+        {user}, {date}
+      </UsernameDate>
     </>
   )
 };
