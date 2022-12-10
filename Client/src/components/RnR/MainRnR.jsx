@@ -7,14 +7,14 @@ const RNRTitle = styled.div`
   font-family: Helvetica, Sans-Serif;
   font-size: 12px;
   position:relative ;
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
 `;
 
 const RNRContainer = styled.div`
   font-family: Helvetica, Sans-Serif;
   position:relative;
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
   display: flex;
   color: rgb(54, 54, 54);

@@ -7,11 +7,11 @@ import BreakDownArrowChart from './charts/BreakDownArrowChart.jsx';
 const Formatting = styled.div`
   font-family: Helvetica, Sans-Serif;
   font-size: 12px;
-  width: 350px;
+  width: 400px;
   margin-right: 100px;
 `;
 const LargeRating = styled.div`
-  font-size: 60px;
+  font-size: 70px;
   font-weight: bold;
 `
 const PercentRecc = styled.div`
@@ -33,7 +33,7 @@ const Ratings = ({ rating, reviews, metaData }) => {
 
   return (
   <Formatting>
-    <LargeRating>{rating}<Stars rating={rating}/></LargeRating>
+    <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}<Stars rating={rating}/></LargeRating>
     <PercentRecc>{recommendOrNah(reviews)}% of reviews recommended this product</PercentRecc>
     <BreakDownArrowChart metaData={metaData.characteristics}/>
   </Formatting>
