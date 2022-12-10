@@ -124,6 +124,7 @@ html, body {
   gap: 7px;
   padding-bottom: 23px;
   padding-left: inherit;
+  margin-top: 0px;
 }
 
 .stylelist :is(img) {

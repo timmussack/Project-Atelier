@@ -212,7 +212,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           <Stars rating={rating} />
           <h1>{productData.category}</h1>
           <h1>{productData.name}</h1>
-          <a>${productData.default_price}</a>
+          <a>${currentStyle.original_price}</a>
+          <div style={{paddingTop: '10px'}}><a>Current Style > <strong>{currentStyle.name}</strong></a></div>
           <ul className="stylelist">
             {
               styles.map((style, index) => {
