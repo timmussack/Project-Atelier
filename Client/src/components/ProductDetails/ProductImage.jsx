@@ -22,25 +22,35 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
 
 
   const onZoom = useCallback((e) => {
-    let x = e.clientX - e.target.offsetLeft;
-    let y = e.clientY - e.target.offsetTop;
-    if (x > 900) {
-      x = 1200
-    }
-    if (x < 400) {
-      x = 0
+    let x = (e.clientX - e.target.offsetLeft) / e.target.width * 100;
+    let y = (e.clientY - e.target.offsetTop) / e.target.height * 100;
+    // if (x > 900) {
+    //   x = 1200
+    // }
+    // if (x < 400) {
+    //   x = 0
+    // }
+
+    // if (y < 225) {
+    //   y = 0
+    // }
+    //  if (y > 525) {
+    //   y = 700
+    //  }
+
+    if (x > 100) {
+      x = 100
     }
 
-    if (y < 225) {
-      y = 0
+
+    if (y > 100) {
+      y = 100
     }
-     if (y > 525) {
-      y = 700
-     }
     console.log(x, y)
 
+
+    e.target.style.transformOrigin = `${x}% ${y}%`
     e.target.style.transform = "scale(2.5, 2.5)";
-    e.target.style.transformOrigin = `${x}px ${y}px`
 
   }, [])
 

@@ -92,6 +92,7 @@ html, body {
 
 #expandwidth {
   width: 1200px;
+  cursor: zoom-out;
 }
 
 
