@@ -64,7 +64,8 @@ html, body {
 .left_2 {
   position: relative;
   padding-left: 0.5em;
-  margin-left: -100px
+  margin-left: -100px;
+  overflow: hidden;
 }
 
 .left_2 img {
@@ -75,6 +76,19 @@ html, body {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+  transition: width 2s;
+}
+
+
+#expandwidth {
+  width: 900px;
+  scale: 1
+}
+
+.expandedview {
+  clip-path: inset(0px, 0px, 0px, 0px);
+  transition: all 2s ease-in-out;
+
 }
 
 .left_3 {
@@ -174,36 +188,32 @@ input[type='radio']:checked + img {
 }
 
 
-.lds-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateZ(1px);
-}
-.lds-circle > div {
-  width: 700px;
-  height: 700px;
-  margin: 8px;
-  border-radius: 50%;
-  background: rgb(146, 146, 146);
-  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-@keyframes lds-circle {
-  0%, 100% {
-    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
-  }
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(1800deg);
-    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
-  }
-  100% {
-    transform: rotateY(3600deg);
-  }
-}
-
 #originalprice {
   color: red;
+}
+
+.modal-pop {
+  background: #29b8ff;
+  border: 2px solid #aaa;
+  color: #D5DBE7;
+  border-radius: 5px;
+  z-index: 2;
+  margin: auto;
+  overflow-y: scroll;
+  overflow: scroll;
+  /* padding: 1em 2em 2em; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 30%;
+  min-width: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-close {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
 }

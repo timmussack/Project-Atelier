@@ -5,7 +5,6 @@ const Description = ({ productData }) => {
 
   const DataContainer = styled.div`
     position:relative ;
-    background-color: yellow;
     width: 75%;
     max-width: 900px;
     margin: 0 auto;

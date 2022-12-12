@@ -4,8 +4,8 @@ import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import {MdArrowCircleUp, MdArrowCircleDown} from 'react-icons/md'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import styled from 'styled-components';
-import Stars from '../RnR/Stars.jsx'
-import Dropdown from './Dropdown.jsx'
+import Stars from '../RnR/Stars.jsx';
+import Dropdown from './Dropdown.jsx';
 
 
 const ProductImage = ({styles, defaultStyle, productData, rating}) => {
@@ -17,7 +17,13 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailDown, setThumbnailDown] = useState(false);
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
-  const [imageArray, setImageArray] = useState([])
+  const [imageArray, setImageArray] = useState([]);
+  const [isExpanded, setExpandedView] = useState(false);
+
+  const handleExpand = () => {
+    setExpandedView(!isExpanded);
+    document.getElementById('')
+  }
 
 
 
@@ -51,14 +57,6 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
         setCurrentImage(imageArray[index]);
         console.log(`index inside thumbs down: ${index}`);
       }
-    // if (index >= 7) {
-    //   setStartingIndex(startingIndex + 1)
-    //   setShowItems(showItems + 1);
-    //   setThumbnailDown(true);
-    // } else if (index === thumbnailArray.length -1) {
-    //   setStartingIndex(index);
-    //   setThumbnailDown(false);
-    // }
 
   };
 
@@ -206,14 +204,15 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
               className="right-arrow"
               onClick={moveThumbnailsDown}/>
           }
-          <img src={currentImage} alt="" />
+
+          <img id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
         <div className="left_3">
           <Stars rating={rating} />
           <h1>{productData.category}</h1>
           <h1>{productData.name}</h1>
           {
-          currentStyle.sale_price ?
+            currentStyle.sale_price ?
             <>
               <del>${currentStyle.original_price}</del>
               <a id='originalprice'>${currentStyle.sale_price}</a>
