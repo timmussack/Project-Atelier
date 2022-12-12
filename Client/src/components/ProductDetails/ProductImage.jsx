@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import {MdArrowCircleUp, MdArrowCircleDown} from 'react-icons/md'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
@@ -20,8 +20,52 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [imageArray, setImageArray] = useState([]);
   const [isExpanded, setExpandedView] = useState(false);
 
+
+  const onZoom = useCallback((e) => {
+    let x = e.clientX - e.target.offsetLeft;
+    let y = e.clientY - e.target.offsetTop;
+    if (x > 900) {
+      x = 1200
+    }
+    if (x < 400) {
+      x = 0
+    }
+
+    if (y < 225) {
+      y = 0
+    }
+     if (y > 525) {
+      y = 700
+     }
+    console.log(x, y)
+
+    e.target.style.transform = "scale(2.5, 2.5)";
+    e.target.style.transformOrigin = `${x}px ${y}px`
+
+  }, [])
+
+  const offZoom = useCallback((e) => {
+    const img = document.getElementsByClassName('mainimage')
+    img[0].style.transformOrigin = `center center`;
+    img[0].style.transform = "scale(1)";
+  }, [])
+
   const handleExpand = () => {
-    setExpandedView(!isExpanded);
+    let picture = document.getElementsByClassName('mainimage');
+    if (!isExpanded) {
+      setExpandedView(!isExpanded);
+      picture[0].addEventListener('mousemove', onZoom, true);
+      var element = document.getElementsByClassName('left_3');
+      element[0].style.visibility = 'hidden'
+    } else {
+      picture[0].removeEventListener('mousemove',onZoom, true);
+      picture[0].style.transformOrigin = `center center`;
+      picture[0].style.transform = "scale(1)";
+      setExpandedView(!isExpanded);
+      var element = document.getElementsByClassName('left_3');
+      element[0].style.visibility = 'visible';
+
+    }
   }
 
 
@@ -201,11 +245,11 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           {
             defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
             <FaAngleRight
-              className="right-arrow" id={isExpanded ? 'expandedarrow' : ''}
+              className="right-arrow"
               onClick={moveThumbnailsDown}/>
           }
 
-          <img id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
+          <img  className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
         <div className="left_3">
           <Stars rating={rating} />

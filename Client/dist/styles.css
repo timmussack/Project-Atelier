@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: helvetica;
 
 }
 
@@ -67,12 +68,12 @@ html, body {
   margin-left: -100px;
   overflow-x: visible;
   overflow-y: hidden;
-  transition: clip-path  0.2s ease-in-out;
+  transition: width  0.2s ease-in-out;
 }
 
 
 #expandedview {
-  clip-path: inset(0px -340px 0px 0px);
+  clip-path: inset(0px 0px 0px 0px);
   z-index: 1;
   overflow-y: visible;
 }
@@ -85,12 +86,12 @@ html, body {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
-  transition: scale 0.5s ease-in-out;
+  transition: width .3s ease-in-out;
 }
 
 
 #expandwidth {
-  scale: 2.5
+  width: 1200px;
 }
 
 
@@ -109,12 +110,8 @@ html, body {
   z-index: 1;
   cursor: pointer;
   user-select: none;
-  transition: right 0.6s ease-in-out;
 }
 
-#expandedarrow {
-  right: -290px;
-}
 
 .left-arrow {
   position: absolute;
@@ -201,28 +198,3 @@ input[type='radio']:checked + img {
   color: red;
 }
 
-.modal-pop {
-  background: #29b8ff;
-  border: 2px solid #aaa;
-  color: #D5DBE7;
-  border-radius: 5px;
-  z-index: 2;
-  margin: auto;
-  overflow-y: scroll;
-  overflow: scroll;
-  /* padding: 1em 2em 2em; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  max-width: 100%;
-  max-height: 100%;
-  min-height: 30%;
-  min-width: 30%;
-  transform: translate(-50%, -50%);
-}
-
-.modal-close {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: flex-end;
-}
