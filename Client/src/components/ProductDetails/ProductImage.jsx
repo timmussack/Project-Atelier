@@ -22,8 +22,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
 
   const handleExpand = () => {
     setExpandedView(!isExpanded);
-    document.getElementById('')
   }
+
 
 
 
@@ -131,7 +131,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
 
   return (
     <div className="container">
-      <div className="left">
+      <div className="left" style={ isExpanded ? {cursor: 'zoom-out'}: {}}>
         <div className="left_1">
           {
             thumbnailArray.length && photoIndex !== 0 &&
@@ -191,7 +191,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
             </div>
           }
         </div>
-        <div className="left_2">
+        <div className="left_2" id={isExpanded ? 'expandedview' : ''}>
           {
             photoIndex !== 0 &&
             <FaAngleLeft
@@ -201,7 +201,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           {
             defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
             <FaAngleRight
-              className="right-arrow"
+              className="right-arrow" id={isExpanded ? 'expandedarrow' : ''}
               onClick={moveThumbnailsDown}/>
           }
 
