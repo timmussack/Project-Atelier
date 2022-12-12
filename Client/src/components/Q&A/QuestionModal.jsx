@@ -30,6 +30,7 @@ const ModalButton = styled.button`
   background: transparent;
   border: 1px solid;
   margin-right: 20px;
+  margin-top: 10px;
 `;
 
 const ModalForm = styled.form`
@@ -37,7 +38,7 @@ const ModalForm = styled.form`
 `;
 
 const Note = styled.p`
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {

@@ -281,6 +281,29 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 //   })
 // })
 
+//Posts an interaction (click of an element) to the database
+app.post('/interactions', (req, res) => {
+  const { element, time, widget } = req.body;
+  axios({
+    method: 'post',
+    url: `${url}interactions`,
+    data: {
+      element: element,
+      time: time,
+      widget: widget
+    },
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      res.sendStatus(404);
+      res.end('Not Found');
+      console.error(error, 'Error in server line 163');
+    });
+ });
+
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

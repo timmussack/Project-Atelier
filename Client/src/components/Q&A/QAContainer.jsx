@@ -49,8 +49,26 @@ export default function QAContainer( { product, productData } ) {
       });
   };
 
+  const handleElementClick = (event) => {
+    const clickTime = new Date();
+    axios.post('/interactions', {
+      element: event.target.outerHTML,
+      time: clickTime,
+      widget: 'QA'
+    })
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        console.log(error, 'Error in client from QA interaction post request');
+      });
+  };
+
   useEffect(() => {
     getQAs(product);
+    const qaElement = document.getElementById('QA');
+    //console.log(qaElement)
+    qaElement.addEventListener('click', handleElementClick, true);
   }, []);
 
   const handleSearch = (search) => {
@@ -61,7 +79,7 @@ export default function QAContainer( { product, productData } ) {
   };
 
   return (
-    <QAWrapper>
+    <QAWrapper id='QA'>
       <QATitle>
         QUESTIONS & ANSWERS
       </QATitle>

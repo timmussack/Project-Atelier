@@ -27,14 +27,10 @@ const AModalContent = styled.div`
 `;
 
 const ModalButton = styled.button`
-  background-color: #253954;
-  color: white;
-  height: 50px;
+  background: transparent;
   border: 1px solid;
-  width: 150px;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 10px 20px 0px 0px;
+  margin-right: 20px;
+  margin-top: 10px;
 `;
 
 const ModalForm = styled.form`
@@ -42,7 +38,7 @@ const ModalForm = styled.form`
 `;
 
 const Note = styled.p`
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers }) {

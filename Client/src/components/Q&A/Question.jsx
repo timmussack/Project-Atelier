@@ -205,7 +205,7 @@ export default function Question( { QA, product, productData, getQAs }) {
       <AnswerWrapper>
         {answers.length === 0 ? <NoAnswers>This question has not been answered.</NoAnswers> : <A>A:</A>}
         <Answers>
-          {!loadMore ? answers.filter((item, index) => index < 2).map((answer) => {
+          {!loadMore ? answers.filter((item, index) => index < 1).map((answer) => {
             return (
                 <Answer key={answer.answer_id} answer={answer} QA={QA} getAnswers={getAnswers}/>
             )
