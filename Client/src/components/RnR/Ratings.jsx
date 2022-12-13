@@ -1,18 +1,25 @@
 import React from 'react';
 import Stars from './Stars.jsx';
 import styled, { css } from 'styled-components';
+import BreakDownBarChart from './charts/BreakDownBarChart.jsx';
+import BreakDownArrowChart from './charts/BreakDownArrowChart.jsx';
 
 const Formatting = styled.div`
-  margin: 10px 20px;
   font-family: Helvetica, Sans-Serif;
   font-size: 12px;
+  width: 400px;
+  margin-right: 100px;
 `;
 const LargeRating = styled.div`
-  font-size: 60px;
+  font-size: 70px;
   font-weight: bold;
+`
+const PercentRecc = styled.div`
+  padding-bottom: 1em;
 `
 const Ratings = ({ rating, reviews, metaData }) => {
   const recommendOrNah = (reviewData) => {
+    console.log(metaData)
     let recommended = 0;
 
     reviewData.forEach((review) => {
@@ -26,8 +33,9 @@ const Ratings = ({ rating, reviews, metaData }) => {
 
   return (
   <Formatting>
-    <div><LargeRating>{rating} <Stars rating={rating}/> </LargeRating> </div>
-    <div>{recommendOrNah(reviews)}% of reviews recommended this item</div>
+    <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}<Stars rating={rating}/></LargeRating>
+    <PercentRecc>{recommendOrNah(reviews)}% of reviews recommended this product</PercentRecc>
+    <BreakDownArrowChart metaData={metaData.characteristics}/>
   </Formatting>
 )};
 

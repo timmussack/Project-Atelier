@@ -11,7 +11,7 @@ export default function App() {
   const [avgRating, setAvgRating] = useState(0);
   const [product, setProduct] = useState(37318);
   const [productData, setProductData] = useState({});
-  const [metaData, setMetaData] = useState({});
+  const [metaData, setMetaData] = useState({"characteristics": {}});
 
   const getProductData = (productId) => {
     axios.get('/products/:product_id', {
@@ -56,7 +56,8 @@ export default function App() {
     axios.get('/reviews', {
       params: {
         product_id: id,
-        count: 50,
+        count: 100,
+        sort: 'relevant',
       },
     })
       .then((response) => {
@@ -70,9 +71,9 @@ export default function App() {
 
 
   useEffect(() => {
-    getReviews(product);
-    getProductData(product);
     getReviewMeta(product);
+    getProductData(product);
+    getReviews(product);
     //getreviews
     //get question stuff
     //seteventlistner()
@@ -91,9 +92,11 @@ export default function App() {
 
       <MainRnR
       rating={avgRating}
+      setReviews={setReviews}
       reviews={reviews}
-      productID={product}
-      metaData={metaData} />
+      product={product}
+      metaData={metaData}
+      productData={productData} />
     </div>
-  );
+  )
 }

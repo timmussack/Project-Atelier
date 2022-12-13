@@ -1,38 +1,31 @@
+import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
+import Stars from './Stars.jsx';
 import ReviewEntry from './ReviewEntry.jsx';
 import AddReview from './AddReview.jsx';
 import ReviewSortOptions from './ReviewSortOptions.jsx';
 
-const ReviewTiles = ({reviews, filter, metaData, rating}) => {
+const ReviewTiles = ({reviews, filter, metaData, rating, product, productData}) => {
   const [display, setDisplay] = useState(2);
-
-  const sortHandler = (option, reviews) => {
-    if (option === 'Relevant') {
-      return reviews.sort((a, b) => { b.date - a.date });
-    } else if (option === 'Helpful') {
-      return reviews.sort((a, b) => { b.helpfulness - a.helpfulness });
-    } else {
-      return reviews.sort((a, b) => { a.date - b.date });
-    }
-  };
 
   const addMoreReviewsToDisplay = () => {
     setDisplay(display+2);
   };
 
   return (
-    <div>
+    <>
       <div>
         {reviews.map((review, index) => {
           if (index < display) {
+            console.log(review)
             return <ReviewEntry review={review} key={index}/>
           } else {
             return
           }
-        })};
+        })}
       </div>
-      <AddReview display={display} reviews={reviews} metaData={metaData} rating={rating} displayHandler={addMoreReviewsToDisplay}/>
-    </div>
+      <AddReview display={display} reviews={reviews} metaData={metaData} rating={rating} displayHandler={addMoreReviewsToDisplay} product={product} productData={productData}/>
+    </>
   )};
 
 export default ReviewTiles;

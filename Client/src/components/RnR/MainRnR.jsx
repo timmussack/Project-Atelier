@@ -5,23 +5,31 @@ import styled, { css } from 'styled-components';
 
 const RNRTitle = styled.div`
   font-family: Helvetica, Sans-Serif;
-  margin: 10px 20px;
   font-size: 12px;
+  position:relative ;
+  width: 50%;
+  margin: 0 auto;
 `;
 
-const MainRnR = ({ rating, reviews, productID, metaData }) => {
+const RNRContainer = styled.div`
+  font-family: Helvetica, Sans-Serif;
+  position:relative;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  color: rgb(54, 54, 54);
+`;
+
+const MainRnR = ({ rating, reviews, product, metaData, productData, setReviews }) => {
 
   return (
-  <>
-    <RNRTitle> RATINGS & REVIEWS </RNRTitle>
-    <div>
-      <Ratings rating={rating} reviews={reviews} metaData={metaData}/>
-    </div>
-
-    <div>
-      <Reviews reviews={reviews} rating={rating} metaData={metaData}/>
-    </div>
-  </>
+    <>
+      <RNRTitle> RATINGS & REVIEWS </RNRTitle>
+      <RNRContainer>
+        <Ratings rating={rating} reviews={reviews} metaData={metaData}/>
+        <Reviews reviews={reviews} setReviews={setReviews} rating={rating} metaData={metaData} product={product} productData={productData}/>
+      </RNRContainer>
+    </>
 )};
 
 export default MainRnR;
