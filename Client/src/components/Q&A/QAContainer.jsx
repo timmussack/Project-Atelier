@@ -15,7 +15,7 @@ const QATitle = styled.div`
   font-size: 12px;
 `;
 
-QATitle.displayName = 'QATitle';
+//QATitle.displayName = 'QATitle';
 
 const QAWrapper = styled.div`
   font-family: Helvetica, Sans-Serif;
@@ -29,6 +29,7 @@ export default function QAContainer( { product, productData } ) {
   const [QAs, setQAs] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
   const [loadMoreQ, setLoadMoreQ] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const getQAs = (productId) => {
     axios.get('/qa/questions', {
@@ -66,13 +67,12 @@ export default function QAContainer( { product, productData } ) {
 
   useEffect(() => {
     getQAs(product);
+    //The below two lines are used to log user click interactions
     const qaElement = document.getElementById('QA');
-    //console.log(qaElement)
     qaElement.addEventListener('click', handleElementClick, true);
   }, []);
 
   const handleSearch = (search) => {
-    console.log(search);
     setQAs(
       QAs.filter(QA => QA.question_body.toLowerCase().includes(search.toLowerCase()))
     )
@@ -80,17 +80,17 @@ export default function QAContainer( { product, productData } ) {
 
   return (
     <QAWrapper id='QA'>
-      <QATitle>
+      <QATitle data-testid='qaTitle'>
         QUESTIONS & ANSWERS
       </QATitle>
 
-      <QASearch product={product} getQAs={getQAs} handleSearch={ handleSearch }/>
+      <QASearch product={product} getQAs={getQAs} handleSearch={handleSearch} SearchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 
       <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} getQAs={getQAs}/>
 
       <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal} getQAs={getQAs}/>
 
-      <QAButtons loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
+      <QAButtons QAs={QAs} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
     </QAWrapper>
   );
 };

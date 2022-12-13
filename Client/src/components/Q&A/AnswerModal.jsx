@@ -48,7 +48,6 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
   const [imageURL, setImageURL] = useState([]);
 
   const handleAddAnswer = (answer, nickname, email, imageURL, questionId) => {
-    console.log(answer, nickname, email, imageURL, questionId);
     axios.post('/qa/questions/:question_id/answers', {
       body: answer,
       name: nickname,

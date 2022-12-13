@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import PhotoModal from './PhotoModal.jsx';
+import styled, { css } from 'styled-components';
 
+const Photo = styled.img`
+  max-width: 130px;
+  margin-right: 16px;
+  margin-bottom: 0px;
+  border: 1px solid black;
+  cursor: pointer;
+`;
 
 export default function AnswerPhotos({photos, showPModal, setShowPModal}) {
   const [photoUrl, setPhotoUrl] = useState('');
@@ -15,8 +23,7 @@ export default function AnswerPhotos({photos, showPModal, setShowPModal}) {
       <>
         <div>
           {photos.map((photo, index) => {
-            return <img
-            style={{maxWidth: "130px", marginRight: "16px", border: "1px solid", marginBottom: "19px"}}
+            return <Photo
             onClick={() => handlePhotoClick(photo)}
             src={photo.url}
             key={index}

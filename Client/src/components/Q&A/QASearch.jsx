@@ -15,19 +15,27 @@ const Form = styled.form`
   margin: 10px 0px 15px 0px;
 `;
 
-export default function Search( { handleSearch, product, getQAs } ) {
+export default function Search( { handleSearch, product, getQAs, searchTerm, setSearchTerm } ) {
 
   const styleIcon = {
-    "padding-top": "13px",
-    "padding-right": "10px"
+    "paddingTop": "13px",
+    "paddingRight": "10px"
   };
 
   return (
-    <Form>
+    <Form onSubmit={(e) => {
+      e.preventDefault();
+      // const clearSearchField = document.getElementById('search');
+      // clearSearchField.value = '';
+    }}>
         <SearchBar
-          type="text"
+          data-testid='qaSearch'
+          id='search'
+          type='text'
           placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...'
-          onChange={(e) => e.target.value.length > 2 ? handleSearch(e.target.value) : getQAs(product)}
+          onChange={(e) => {
+            e.target.value.length > 2 ? handleSearch(e.target.value) : getQAs(product);
+          }}
         />
         <FaSearch style={styleIcon}/>
     </Form>

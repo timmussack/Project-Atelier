@@ -65,13 +65,13 @@ const Answers = styled.div`
   padding-left: 5px;
 `;
 
-const MoreButton = styled.button`
+const LoadMoreAnswers = styled.button`
   font-size: 10px;
   font-weight: bold;
   background: transparent;
   border: none;
   cursor: pointer;
-  margin: 0px 0px 15px 16px;
+  margin: 0px 0px 18px 16px;
 `;
 
 const NoAnswers = styled.div`
@@ -205,7 +205,7 @@ export default function Question( { QA, product, productData, getQAs }) {
       <AnswerWrapper>
         {answers.length === 0 ? <NoAnswers>This question has not been answered.</NoAnswers> : <A>A:</A>}
         <Answers>
-          {!loadMore ? answers.filter((item, index) => index < 1).map((answer) => {
+          {!loadMore ? answers.filter((item, index) => index < 2).map((answer) => {
             return (
                 <Answer key={answer.answer_id} answer={answer} QA={QA} getAnswers={getAnswers}/>
             )
@@ -216,7 +216,7 @@ export default function Question( { QA, product, productData, getQAs }) {
           })}
         </Answers>
       </AnswerWrapper>
-      {answers.length > 2 ? <MoreButton onClick={() => handleShowMore()}>{buttonText}</MoreButton> : null}
+      {answers.length > 2 ? <LoadMoreAnswers onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
       <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>
