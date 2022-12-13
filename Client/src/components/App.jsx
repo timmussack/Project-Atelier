@@ -68,27 +68,6 @@ export default function App() {
       })
   };
 
-  /*
-
-    handleClick = (event, widget) => {
-        //create time
-        // element = event.target
-        // Overiew/qa/rr
-    }
-
-
-
-
-  */
-
-  /*
-  set event listener function
-  document.body.addEventListener('click', handleClick, true)
-
-
-
-
-  */
 
   useEffect(() => {
     getReviews(product);

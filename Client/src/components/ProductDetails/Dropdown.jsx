@@ -1,6 +1,20 @@
 import {React, useState, useEffect} from 'react';
 import styled from 'styled-components';
 
+const StyledAddToCart = styled.button`
+color: black;
+width: inherit;
+height: inherit;
+background-color: transparent;
+border-color: black
+font-size: 1em;
+padding: 0.25em 1em;
+`;
+
+const StyledError = styled.strong`
+color: red;
+`
+
 const Dropdown = ({ currentStyle }) => {
   const [sizeValue, setSizeValue] = useState('');
   const [qtyValue, setQtyValue] = useState('default');
@@ -65,20 +79,6 @@ const Dropdown = ({ currentStyle }) => {
     }
   }, [currentStyle])
 
-  const StyledAddToCart = styled.button`
-    color: black;
-    width: inherit;
-    height: inherit;
-    background-color: transparent;
-    border-color: black
-    font-size: 1em;
-    padding: 0.25em 1em;
-  `;
-
-  const StyledError = styled.strong`
-    color: red;
-  `
-
 
   return (
   <>
@@ -94,7 +94,7 @@ const Dropdown = ({ currentStyle }) => {
           {
             Object.keys(sizeObj).map((sku, index) => {
               return (
-                <option value={sku}>{sizeObj[sku].size}</option>
+                <option key={index} value={sku}>{sizeObj[sku].size}</option>
               )
             })
           }

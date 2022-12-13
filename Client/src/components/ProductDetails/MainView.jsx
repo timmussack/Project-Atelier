@@ -3,12 +3,28 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ProductImage from './ProductImage.jsx';
-import Description from './Description.jsx'
+import Description from './Description.jsx';
+
+
+
+  const Button = styled.button`
+    background: transparent;
+    border-radius: 3px;
+    border: 2px solid palevioletred;
+    color: palevioletred;
+    margin: 0 1em;
+    padding: 0.25em 1em;
+`
+  const Container = styled.div`
+    text-align: center;
+  `
 
 
 const MainView = ({ product, productData, reviewMeta, rating}) => {
   const [styles, setStyles] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState({});
+
+
 
 
 
@@ -39,17 +55,7 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
     element[0].addEventListener('click', listen, true)
   }, [])
 
-  const Button = styled.button`
-    background: transparent;
-    border-radius: 3px;
-    border: 2px solid palevioletred;
-    color: palevioletred;
-    margin: 0 1em;
-    padding: 0.25em 1em;
-`
-const Container = styled.div`
-  text-align: center;
-`
+
 
   return (
     <div className="mainView">
@@ -58,6 +64,7 @@ const Container = styled.div`
         styles={styles}
         defaultStyle={defaultStyle}
         rating={rating}
+        reviewMeta={reviewMeta}
         />
       <Description
         productData={productData} />

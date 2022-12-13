@@ -1,14 +1,34 @@
 import React from 'react';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback} from 'react';
 import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import {MdArrowCircleUp, MdArrowCircleDown} from 'react-icons/md'
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp, FaTwitter, FaFacebook, FaPinterest } from 'react-icons/fa';
 import styled from 'styled-components';
 import Stars from '../RnR/Stars.jsx';
 import Dropdown from './Dropdown.jsx';
 
+const SocialDiv = styled.div`
+padding-Top: 5px;`;
 
-const ProductImage = ({styles, defaultStyle, productData, rating}) => {
+const Fb = styled.a`
+font-size: 1em;
+padding-right: 5px;
+color: #4267B2;
+`;
+
+const Twitter = styled.a`
+font-size: 1em;
+color: #1DA1F2;
+padding-right: 5px;
+`;
+
+const Pinterest = styled.a`
+font-size: 1em;
+color: #E60023;
+`;
+
+
+const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [currentStyle, setCurrentStyle] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -19,24 +39,29 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [startingIndex, setStartingIndex] = useState(0);
   const [imageArray, setImageArray] = useState([]);
   const [isExpanded, setExpandedView] = useState(false);
+  const [totalReviews, setTotalReviews] = useState(0)
+
+  console.log(`reviewmeta:`, reviewMeta)
+
+  const handleReviews = () => {
+    if (Object.keys(reviewMeta).length > 0) {
+      let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
+        return Number(a) + Number(b)
+      }, 0)
+      setTotalReviews(getReviews)
+    }
+  }
+
+  const handleScroll = (e) => {
+    e.preventDefault();
+    var test = document.getElementById('testing');
+    test.scrollIntoView({behavior: 'smooth'})
+  }
 
 
   const onZoom = useCallback((e) => {
     let x = (e.clientX - e.target.offsetLeft) / e.target.width * 100;
     let y = (e.clientY - e.target.offsetTop) / e.target.height * 100;
-    // if (x > 900) {
-    //   x = 1200
-    // }
-    // if (x < 400) {
-    //   x = 0
-    // }
-
-    // if (y < 225) {
-    //   y = 0
-    // }
-    //  if (y > 525) {
-    //   y = 700
-    //  }
 
     if (x > 100) {
       x = 100
@@ -46,6 +71,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
     if (y > 100) {
       y = 100
     }
+
+
     console.log(x, y)
 
 
@@ -158,7 +185,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
       }
       setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
-      createThumbnailArray()
+      createThumbnailArray();
+      handleReviews()
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
@@ -262,17 +290,27 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
           <img  className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
         <div className="left_3">
-          <Stars rating={rating} />
+          <div>
+            <Stars rating={rating}/>
+            {
+              <a  onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
+            }
+          </div>
           <h1>{productData.category}</h1>
           <h1>{productData.name}</h1>
           {
             currentStyle.sale_price ?
             <>
               <del>${currentStyle.original_price}</del>
-              <a id='originalprice'>${currentStyle.sale_price}</a>
+              <pre id='originalprice'>${currentStyle.sale_price}</pre>
             </>
             : <a>${currentStyle.original_price}</a>
           }
+          <SocialDiv>
+              <Fb target={'_blank'} href={`https://www.facebook.com`} > <FaFacebook /> </Fb>
+              <Twitter className='twitter-share-button' target={'_blank'} href={`https://twitter.com/intent/tweet?text=Hello%20world`} ><FaTwitter /></Twitter>
+              <Pinterest target={'_blank'} href={`https://www.pinterest.com`}> <FaPinterest /> </Pinterest>
+          </SocialDiv>
 
           <div style={{paddingTop: '10px'}}><a>Style > <strong>{currentStyle.name}</strong></a></div>
           <ul className="stylelist">
@@ -281,7 +319,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
                 if (index === 0) {
                   return (
                     <li>
-                    <label for={index}>
+                    <label key={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img src={style.photos[0].thumbnail_url}/>
                     </label>
@@ -290,7 +328,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
                 }
                 return (
                   <li>
-                    <label for={index}>
+                    <label key={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img src={style.photos[0].thumbnail_url}/>
                     </label>
