@@ -27,8 +27,6 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
 
 
 
-
-
   const listen = (e) => {
     console.log('This element was clicked', e.target)
   }

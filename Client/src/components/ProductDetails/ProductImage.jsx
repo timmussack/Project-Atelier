@@ -41,8 +41,6 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   const [isExpanded, setExpandedView] = useState(false);
   const [totalReviews, setTotalReviews] = useState(0)
 
-  console.log(`reviewmeta:`, reviewMeta)
-
   const handleReviews = () => {
     if (Object.keys(reviewMeta).length > 0) {
       let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
@@ -54,7 +52,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
 
   const handleScroll = (e) => {
     e.preventDefault();
-    var test = document.getElementById('testing');
+    var test = document.getElementById('ratings');
     test.scrollIntoView({behavior: 'smooth'})
   }
 
@@ -104,8 +102,6 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
 
     }
   }
-
-
 
 
   const moveThumbnailsUp = (e) => {
@@ -253,6 +249,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                 while (index <= showItems) {
                   return (
                     <div
+                      data-testid='thumbnails'
                       className={index === photoIndex ? "img_wrap active" : "img_wrap"}
                       key={index}
                       onClick={() => handleClick(image, index)}
@@ -319,7 +316,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                 if (index === 0) {
                   return (
                     <li>
-                    <label key={index}>
+                    <label htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img src={style.photos[0].thumbnail_url}/>
                     </label>
@@ -328,9 +325,9 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                 }
                 return (
                   <li>
-                    <label key={index}>
+                    <label  htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img src={style.photos[0].thumbnail_url}/>
+                        <img id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )
