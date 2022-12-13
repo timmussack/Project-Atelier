@@ -9,7 +9,7 @@ const { useState, useEffect } = React;
 export default function App() {
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
-  const [product, setProduct] = useState(37315);
+  const [product, setProduct] = useState(37318);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({"characteristics": {}});
 
@@ -69,12 +69,14 @@ export default function App() {
       })
   };
 
+
   useEffect(() => {
     getReviewMeta(product);
     getProductData(product);
     getReviews(product);
     //getreviews
     //get question stuff
+    //seteventlistner()
   }, []);
 
   return (

@@ -1,8 +1,13 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx}'],
+  collectCoverageFrom: ['Client/src/**/*.{js,jsx}'],
+  coverageThreshold: {
+    "global": {
+      "lines": 70
+    }
+  },
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  coverageReporters: ['json', 'json-summary'],
+  coverageReporters: ['html'],
 };
