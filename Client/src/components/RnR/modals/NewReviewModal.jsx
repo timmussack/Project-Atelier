@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const RModal = styled.div`
   display: flex;
@@ -48,22 +49,41 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
 
-  const postReviewHandler = (userReview, reccomend, nickname, email, photos, summary) => {
-    axios.post('/reviews', {
-      product_id: product,
-      reccomend: reccomend,
-      summary: summary,
-      name: nickname,
-      email: email,
-      body: userReview,
+  const postReviewHandler = (e) => {
+    e.preventDefault();
+    let submittedForm = new FormData();
+    submittedForm.append('file', photos);
+    axios.post('/photoUpload', submittedForm, {
+      headers: { 'Content-type': 'multipart/form-data' }
     })
-    .then((response) => {
-      console.log(response)
-    })
-    .catch((err) => {
-      console.log('Error posting review', err)
-    });
+      .then((response) => {
+        console.log('Successful image upload', response);
+        // axios.post('/reviews', {
+        //   product_id: product,
+        //   recommend: reccomend,
+        //   summary: summary,
+        //   name: nickname,
+        //   email: email,
+        //   body: userReview,
+        //   photos: photos,
+        // })
+        // .then((response) => {
+        //   console.log('sucessful review post', response)
+        // })
+        // .catch((err) => {
+        //   console.log('Error posting review', err)
+        // });
+      })
+      .catch((err) => {
+        console.log('Error uploading images');
+      });
   };
+
+  const photoUploadHandler = (e) => {
+    let urlArr = photos;
+    urlArr.push(URL.createObjectURL(e.target.files[0]));
+    setPhotos(urlArr);
+  }
 
   if (showAddReview) {
     return (
@@ -71,10 +91,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
         <RModalContent>
           <h2>Write Your Review</h2>
           <h4>About the {productData.name}</h4>
-          <ModalForm onSubmit={() => {
-            postReviewHandler(userReview, reccomend, nickname, email, photos, summary);
-            setShowAddReview(false);
-          }}>
+          <ModalForm enctype="multipart/form-data" onSubmit={(e) => postReviewHandler(e)}>
+
             <label>
             <ModalTitles>Overall Rating</ModalTitles>
             </label>
@@ -82,21 +100,21 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
             <label>
               <ModalTitles>Would You Reccomend This Product?</ModalTitles>
               <ModalButton>
-                <input required type="radio" name="yesNo" value="yes" onClick={() => setReccomend(true)}/>Yes
+                <input required type="radio" value="yes" onClick={() => setReccomend(true)}/>Yes
               </ModalButton>
               <ModalButton>
-                <input required type="radio" name="yesNo" value="no" onClick={() => setReccomend(false)}/>No
+                <input required type="radio" value="no" onClick={() => setReccomend(false)}/>No
               </ModalButton>
             </label>
 
             <label>
               <ModalTitles>Summary</ModalTitles>
-              <input onChange={e => setSummary(e.target.value)} type="text" required maxLength="60" size="50" placeholder="Example: Best Purchase Ever!"/>
+              <input name="summary" onChange={e => setSummary(e.target.value)} type="text" required maxLength="60" size="50" placeholder="Example: Best Purchase Ever!"/>
             </label>
 
             <label>
               <ModalTitles>Body</ModalTitles>
-              <input type="text" size="200" maxLength="1000" style={{height: '100px', width: '90%'}} placeholder="Why did you like the product or not?" onChange={e => setUserReview(e.target.value)} required/>
+              <input type="text" name="body" size="200" maxLength="1000" style={{height: '100px', width: '90%'}} placeholder="Why did you like the product or not?" onChange={e => setUserReview(e.target.value)} required/>
               {userReview.length < 50 ? (
                 <p id="review-counter" style={{fontSize: '12px'}}>Minimum required characters left: {50-userReview.length}</p>
               ) : (
@@ -106,22 +124,22 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
 
             <label>
               <ModalTitles>Upload Your Photos</ModalTitles>
-              <input type="file" name="images" multiple/>
+              <input onChange={(e) => photoUploadHandler(e)} type="file" name="images" multiple/>
             </label>
 
             <label>
               <ModalTitles>Your Nickname</ModalTitles>
-              <input type="text" maxLength="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)} required/>
+              <input name="name" type="text" maxLength="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)} required/>
               <p style={{fontSize: '12px'}}>For privacy reasons, do not use your full name or email address</p>
             </label>
 
             <label>
               <ModalTitles>Your E-mail</ModalTitles>
-              <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" maxLength="60" placeholder="Example: jackson11@email.com" onChange={e => setEmail(e.target.value)} required/>
+              <input name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" maxLength="60" placeholder="Example: jackson11@email.com" onChange={e => setEmail(e.target.value)} required/>
               <p style={{fontSize: '12px'}}>For authentication reasons, you will not be emailed</p>
             </label>
 
-          <ModalButton type="submit" onSubmit={() => setShowAddReview(!showAddReview)}>Submit Review</ModalButton>
+            <input type="submit" value="Submit Review" name="submit" />
           <ModalButton type="submit" onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
           </ModalForm>
          </RModalContent>

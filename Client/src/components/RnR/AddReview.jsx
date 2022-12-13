@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 import NewReviewModal from './modals/NewReviewModal.jsx'
 
 const MoreReviews = styled.button`
-  background: transparent;
-  margin: 20px 10px 20px 0px;
+  background-color: #253954;
+  color: white;
+  margin: 0px 10px 60px 0px;
   height: 50px;
   width: 150px;
   border: 1px solid;
@@ -13,7 +14,8 @@ const MoreReviews = styled.button`
 `;
 
 const AddReviewButton = styled.button`
-  background: transparent;
+  background-color: #253954;
+  color: white;
   height: 50px;
   border: 1px solid;
   width: 150px;

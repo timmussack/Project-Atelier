@@ -19,7 +19,6 @@ const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
       }
     })
       .then(response => {
-        console.log(response.data.results)
         setReviews(response.data.results);
       })
       .catch(err => err);

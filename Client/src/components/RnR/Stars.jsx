@@ -14,4 +14,4 @@ const Stars = ({rating}) => {
   )
 };
 
-export default Stars
+export default Stars;
