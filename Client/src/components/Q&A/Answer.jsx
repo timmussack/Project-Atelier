@@ -13,14 +13,15 @@ const AnswerContainer = styled.div`
 
 const AnswerMain = styled.div`
   font-size: 14px;
-  padding-bottom: 10px;
-  max-width: 80vh;
+  padding: 0px 0px 5px 0px;
+  max-width: 50vh;
 `;
 
 const AnswerExtras = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 11px;
+  font-size: 12px;
+  padding-bottom: 5px;
 `;
 
 const Helpful = styled.div`
@@ -59,7 +60,7 @@ const ReportAnswer = styled.div`
 `;
 
 const APhotos = styled.div`
-  padding: 0px 5px 10px 0px;
+  padding: 0px 5px 5px 0px;
 `;
 
 export default function Answer( { answer, QA, getAnswers }) {
@@ -81,7 +82,7 @@ export default function Answer( { answer, QA, getAnswers }) {
       answer_id: answerId
     })
       .then((response) => {
-        getAnswers(QA.question_id);
+
       })
       .catch((error) => {
         console.log(error, 'Error from reporting an answer')
@@ -113,6 +114,7 @@ export default function Answer( { answer, QA, getAnswers }) {
       </APhotos>
 
       <AnswerExtras>
+
         {answer.answerer_name.toLowerCase() === 'seller' ? <AnsweredBy> by <strong>Seller</strong>, </AnsweredBy> : <AnsweredBy> by {answer.answerer_name}, </AnsweredBy>}
 
         <AnswerDate> {formatDate(answer.date)} </AnswerDate>

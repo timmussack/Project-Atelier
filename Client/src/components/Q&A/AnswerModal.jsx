@@ -21,8 +21,8 @@ const AModal = styled.div`
 const AModalContent = styled.div`
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
-  border: 1px solid black;
+  padding: 30px;
+  border: 1px solid;
   width: 50%;
 `;
 
@@ -30,23 +30,29 @@ const ModalButton = styled.button`
   background: transparent;
   border: 1px solid;
   margin-right: 20px;
+  margin-top: 10px;
 `;
 
 const ModalForm = styled.form`
   overflow: auto;
 `;
 
+const Note = styled.p`
+  font-size: 12px;
+`;
+
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers }) {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [imageURL, setImageURL] = useState([]);
 
-  const handleAddAnswer = (answer, nickname, email, questionId) => {
+  const handleAddAnswer = (answer, nickname, email, imageURL, questionId) => {
     axios.post('/qa/questions/:question_id/answers', {
       body: answer,
       name: nickname,
       email: email,
-      //photos: Need to implement adding photos to an answer
+      photos: imageURL,
       questionId: questionId
     })
     .then((response) => {
@@ -55,6 +61,35 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
     .catch((error) => {
       console.log('Error in QuestionModal', error);
     })
+  };
+
+  const getBase64 = async (url) => {
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        resolve(base64data);
+      };
+    });
+  };
+
+  const uploadPhoto = async (file) => {
+      const base64File = await getBase64(file);
+      const data = new FormData();
+      data.append('file', base64File);
+      data.append('upload_preset', 'SYNTHETIC')
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dfxzjeut8/image/upload",
+        {
+         method: "Post",
+         body: data,
+        }
+      );
+      const response = await res.json();
+      setImageURL([...imageURL, response.secure_url]);
   };
 
   let modalContent;
@@ -70,7 +105,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
           <p>{productData.name}: {QA.question_body}</p>
 
           <ModalForm onSubmit={() => {
-              handleAddAnswer(answer, nickname, email, QA.question_id);
+              handleAddAnswer(answer, nickname, email, imageURL, QA.question_id);
               setAnswer('');
               setShowAModal(!showAModal);
             }}>
@@ -89,6 +124,8 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
               }} required/>
             </label>
 
+            <Note>For privacy reasons, do not use your full name or email address.</Note>
+
             <label>
               <div> Your email* </div>
               <input maxLength='60' type='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
@@ -96,13 +133,35 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
               }} required/>
             </label>
 
-            <p>For privacy reasons, do not use your full name or email address</p>
+            <Note>For authentication reasons, you will not be emailed.</Note>
 
-            <ModalButton type='submit'>Submit Answer</ModalButton>
+            <label>
+            <div> You can upload up to 5 images </div>
+              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
+              uploadPhoto(URL.createObjectURL(event.target.files[0]));
+              }} />
+              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
+              uploadPhoto(URL.createObjectURL(event.target.files[0]));
+              }} />
+              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
+              uploadPhoto(URL.createObjectURL(event.target.files[0]));
+              }} />
+              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
+              uploadPhoto(URL.createObjectURL(event.target.files[0]));
+              }} />
+              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
+              uploadPhoto(URL.createObjectURL(event.target.files[0]));
+              }} />
+            </label>
 
-            <ModalButton onClick={() => {
-              setShowAModal(!showAModal)
-            }}>Close without submission</ModalButton>
+            <div>
+              <ModalButton type='submit'>Submit Answer</ModalButton>
+
+              <ModalButton onClick={() => {
+                setShowAModal(!showAModal)
+              }}>Close without submission</ModalButton>
+
+            </div>
 
           </ModalForm>
 
@@ -123,43 +182,3 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
     </>
   )
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Add an Answer Modal
-// Through the link provided on each question within the Questions list, users will be allowed to submit an answer for the product.
-// Upon clicking the button a modal window should open, overlaying the product page. The modal should be titled “Submit your Answer”. The modal should be subtitled: “[Product Name]: [Question Body]” . The appropriate product name and question body should be inserted into the subtitle.
-// The following inputs should appear on the question form. Each should be labeled as titled below. Those indicated as mandatory should have an asterisk next to the title.
-// 1.3.6.1. Your Answer (mandatory)
-// This text input should be a large text window allowing up to 1000 characters.
-// 1.3.6.2. What is your nickname (mandatory)
-// A text input allowing up to 60 characters for the user’s display name.
-// Placeholder text should read: “Example: jack543!”.
-// Below this field, the text “For privacy reasons, do not use your full name or email address” will appear.
-// 1.3.6.3. Your email (mandatory)
-// A text input allowing up to 60 characters.
-// Placeholder text should read: “Example: jack@email.com”.
-// Below this field, the text “For authentication reasons, you will not be emailed” will appear.
-// 1.3.6.4. Upload your photos
-// A button will appear allowing users to upload their photos to the form. Up to five photos should be allowed for each answer.
-// Clicking the button should open a separate window where the photo to be can be selected.
-// After the first image is uploaded, a thumbnail showing the image should appear. A user should be able to add up to five images before the button to add disappears, preventing further additions.
-// 1.3.6.5. Submit answer (button)
-// A button by which the answer can be submitted.
-// Upon selecting this button the form’s inputs should be validated. If there are any invalid entries, the submission should be prevented, and a warning message will appear. This message should be titled “You must enter the following:”
-// This error will occur if:
-// Any mandatory fields are blank
-// The email address provided is not in correct email format
-// The images selected are invalid or unable to be uploaded.
