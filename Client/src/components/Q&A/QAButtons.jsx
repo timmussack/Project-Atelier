@@ -26,18 +26,15 @@ const AddQuestion = styled.button`
 `;
 
 export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ, QAs }) {
-  // const [buttonText, setButtonText] = useState('MORE ANSWERED QUESTIONS');
   const [showMore, setShowMore] = useState(false);
 
   const handleMoreAnsweredQs = () => {
     setLoadMoreQ(!loadMoreQ);
-    // !loadMoreQ ? setButtonText('COLLAPSE QUESTIONS') : setButtonText('MORE ANSWERED QUESTIONS');
     setShowMore(!showMore)
   };
 
   let buttonText;
   showMore ? buttonText = 'COLLAPSE QUESTIONS' : buttonText = 'MORE ANSWERED QUESTIONS'
-
 
   return (
     <div>
