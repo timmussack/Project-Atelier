@@ -305,7 +305,7 @@ app.post('/interactions', (req, res) => {
  });
 
 //Serves up our homepage, this is needed for deployment on AWS
-app.get("*", (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/dist', "index.html"))
 })
 
