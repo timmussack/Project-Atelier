@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: helvetica;
 
 }
 
@@ -64,7 +65,17 @@ html, body {
 .left_2 {
   position: relative;
   padding-left: 0.5em;
-  margin-left: -100px
+  margin-left: -100px;
+  overflow-x: visible;
+  overflow-y: hidden;
+  transition: width  0.2s ease-in-out;
+}
+
+
+#expandedview {
+  clip-path: inset(0px 0px 0px 0px);
+  z-index: 1;
+  overflow-y: visible;
 }
 
 .left_2 img {
@@ -75,12 +86,21 @@ html, body {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+  transition: width .3s ease-in-out;
 }
+
+
+#expandwidth {
+  width: 1200px;
+  cursor: zoom-out;
+}
+
+
 
 .left_3 {
   position: relative;
   padding-left: 0.5em;
-  width: max-content;
+  width: 354px;
 }
 .right-arrow {
   position: absolute;
@@ -92,6 +112,7 @@ html, body {
   cursor: pointer;
   user-select: none;
 }
+
 
 .left-arrow {
   position: absolute;
@@ -114,16 +135,29 @@ html, body {
 
 
 .stylelist  {
-  display:flex;
-  list-style:none;
-  justify-content: space-evenly;
-  padding-left: unset;
+  /* background: gray; */
+  width: 300px;
+  /* height: 30%; */ /* height given for illustration */
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  list-style: none;
+  gap: 7px;
+  padding-bottom: 23px;
+  padding-left: inherit;
+  margin-top: 0px;
 }
 
 .stylelist :is(img) {
 border-radius: 50%;
 width: 60px;
 height: 60px;
+z-index: -1
+}
+
+.stylelist :is(li) {
+  flex: 0 0 0;
+  height: 58px;
 }
 
 input[type="radio"] {
@@ -131,8 +165,11 @@ input[type="radio"] {
   margin: auto;
 }
 
+
+
 input[type='radio']:checked + img {
   outline: 5px solid red;
+  background: url('checkmark.png') no-repeat center center;
 }
 
 .Dropdown {
@@ -160,3 +197,9 @@ input[type='radio']:checked + img {
   color: white;
   font-size: xx-large;
 }
+
+
+#originalprice {
+  color: red;
+}
+

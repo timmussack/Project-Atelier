@@ -25,7 +25,7 @@ const MainRnR = ({ rating, reviews, product, metaData, productData, setReviews }
   return (
     <>
       <RNRTitle> RATINGS & REVIEWS </RNRTitle>
-      <RNRContainer>
+      <RNRContainer id="ratings">
         <Ratings rating={rating} reviews={reviews} metaData={metaData}/>
         <Reviews reviews={reviews} setReviews={setReviews} rating={rating} metaData={metaData} product={product} productData={productData}/>
       </RNRContainer>

@@ -69,12 +69,14 @@ export default function App() {
       })
   };
 
+
   useEffect(() => {
     getReviewMeta(product);
     getProductData(product);
     getReviews(product);
     //getreviews
     //get question stuff
+    //seteventlistner()
   }, []);
 
   return (
