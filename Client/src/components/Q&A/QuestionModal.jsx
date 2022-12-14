@@ -30,10 +30,15 @@ const ModalButton = styled.button`
   background: transparent;
   border: 1px solid;
   margin-right: 20px;
+  margin-top: 10px;
 `;
 
 const ModalForm = styled.form`
   overflow: auto;
+`;
+
+const Note = styled.p`
+  font-size: 12px;
 `;
 
 export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {
@@ -89,6 +94,8 @@ export default function QuestionModal({ productData, product, showQModal, setSho
               }} required/>
             </label>
 
+            <Note>For privacy reasons, do not use your full name or email address.</Note>
+
             <label required>
               <div> Your email* </div>
               <input maxLength='60' type='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$' style={{width: '90%', height: '15px'}} placeholder='Example: jack@email.com' onChange={e => {
@@ -96,7 +103,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
               }} required/>
             </label>
 
-            <p>For privacy reasons, do not use your full name or email address</p>
+            <Note>For authentication reasons, you will not be emailed.</Note>
 
           <ModalButton type="submit">Submit Question</ModalButton>
 

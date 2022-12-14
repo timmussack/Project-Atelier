@@ -1,14 +1,34 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback} from 'react';
 import { FaAngleLeft, FaAngleRight, FaExpand, FaSearch } from 'react-icons/fa';
 import {MdArrowCircleUp, MdArrowCircleDown} from 'react-icons/md'
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp, FaTwitter, FaFacebook, FaPinterest } from 'react-icons/fa';
 import styled from 'styled-components';
-import Stars from '../RnR/Stars.jsx'
-import Dropdown from './Dropdown.jsx'
+import Stars from '../RnR/Stars.jsx';
+import Dropdown from './Dropdown.jsx';
+
+const SocialDiv = styled.div`
+padding-Top: 5px;`;
+
+const Fb = styled.a`
+font-size: 1em;
+padding-right: 5px;
+color: #4267B2;
+`;
+
+const Twitter = styled.a`
+font-size: 1em;
+color: #1DA1F2;
+padding-right: 5px;
+`;
+
+const Pinterest = styled.a`
+font-size: 1em;
+color: #E60023;
+`;
 
 
-const ProductImage = ({styles, defaultStyle, productData, rating}) => {
+const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [currentStyle, setCurrentStyle] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -17,8 +37,71 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
   const [thumbnailDown, setThumbnailDown] = useState(false);
   const [thumbnailUp, setThumbnailUp] = useState(false);
   const [startingIndex, setStartingIndex] = useState(0);
-  const [imageArray, setImageArray] = useState([])
+  const [imageArray, setImageArray] = useState([]);
+  const [isExpanded, setExpandedView] = useState(false);
+  const [totalReviews, setTotalReviews] = useState(0)
 
+  const handleReviews = () => {
+    if (Object.keys(reviewMeta).length > 0) {
+      let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
+        return Number(a) + Number(b)
+      }, 0)
+      setTotalReviews(getReviews)
+    }
+  }
+
+  const handleScroll = (e) => {
+    e.preventDefault();
+    var test = document.getElementById('ratings');
+    test.scrollIntoView({behavior: 'smooth'})
+  }
+
+
+  const onZoom = useCallback((e) => {
+    let x = (e.clientX - e.target.offsetLeft) / e.target.width * 100;
+    let y = (e.clientY - e.target.offsetTop) / e.target.height * 100;
+
+    if (x > 100) {
+      x = 100
+    }
+
+
+    if (y > 100) {
+      y = 100
+    }
+
+
+    console.log(x, y)
+
+
+    e.target.style.transformOrigin = `${x}% ${y}%`
+    e.target.style.transform = "scale(2.5, 2.5)";
+
+  }, [])
+
+  const offZoom = useCallback((e) => {
+    const img = document.getElementsByClassName('mainimage')
+    img[0].style.transformOrigin = `center center`;
+    img[0].style.transform = "scale(1)";
+  }, [])
+
+  const handleExpand = () => {
+    let picture = document.getElementsByClassName('mainimage');
+    if (!isExpanded) {
+      setExpandedView(!isExpanded);
+      picture[0].addEventListener('mousemove', onZoom, true);
+      var element = document.getElementsByClassName('left_3');
+      element[0].style.visibility = 'hidden'
+    } else {
+      picture[0].removeEventListener('mousemove',onZoom, true);
+      picture[0].style.transformOrigin = `center center`;
+      picture[0].style.transform = "scale(1)";
+      setExpandedView(!isExpanded);
+      var element = document.getElementsByClassName('left_3');
+      element[0].style.visibility = 'visible';
+
+    }
+  }
 
 
   const moveThumbnailsUp = (e) => {
@@ -51,14 +134,6 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
         setCurrentImage(imageArray[index]);
         console.log(`index inside thumbs down: ${index}`);
       }
-    // if (index >= 7) {
-    //   setStartingIndex(startingIndex + 1)
-    //   setShowItems(showItems + 1);
-    //   setThumbnailDown(true);
-    // } else if (index === thumbnailArray.length -1) {
-    //   setStartingIndex(index);
-    //   setThumbnailDown(false);
-    // }
 
   };
 
@@ -106,7 +181,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
       }
       setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
-      createThumbnailArray()
+      createThumbnailArray();
+      handleReviews()
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
@@ -133,7 +209,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
 
   return (
     <div className="container">
-      <div className="left">
+      <div className="left" style={ isExpanded ? {cursor: 'zoom-out'}: {}}>
         <div className="left_1">
           {
             thumbnailArray.length && photoIndex !== 0 &&
@@ -173,6 +249,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
                 while (index <= showItems) {
                   return (
                     <div
+                      data-testid='thumbnails'
                       className={index === photoIndex ? "img_wrap active" : "img_wrap"}
                       key={index}
                       onClick={() => handleClick(image, index)}
@@ -193,7 +270,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
             </div>
           }
         </div>
-        <div className="left_2">
+        <div className="left_2" id={isExpanded ? 'expandedview' : ''}>
           {
             photoIndex !== 0 &&
             <FaAngleLeft
@@ -206,20 +283,40 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
               className="right-arrow"
               onClick={moveThumbnailsDown}/>
           }
-          <img src={currentImage} alt="" />
+
+          <img  className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
         <div className="left_3">
-          <Stars rating={rating} />
+          <div>
+            <Stars rating={rating}/>
+            {
+              <a  onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
+            }
+          </div>
           <h1>{productData.category}</h1>
           <h1>{productData.name}</h1>
-          <a>${productData.default_price}</a>
+          {
+            currentStyle.sale_price ?
+            <>
+              <del>${currentStyle.original_price}</del>
+              <pre id='originalprice'>${currentStyle.sale_price}</pre>
+            </>
+            : <a>${currentStyle.original_price}</a>
+          }
+          <SocialDiv>
+              <Fb target={'_blank'} href={`https://www.facebook.com`} > <FaFacebook /> </Fb>
+              <Twitter className='twitter-share-button' target={'_blank'} href={`https://twitter.com/intent/tweet?text=Hello%20world`} ><FaTwitter /></Twitter>
+              <Pinterest target={'_blank'} href={`https://www.pinterest.com`}> <FaPinterest /> </Pinterest>
+          </SocialDiv>
+
+          <div style={{paddingTop: '10px'}}><a>Style > <strong>{currentStyle.name}</strong></a></div>
           <ul className="stylelist">
             {
               styles.map((style, index) => {
                 if (index === 0) {
                   return (
                     <li>
-                    <label for={index}>
+                    <label htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img src={style.photos[0].thumbnail_url}/>
                     </label>
@@ -228,9 +325,9 @@ const ProductImage = ({styles, defaultStyle, productData, rating}) => {
                 }
                 return (
                   <li>
-                    <label for={index}>
+                    <label  htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img src={style.photos[0].thumbnail_url}/>
+                        <img id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )

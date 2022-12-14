@@ -14,7 +14,8 @@ const QuestionContainer = styled.div`
 
 const QuestionMain = styled.div`
   font-weight: bold;
-  max-width: 80vh;
+  max-width: 50vh;
+  font-size: 16px;
 `;
 
 const QuestionExtras = styled.div`
@@ -64,18 +65,19 @@ const Answers = styled.div`
   padding-left: 5px;
 `;
 
-const MoreButton = styled.button`
+const LoadMoreAnswers = styled.button`
   font-size: 10px;
   font-weight: bold;
   background: transparent;
   border: none;
   cursor: pointer;
-  margin: 0px 0px 15px 16px;
+  margin: 0px 0px 18px 16px;
 `;
 
 const NoAnswers = styled.div`
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: 15px;
+  padding-left: 20px;
 `;
 
 const Spacer2 = styled.div`
@@ -165,7 +167,7 @@ export default function Question( { QA, product, productData, getQAs }) {
       question_id: questionId
     })
       .then((response) => {
-        getQAs(product);
+        //getQAs(product);
       })
       .catch((error) => {
         console.log(error, 'Error from reporting a question')
@@ -214,7 +216,7 @@ export default function Question( { QA, product, productData, getQAs }) {
           })}
         </Answers>
       </AnswerWrapper>
-      {answers.length > 2 ? <MoreButton onClick={() => handleShowMore()}>{buttonText}</MoreButton> : null}
+      {answers.length > 2 ? <LoadMoreAnswers onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
       <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>

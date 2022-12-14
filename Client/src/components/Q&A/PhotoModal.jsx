@@ -28,7 +28,7 @@ const PModalContent = styled.div`
 
 const ModalButton = styled.span`
   position: absolute;
-  top: 15px;
+  top: 70px;
   right: 35px;
   color: #f1f1f1;
   font-size: 40px;
@@ -37,7 +37,7 @@ const ModalButton = styled.span`
 `;
 
 const ZoomPhoto = styled.img`
-  //may need to add styles later
+  border: 1px solid black;
 `;
 
 export default function PhotoModal({ url, showPModal, setShowPModal }) {
