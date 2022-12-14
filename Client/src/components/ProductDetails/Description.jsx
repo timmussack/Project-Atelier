@@ -12,9 +12,9 @@ margin: 0 auto;
 const Description = ({ productData }) => {
 
   return (
-   <DataContainer>
-    <h3>{productData.slogan}</h3>
-    <p>{productData.description}</p>
+   <DataContainer data-testid='description_container'>
+    <h3 data-testid='slogan'>{productData.slogan}</h3>
+    <p data-testid='description'>{productData.description}</p>
    </DataContainer>
   )
 }

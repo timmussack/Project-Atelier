@@ -2,8 +2,12 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['Client/src/**/*.{js,jsx}'],
   coverageThreshold: {
-    "global": {
-      "lines": 70
+    "Client/src/components/ProductDetails/": {
+      "lines": 70,
+      "Statements": 70,
+      "Branches": 70,
+      "Functions": 70
+
     }
   },
   coverageDirectory: 'coverage',

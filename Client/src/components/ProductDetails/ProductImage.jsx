@@ -28,7 +28,7 @@ color: #E60023;
 `;
 
 
-const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) => {
+const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [currentStyle, setCurrentStyle] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -39,16 +39,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   const [startingIndex, setStartingIndex] = useState(0);
   const [imageArray, setImageArray] = useState([]);
   const [isExpanded, setExpandedView] = useState(false);
-  const [totalReviews, setTotalReviews] = useState(0)
+  const [totalReviews, setTotalReviews] = useState(0);
 
-  const handleReviews = () => {
-    if (Object.keys(reviewMeta).length > 0) {
-      let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
-        return Number(a) + Number(b)
-      }, 0)
-      setTotalReviews(getReviews)
-    }
-  }
 
   const handleScroll = (e) => {
     e.preventDefault();
@@ -64,16 +56,10 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
     if (x > 100) {
       x = 100
     }
-
-
     if (y > 100) {
       y = 100
     }
-
-
-    console.log(x, y)
-
-
+    // console.log(x, y)
     e.target.style.transformOrigin = `${x}% ${y}%`
     e.target.style.transform = "scale(2.5, 2.5)";
 
@@ -182,7 +168,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
       setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
       createThumbnailArray();
-      handleReviews()
+      setTotalReviews(reviews.length)
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
@@ -208,12 +194,13 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   }
 
   return (
-    <div className="container">
+    <div className="container" data-testid='carousel'>
       <div className="left" style={ isExpanded ? {cursor: 'zoom-out'}: {}}>
         <div className="left_1">
           {
             thumbnailArray.length && photoIndex !== 0 &&
             < div
+              data-testid='thumbnailuptest'
               style={{alignSelf: "center"}}
               onClick={moveThumbnailsUp}>
               <MdArrowCircleUp id="thumbnailArrow"/>
@@ -263,7 +250,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
           }
           {
             thumbnailArray.length && photoIndex !== thumbnailArray.length -1 &&
-            <div
+            <div data-testid='thumbnaildown'
               style={{alignSelf: "center"}}
               onClick={moveThumbnailsDown}>
               <MdArrowCircleDown id="thumbnailArrow" />
@@ -274,23 +261,25 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
           {
             photoIndex !== 0 &&
             <FaAngleLeft
+              data-testid='left-arrow_test'
               className="left-arrow"
               onClick={moveThumbnailsUp}/>
           }
           {
             defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
             <FaAngleRight
+              data-testid='right-arrow_test'
               className="right-arrow"
               onClick={moveThumbnailsDown}/>
           }
 
-          <img  className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
+          <img  data-testid="mainimagetest" className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
-        <div className="left_3">
+        <div className="left_3" data-testid="left3test">
           <div>
             <Stars rating={rating}/>
             {
-              <a  onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
+              <a  data-testid='testreview' onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
             }
           </div>
           <h1>{productData.category}</h1>
@@ -315,19 +304,19 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
               styles.map((style, index) => {
                 if (index === 0) {
                   return (
-                    <li>
-                    <label htmlFor={index}>
+                    <li >
+                    <label key={index} htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img src={style.photos[0].thumbnail_url}/>
+                        <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                   )
                 }
                 return (
                   <li>
-                    <label  htmlFor={index}>
+                    <label  key={index} htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img id="testingimage" src={style.photos[0].thumbnail_url}/>
+                        <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )

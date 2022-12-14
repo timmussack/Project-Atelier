@@ -2,13 +2,15 @@ import {React, useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 const StyledAddToCart = styled.button`
-color: black;
 width: inherit;
 height: inherit;
-background-color: transparent;
-border-color: black
 font-size: 1em;
 padding: 0.25em 1em;
+background-color: #253954;
+color: white;
+border: 1px solid;
+cursor: pointer;
+font-weight: bold;
 `;
 
 const StyledError = styled.strong`
@@ -26,6 +28,7 @@ const Dropdown = ({ currentStyle }) => {
   const handleSizeChange = (e) => {
     if (e.target.value === "default") {
       setSizeValue('');
+      alert('size changed')
       return;
     }
     document.getElementById('sizedropdown').removeAttribute('size');
@@ -83,18 +86,18 @@ const Dropdown = ({ currentStyle }) => {
   return (
   <>
     {
-      <StyledError>{errorMessage}</StyledError>
+      <StyledError data-testid='errortest'>{errorMessage}</StyledError>
     }
-    { Object.keys(sizeObj).length > 0 &&
-      <div className="Dropdown">
-        <select form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
+    { (currentStyle.original_price || Object.keys(sizeObj).length > 0) &&
+      <div className="Dropdown" data-testid="dropdowntest">
+        <select data-testid='sizedropdowntest' form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
           {
-            <option value="default">Select Size</option>
+            <option data-testid='optiontest' value="default">Select Size</option>
           }
           {
             Object.keys(sizeObj).map((sku, index) => {
               return (
-                <option key={index} value={sku}>{sizeObj[sku].size}</option>
+                <option data-testid='optiontest' key={index} value={sku}>{sizeObj[sku].size}</option>
               )
             })
           }
@@ -103,17 +106,17 @@ const Dropdown = ({ currentStyle }) => {
 
         <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}>
           {
-            disabled() ? <option value="default">-</option> : null
+            disabled() ? <option data-tesid="qtyopt" value="default">-</option> : null
           }
 
         {
           qtyLength.map((number, index) => {
-            return <option key={index} value={number}>{number}</option>
+            return <option data-tesid="qtyopt" key={index} value={number}>{number}</option>
           })
         }
         </select>
         <form onClick={addToCart} id="addtocartform">
-          <StyledAddToCart>Add To Cart</StyledAddToCart>
+          <StyledAddToCart data-testid='atcbutton'>Add To Cart</StyledAddToCart>
         </form>
       </div>
     }

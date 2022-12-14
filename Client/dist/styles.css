@@ -181,16 +181,26 @@ input[type='radio']:checked + img {
 #sizedropdown {
   width: 65%;
   height: 50px;
+  background-color: #253954;
+  color: white;
+  border: 1px solid;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 #qtydropdown {
   width: 25%;
   height: 50px;
+  background-color: #253954;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 #addtocartform {
   width: 88%;
   height: 50px;
+  
 }
 
 #thumbnailArrow {

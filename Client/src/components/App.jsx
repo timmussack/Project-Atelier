@@ -9,11 +9,7 @@ const { useState, useEffect } = React;
 export default function App() {
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
-<<<<<<< HEAD
-  const [product, setProduct] = useState(37311);
-=======
   const [product, setProduct] = useState(37318);
->>>>>>> 7a6e9b05af12a607ff0f4d39ecc12d7e72c0ee84
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({"characteristics": {}});
 
