@@ -5,7 +5,7 @@ const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
-app.use(compression());
+app.use(compression({level: 9}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
