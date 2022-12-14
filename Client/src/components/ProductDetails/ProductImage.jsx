@@ -39,10 +39,10 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   const [startingIndex, setStartingIndex] = useState(0);
   const [imageArray, setImageArray] = useState([]);
   const [isExpanded, setExpandedView] = useState(false);
-  const [totalReviews, setTotalReviews] = useState(0)
+  const [totalReviews, setTotalReviews] = useState(0);
 
   const handleReviews = () => {
-    if (Object.keys(reviewMeta).length > 0) {
+    if (reviewMeta.ratings) {
       let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
         return Number(a) + Number(b)
       }, 0)
@@ -71,7 +71,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
     }
 
 
-    console.log(x, y)
+    // console.log(x, y)
 
 
     e.target.style.transformOrigin = `${x}% ${y}%`

@@ -86,15 +86,15 @@ const Dropdown = ({ currentStyle }) => {
       <StyledError>{errorMessage}</StyledError>
     }
     { Object.keys(sizeObj).length > 0 &&
-      <div className="Dropdown">
+      <div className="Dropdown" data-testid="dropdowntest">
         <select form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
           {
-            <option value="default">Select Size</option>
+            <option data-testid='optiontest' value="default">Select Size</option>
           }
           {
             Object.keys(sizeObj).map((sku, index) => {
               return (
-                <option key={index} value={sku}>{sizeObj[sku].size}</option>
+                <option data-testid='optiontest' key={index} value={sku}>{sizeObj[sku].size}</option>
               )
             })
           }
