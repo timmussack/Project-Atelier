@@ -6,10 +6,11 @@ const cors = require('cors');
 const S3 = require('aws-sdk/clients/s3');
 const { GetObjectCommand } = require('aws-sdk/clients/s3');
 const uuid = require("uuid").v4;
-
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
+app.use(compression({level: 9}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
@@ -46,25 +47,6 @@ const s3Upload = async (files) => {
 
   return await Promise.all(params.map((param) => s3.upload(param).promise()));
 };
-
-var uploadS3 = multer({
-  dest: './uploads',
-  storage: multer({
-    s3: new S3({
-      accessKeyId: process.env.S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-      region: process.env.S3_REGION,
-    }),
-    Bucket: process.env.S3_BUCKET,
-    metadata: (req, file, getFieldname) => {
-      getFieldname(null, {fieldName: file.fieldname});
-    },
-    key: (req, file, createAWSName) => {
-      createAWSName(null, Date.now().toString() + '-' + file.originalname);
-    }
-  })
-});
-
 
 // ------------------- APP.JSX -------------------------- //
 
@@ -372,7 +354,7 @@ app.post('/interactions', (req, res) => {
 
 //Serves up our homepage, this is needed for deployment on AWS
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Client/dist', "Index.html"))
+  res.sendFile(path.join(__dirname, '../Client/dist', 'Index.html'))
 })
 
 const port = process.env.PORT;
