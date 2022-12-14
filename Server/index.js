@@ -2,16 +2,68 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const multer = require('multer');
+const cors = require('cors');
+const S3 = require('aws-sdk/clients/s3');
+const { GetObjectCommand } = require('aws-sdk/clients/s3');
+const uuid = require("uuid").v4;
+
 require('dotenv').config();
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const code = process.env.CAMPUS_CODE;
 const key = process.env.KEY;
 const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${code}/`;
+
+// ------------------- S3 -------------------------- //
+const storage = multer.memoryStorage();
+
+const upload = multer({ storage: storage })
+
+const s3Upload = async (files) => {
+  const s3 = new S3({
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    region: process.env.S3_REGION,
+  });
+
+  const params = files.map((file) => {
+    return {
+      Bucket: process.env.S3_BUCKET,
+      Key: uuid(),
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    };
+  });
+
+  return await Promise.all(params.map((param) => s3.upload(param).promise()));
+};
+
+var uploadS3 = multer({
+  dest: './uploads',
+  storage: multer({
+    s3: new S3({
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+      region: process.env.S3_REGION,
+    }),
+    Bucket: process.env.S3_BUCKET,
+    metadata: (req, file, getFieldname) => {
+      getFieldname(null, {fieldName: file.fieldname});
+    },
+    key: (req, file, createAWSName) => {
+      createAWSName(null, Date.now().toString() + '-' + file.originalname);
+    }
+  })
+});
 
 
 // ------------------- APP.JSX -------------------------- //
@@ -260,55 +312,39 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     });
 });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, __dirname + './uploads')      //you tell where to upload the files,
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname)
-  }
-})
 
-const upload = multer({storage: storage});
-
-app.post('/reviews', upload.array('images', 5), (req, res) => {
-  const { product_id, recommend, summary, name, email, body, photos } = req.body;
-  axios({
-    method: 'post',
-    url: `${url}reviews`,
-    headers: {Authorization: `${key}`},
-    data: {
-      product_id: product_id,
-      recommend: recommend,
-      summary: summary,
-      name: name,
-      email: email,
-      body: body,
-      photos: photos,
-    }
-  })
-  .then((response) => {
-    console.log(response.config.data)
-    res.end(JSON.stringify(response))
-  })
-  .catch((err) => {
-    console.log('Error posting review in server', err)
-    res.end(JSON.stringify(err))
-  })
-})
-
-app.post('/photoUpload', upload.array("images", 5), (req, res, next) => {
-  // req.files is array of `photos` files
-  console.log(req.files)
-  console.log(req.body)
+app.post('/reviews', uploadS3.array('images', 5), (req, res) => {
   if (!req.files) {
-    res.status(400).end('server failed to upload images');
+    res.status(400).end('server error uploading photos');
+  } else {
+    const reviewObject = req.body;
+    const photos = [];
+    req.files.forEach(object => photos.push(object.location));
+    reviewObject.photos = photos;
+    reviewObject.productId = Number(reviewObject.productId);
+    reviewObject.rating = Number(reviewObject.rating);
+    reviewObject.recommend = reviewObject.recommend === 'true';
+
+    axios({
+      method: 'post',
+      url: `${url}reviews`,
+      headers: {Authorization: `${key}`},
+      data: req.body,
+    }).then(result => {
+      res.end(JSON.stringify(result));
+    }).catch(error => {
+      console.error(error);
+    })
+}});
+
+app.post('/photoUpload', upload.array('images', 5), async (req, res) => {
+  try {
+    const results = await s3Upload(req.files);
+    return res.json(results)
+  } catch (err) {
+    console.log(err);
   }
-  // req.body will contain the text fields, if there were any
-  else {
-    res.status(200).redirect('/');
-  }
-})
+});
 
 
 const port = process.env.PORT;

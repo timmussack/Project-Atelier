@@ -49,40 +49,51 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
 
-  const postReviewHandler = (e) => {
-    e.preventDefault();
-    let submittedForm = new FormData();
-    submittedForm.append('file', photos);
-    axios.post('/photoUpload', submittedForm, {
-      headers: { 'Content-type': 'multipart/form-data' }
+  const postReviewHandler = (urls) => {
+    const locations = urls.forEach((url) => Object.keys(url).find(key => key === 'Location'))
+    axios.post('/reviews', {
+      body: userReview,
+      recommend: reccomend,
+      name: nickname,
+      summary: summary,
+      email: email,
+      photos: locations,
     })
-      .then((response) => {
-        console.log('Successful image upload', response);
-        // axios.post('/reviews', {
-        //   product_id: product,
-        //   recommend: reccomend,
-        //   summary: summary,
-        //   name: nickname,
-        //   email: email,
-        //   body: userReview,
-        //   photos: photos,
-        // })
-        // .then((response) => {
-        //   console.log('sucessful review post', response)
-        // })
-        // .catch((err) => {
-        //   console.log('Error posting review', err)
-        // });
-      })
-      .catch((err) => {
-        console.log('Error uploading images');
-      });
+    .then((response) => {
+      console.log(response);
+    })
   };
 
-  const photoUploadHandler = (e) => {
-    let urlArr = photos;
-    urlArr.push(URL.createObjectURL(e.target.files[0]));
-    setPhotos(urlArr);
+  const fileChangeHandler = async (e) => {
+    let url = URL.createObjectURL(e.target.files[0]);
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader;
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        let newPhotos = photos;
+        newPhotos.push(base64data);
+        setPhotos(newPhotos);
+        resolve(photos);
+      };
+    })
+  };
+
+  const photoUploadHandler = async (e) => {
+    e.preventDefault();
+    let submittedForm = new FormData(e.target);
+    submittedForm.append('images', photos);
+    const res = await fetch(
+      'http://localhost:3000/photoUpload',
+      {
+        method: "POST",
+        body: submittedForm,
+      }
+    )
+    const response = await res.json();
+    postReviewHandler(response)
   }
 
   if (showAddReview) {
@@ -91,10 +102,11 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
         <RModalContent>
           <h2>Write Your Review</h2>
           <h4>About the {productData.name}</h4>
-          <ModalForm enctype="multipart/form-data" onSubmit={(e) => postReviewHandler(e)}>
+          <ModalForm enctype="multipart/form-data" onSubmit={(e) => photoUploadHandler(e)}>
 
             <label>
             <ModalTitles>Overall Rating</ModalTitles>
+            <StarRatings rating={0} />
             </label>
 
             <label>
@@ -122,9 +134,9 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
               ) }
             </label>
 
-            <label>
+            <label for="images">
               <ModalTitles>Upload Your Photos</ModalTitles>
-              <input onChange={(e) => photoUploadHandler(e)} type="file" name="images" multiple/>
+              <input type="file" name="images" multiple onChange={(e) => fileChangeHandler(e)}/>
             </label>
 
             <label>
