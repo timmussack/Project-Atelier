@@ -23,6 +23,7 @@ import Description from './Description.jsx';
 const MainView = ({ product, productData, reviewMeta, rating}) => {
   const [styles, setStyles] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState({});
+  const [reviews, setReviews] = useState([]);
 
 
 
@@ -39,16 +40,30 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
       }
     })
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setStyles(response.data.results);
         setDefaultStyle(response.data.results[0])
       })
       .catch((err) => {console.log(err)})
   }
 
+  const getReviews = () => {
+    axios.get('/reviews', {
+      params: {
+        product_id: product,
+        count: 100,
+      }
+    })
+      .then(response => {
+        setReviews(response.data.results)
+      })
+      .catch(err => err);
+  };
+
 
   useEffect(() => {
     getStyles(product)
+    getReviews()
     let element = document.getElementsByClassName('mainView');
     element[0].addEventListener('click', listen, true)
   }, [])
@@ -62,7 +77,7 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
         styles={styles}
         defaultStyle={defaultStyle}
         rating={rating}
-        reviewMeta={reviewMeta}
+        reviews={reviews}
         />
       <Description data-testid='descriptiontest'
         productData={productData} />

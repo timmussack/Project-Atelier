@@ -28,7 +28,7 @@ color: #E60023;
 `;
 
 
-const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) => {
+const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [currentStyle, setCurrentStyle] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -41,14 +41,6 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   const [isExpanded, setExpandedView] = useState(false);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const handleReviews = () => {
-    if (reviewMeta.ratings) {
-      let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
-        return Number(a) + Number(b)
-      }, 0)
-      setTotalReviews(getReviews);
-    }
-  }
 
   const handleScroll = (e) => {
     e.preventDefault();
@@ -64,16 +56,10 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
     if (x > 100) {
       x = 100
     }
-
-
     if (y > 100) {
       y = 100
     }
-
-
     // console.log(x, y)
-
-
     e.target.style.transformOrigin = `${x}% ${y}%`
     e.target.style.transform = "scale(2.5, 2.5)";
 
@@ -182,7 +168,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
       setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
       createThumbnailArray();
-      handleReviews()
+      setTotalReviews(reviews.length)
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
