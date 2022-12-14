@@ -6,33 +6,41 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
-  background: transparent;
-  margin: 20px 10px 30px 0px;
-  height: 40px;
+  background-color: #253954;
+  color: white;
+  height: 50px;
   border: 1px solid;
+  width: 220px;
   cursor: pointer;
+  font-weight: bold;
 `;
 
 const AddQuestion = styled.button`
-  background: transparent;
-  height: 40px;
+  background-color: #253954;
+  color: white;
+  height: 50px;
   border: 1px solid;
+  width: 150px;
   cursor: pointer;
+  font-weight: bold;
 `;
 
-export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ }) {
-  const [buttonText, setButtonText] = useState('MORE ANSWERED QUESTIONS');
+export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ, QAs }) {
+  const [showMore, setShowMore] = useState(false);
 
   const handleMoreAnsweredQs = () => {
     setLoadMoreQ(!loadMoreQ);
-    !loadMoreQ ? setButtonText('COLLAPSE QUESTIONS') : setButtonText('MORE ANSWERED QUESTIONS');
+    setShowMore(!showMore)
   };
+
+  let buttonText;
+  showMore ? buttonText = 'COLLAPSE QUESTIONS' : buttonText = 'MORE ANSWERED QUESTIONS'
 
   return (
     <div>
-      <MoreAnsweredQs onClick={()=> handleMoreAnsweredQs()}>{buttonText}</MoreAnsweredQs>
+      {QAs.length > 2 ? <MoreAnsweredQs data-testid='moreQuestionsButton' onClick={()=> handleMoreAnsweredQs()}>{buttonText}</MoreAnsweredQs> : null}
 
-      <AddQuestion  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
+      <AddQuestion data-testid='addQuestionButton'  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>
   )
 };

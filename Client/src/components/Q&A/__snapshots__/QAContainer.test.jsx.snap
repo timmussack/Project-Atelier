@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`QA Container Component renders correctly 1`] = `
-<div
-  class="sc-bBABsx jjtyeS"
->
-  QUESTIONS & ANSWERS
-</div>
-`;

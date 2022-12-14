@@ -142,7 +142,7 @@ app.post('/qa/questions', (req, res) => {
 
 //Saves an answer to the database
 app.post('/qa/questions/:question_id/answers', (req, res) => {
-  const { body, name, email, questionId } = req.body;
+  const { body, name, email, photos, questionId } = req.body;
   axios({
     method: 'post',
     url: `${url}qa/questions/${questionId}/answers`,
@@ -150,7 +150,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       body: body,
       name: name,
       email: email,
-      photos: []
+      photos: photos
     },
     headers: {Authorization: `${key}`}
   })
@@ -162,7 +162,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       res.end('Not Found');
       console.error(error, 'Error in server line 163');
     });
-});
+ });
 
 //Marks a question as helpful
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
@@ -176,7 +176,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 179');
     });
 });
 
@@ -192,7 +192,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 195');
     });
 });
 
@@ -208,7 +208,7 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 211');
     });
 });
 
@@ -224,7 +224,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
       res.end();
     })
     .catch((error) => {
-      console.error(error, 'Error in server line 180');
+      console.error(error, 'Error in server line 227');
     });
 });
 
@@ -280,6 +280,34 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 //     console.log('Error posting review in server', err)
 //   })
 // })
+
+//Posts an interaction (click of an element) to the database
+app.post('/interactions', (req, res) => {
+  const { element, time, widget } = req.body;
+  axios({
+    method: 'post',
+    url: `${url}interactions`,
+    data: {
+      element: element,
+      time: time,
+      widget: widget
+    },
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      res.end();
+    })
+    .catch((error) => {
+      res.sendStatus(404);
+      res.end('Not Found');
+      console.error(error, 'Error in server line 163');
+    });
+ });
+
+//Serves up our homepage, this is needed for deployment on AWS
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Client/dist', "Index.html"))
+})
 
 const port = process.env.PORT;
 app.listen(port, () => {
