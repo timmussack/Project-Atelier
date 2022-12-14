@@ -2,7 +2,9 @@ import React from 'react';
 import StarRatings from 'react-star-ratings';
 
 const Stars = ({rating}) => {
+  const hoverHandler = () => {
 
+  }
   return (
     <StarRatings
       rating={rating}
@@ -14,4 +16,4 @@ const Stars = ({rating}) => {
   )
 };
 
-export default Stars
+export default Stars;
