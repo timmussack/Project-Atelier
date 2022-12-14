@@ -18,6 +18,7 @@ const ReviewPhotos = ({photos}) => {
           setImage(photo.url);
           setZoom(true);
         }}
+        onError = {e => e.target.style.display = 'none'}
         />
       })}
       <PhotoModal url={image} zoom={zoom} setZoom={setZoom}/>

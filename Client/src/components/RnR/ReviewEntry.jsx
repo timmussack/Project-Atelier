@@ -8,12 +8,21 @@ import ReviewPhotos from './ReviewPhotos.jsx';
 
 const Formatting = styled.div`
   font-family: Helvetica, Sans-Serif;
-  font-size: 12px;
+  font-size: 14px;
   padding-bottom: 1em;
+  &:after {
+    content: '';
+    background: black;
+    height: 1px;
+    width: 100%;
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
 `;
 
 const TitleMain = styled.div`
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   padding-bottom: 1em;
 `;
@@ -51,7 +60,6 @@ const ReviewEntry = ({review, rating}) => {
       </div>
 
       <ReviewFooter helpfulness={review.helpfulness} reviewID={review.review_id}/>
-      <hr style={{marginTop: "2em", border: "1px solid", borderColor: "rgb(54, 54, 54)"}}></hr>
     </Formatting>
   )
 }

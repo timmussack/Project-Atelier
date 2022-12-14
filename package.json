@@ -23,20 +23,26 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+<<<<<<< HEAD
     "@testing-library/user-event": "^14.4.3",
+=======
+    "aws-sdk": "^2.1273.0",
+>>>>>>> 81a1ab69445c63c05233a93f0ff0ae0247e95e5b
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jest-environment-jsdom": "^29.3.1",
-    "mongoose": "^6.7.5",
+    "multer": "^1.4.5-lts.1",
     "node": "^19.2.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-star-ratings": "^2.3.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

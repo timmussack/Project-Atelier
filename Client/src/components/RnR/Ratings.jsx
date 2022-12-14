@@ -1,14 +1,15 @@
 import React from 'react';
 import Stars from './Stars.jsx';
 import styled, { css } from 'styled-components';
-import BreakDownBarChart from './charts/BreakDownBarChart.jsx';
-import BreakDownArrowChart from './charts/BreakDownArrowChart.jsx';
+import BreakdownBarChart from './charts/BreakdownBarChart.jsx';
+import BreakdownArrowChart from './charts/BreakdownArrowChart.jsx';
 
 const Formatting = styled.div`
   font-family: Helvetica, Sans-Serif;
   font-size: 12px;
-  width: 400px;
+  width: 350px;
   margin-right: 100px;
+  display: flex-column;
 `;
 const LargeRating = styled.div`
   font-size: 70px;
@@ -19,7 +20,6 @@ const PercentRecc = styled.div`
 `
 const Ratings = ({ rating, reviews, metaData }) => {
   const recommendOrNah = (reviewData) => {
-    console.log(metaData)
     let recommended = 0;
 
     reviewData.forEach((review) => {
@@ -33,9 +33,10 @@ const Ratings = ({ rating, reviews, metaData }) => {
 
   return (
   <Formatting>
-    <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}<Stars rating={rating}/></LargeRating>
+    <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 })}<Stars rating={rating}/></LargeRating>
     <PercentRecc>{recommendOrNah(reviews)}% of reviews recommended this product</PercentRecc>
-    <BreakDownArrowChart metaData={metaData.characteristics}/>
+    <BreakdownArrowChart metaData={metaData.characteristics}/>
+    <BreakdownBarChart />
   </Formatting>
 )};
 

@@ -17,7 +17,6 @@ const ReviewTiles = ({reviews, filter, metaData, rating, product, productData}) 
       <div>
         {reviews.map((review, index) => {
           if (index < display) {
-            console.log(review)
             return <ReviewEntry review={review} key={index}/>
           } else {
             return
