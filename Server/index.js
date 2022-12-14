@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
+app.use(compression({level: 9}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
@@ -306,7 +308,7 @@ app.post('/interactions', (req, res) => {
 
 //Serves up our homepage, this is needed for deployment on AWS
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Client/dist', "Index.html"))
+  res.sendFile(path.join(__dirname, '../Client/dist', 'Index.html'))
 })
 
 const port = process.env.PORT;
