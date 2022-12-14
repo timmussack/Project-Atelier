@@ -28,7 +28,7 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
 
 
   const listen = (e) => {
-    console.log('This element was clicked', e.target)
+    console.log('This element was clicked')
   }
 
 
@@ -56,15 +56,15 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
 
 
   return (
-    <div className="mainView">
-      <ProductImage
+    <div className="mainView" data-testid='test_mainview'>
+      <ProductImage data-testid='productimagetest'
         productData={productData}
         styles={styles}
         defaultStyle={defaultStyle}
         rating={rating}
         reviewMeta={reviewMeta}
         />
-      <Description
+      <Description data-testid='descriptiontest'
         productData={productData} />
 
     </div>

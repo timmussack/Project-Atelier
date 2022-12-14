@@ -214,6 +214,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
           {
             thumbnailArray.length && photoIndex !== 0 &&
             < div
+              data-testid='thumbnailuptest'
               style={{alignSelf: "center"}}
               onClick={moveThumbnailsUp}>
               <MdArrowCircleUp id="thumbnailArrow"/>
@@ -263,7 +264,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
           }
           {
             thumbnailArray.length && photoIndex !== thumbnailArray.length -1 &&
-            <div
+            <div data-testid='thumbnaildown'
               style={{alignSelf: "center"}}
               onClick={moveThumbnailsDown}>
               <MdArrowCircleDown id="thumbnailArrow" />
@@ -274,23 +275,25 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
           {
             photoIndex !== 0 &&
             <FaAngleLeft
+              data-testid='left-arrow_test'
               className="left-arrow"
               onClick={moveThumbnailsUp}/>
           }
           {
             defaultStyle.photos && photoIndex !== defaultStyle.photos.length -1 &&
             <FaAngleRight
+              data-testid='right-arrow_test'
               className="right-arrow"
               onClick={moveThumbnailsDown}/>
           }
 
-          <img  className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
+          <img  data-testid="mainimagetest" className="mainimage" id={isExpanded ? 'expandwidth' : ''}onClick={() => handleExpand()} src={currentImage} alt="default image" />
         </div>
-        <div className="left_3">
+        <div className="left_3" data-testid="left3test">
           <div>
             <Stars rating={rating}/>
             {
-              <a  onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
+              <a  data-testid='testreview' onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
             }
           </div>
           <h1>{productData.category}</h1>
@@ -315,10 +318,10 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
               styles.map((style, index) => {
                 if (index === 0) {
                   return (
-                    <li>
+                    <li >
                     <label key={index} htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img src={style.photos[0].thumbnail_url}/>
+                        <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                   )
@@ -327,7 +330,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                   <li>
                     <label  key={index} htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img id="testingimage" src={style.photos[0].thumbnail_url}/>
+                        <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )
