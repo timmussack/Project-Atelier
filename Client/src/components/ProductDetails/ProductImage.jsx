@@ -46,7 +46,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
       let getReviews =  Object.values(reviewMeta.ratings).reduce((a,b) => {
         return Number(a) + Number(b)
       }, 0)
-      setTotalReviews(getReviews)
+      setTotalReviews(getReviews);
     }
   }
 

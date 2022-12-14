@@ -26,6 +26,7 @@ const Dropdown = ({ currentStyle }) => {
   const handleSizeChange = (e) => {
     if (e.target.value === "default") {
       setSizeValue('');
+      alert('size changed')
       return;
     }
     document.getElementById('sizedropdown').removeAttribute('size');
@@ -83,11 +84,11 @@ const Dropdown = ({ currentStyle }) => {
   return (
   <>
     {
-      <StyledError>{errorMessage}</StyledError>
+      <StyledError data-testid='errortest'>{errorMessage}</StyledError>
     }
-    { Object.keys(sizeObj).length > 0 &&
+    { (currentStyle.original_price || Object.keys(sizeObj).length > 0) &&
       <div className="Dropdown" data-testid="dropdowntest">
-        <select form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
+        <select data-testid='sizedropdowntest' form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
           {
             <option data-testid='optiontest' value="default">Select Size</option>
           }
@@ -103,17 +104,17 @@ const Dropdown = ({ currentStyle }) => {
 
         <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}>
           {
-            disabled() ? <option value="default">-</option> : null
+            disabled() ? <option data-tesid="qtyopt" value="default">-</option> : null
           }
 
         {
           qtyLength.map((number, index) => {
-            return <option key={index} value={number}>{number}</option>
+            return <option data-tesid="qtyopt" key={index} value={number}>{number}</option>
           })
         }
         </select>
         <form onClick={addToCart} id="addtocartform">
-          <StyledAddToCart>Add To Cart</StyledAddToCart>
+          <StyledAddToCart data-testid='atcbutton'>Add To Cart</StyledAddToCart>
         </form>
       </div>
     }

@@ -824,7 +824,7 @@ const dummyStyles = [
     }
 ]
 
-const dummyDefaultStyle =         {
+const dummyDefaultStyle =  {
   "style_id": 221034,
   "name": "Zebra Stripe",
   "original_price": "900.00",
