@@ -2,13 +2,15 @@ import {React, useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 const StyledAddToCart = styled.button`
-color: black;
 width: inherit;
 height: inherit;
-background-color: transparent;
-border-color: black
 font-size: 1em;
 padding: 0.25em 1em;
+background-color: #253954;
+color: white;
+border: 1px solid;
+cursor: pointer;
+font-weight: bold;
 `;
 
 const StyledError = styled.strong`
