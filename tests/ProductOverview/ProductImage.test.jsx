@@ -4,7 +4,20 @@ import ProductImage from '../../Client/src/components/ProductDetails/ProductImag
 import { dummyStyles, dummyDefaultStyle, dummyProductData, dummyRating, dummyReviewMeta } from './DummyData.js'
 
 describe('Carousel renders 7 images & exists', () => {
-  // const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta})
+  it('should render the carousel', () => {
+    render(
+      <ProductImage
+        styles={dummyStyles}
+        defaultStyle={dummyDefaultStyle}
+        productData={dummyProductData}
+        rating={dummyRating}
+        reviewMeta={dummyReviewMeta}
+      />
+    );
+
+    expect(screen.getAllByTestId('carousel')).toBeTruthy()
+  })
+
   it('should render correct number of thumbnails', () => {
     render(
       <ProductImage

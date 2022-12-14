@@ -208,7 +208,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
   }
 
   return (
-    <div className="container">
+    <div className="container" data-testid='carousel'>
       <div className="left" style={ isExpanded ? {cursor: 'zoom-out'}: {}}>
         <div className="left_1">
           {
@@ -316,7 +316,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                 if (index === 0) {
                   return (
                     <li>
-                    <label htmlFor={index}>
+                    <label key={index} htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img src={style.photos[0].thumbnail_url}/>
                     </label>
@@ -325,7 +325,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviewMeta}) =
                 }
                 return (
                   <li>
-                    <label  htmlFor={index}>
+                    <label  key={index} htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
