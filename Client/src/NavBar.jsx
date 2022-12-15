@@ -24,6 +24,7 @@ const SearchBarContainer = styled.div`
 const SearchBar = styled.input`
   position: relative;
   margin-top: 10px;
+  margin-right: 10px;
   width: 25%;
   height: 2.8rem;
   background: #f5f5f5;
@@ -36,6 +37,7 @@ const SearchBar = styled.input`
 
 const Logo = styled.img`
   font-size: 2em;
+  margin-left: 10px;
 `
 
 const NavBar =  ({nightMode, setNightMode}) => {

@@ -10,9 +10,10 @@ const QAWrapper = styled.div`
   text-overflow: ellipsis;
   max-height: 70vh;
   overflow-y: auto;
+  margin-bottom: 12px;
 `;
 
-export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ, getQAs }) {
+export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ, getQAs, nightMode }) {
 
   return (
     <QAWrapper>
@@ -20,13 +21,13 @@ export default function QuestionList( { QAs, product, productData, loadMoreQ, se
       {!loadMoreQ ? QAs.filter((item, index) => index < 2).map((QA) => {
         return (
           <div key={QA.question_id}>
-            <Question QA={QA} product={product} productData={productData} getQAs={getQAs}/>
+            <Question QA={QA} product={product} productData={productData} getQAs={getQAs} nightMode={nightMode}/>
           </div>
         )
       }) : QAs.map((QA) => {
         return (
           <div key={QA.question_id}>
-            <Question QA={QA} product={product} productData={productData} getQAs={getQAs}/>
+            <Question QA={QA} product={product} productData={productData} getQAs={getQAs} nightMode={nightMode}/>
           </div>
         )
       })}

@@ -22,23 +22,27 @@ const QModalContent = styled.div`
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid;
   width: 50%;
+  border-radius: 10px;
 `;
 
 const ModalButton = styled.button`
-  background-color: #253954;
-  color: white;
-  border: 1px solid;
+  background-color: white;
+  color: black;
+  border: 2px solid;
   height: 40px;
   width: 20%;
-  margin-right: 20px;
+  margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
 `;
 
 const ModalForm = styled.form`
+  margin-left: 7.5%;
   overflow: auto;
 `;
 
@@ -46,7 +50,7 @@ const Note = styled.p`
   font-size: 12px;
 `;
 
-export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {
+export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs, nightMode }) {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -72,11 +76,11 @@ export default function QuestionModal({ productData, product, showQModal, setSho
     modalContent = (
       <QModal>
 
-        <QModalContent>
+        <QModalContent style={nightMode ? {backgroundColor: 'lightslategray'} : {backgroundColor: 'white'}}>
 
-          <h3>Ask Your Question</h3>
+          <h3 style={{'margin-left': '7.5%'}}>Ask Your Question</h3>
 
-          <p>About the {productData.name}</p>
+          <h5 style={{'margin-left': '7.5%'}}>About the {productData.name}</h5>
 
           <ModalForm onSubmit={(e) => {
             e.preventDefault();
@@ -91,9 +95,9 @@ export default function QuestionModal({ productData, product, showQModal, setSho
               setQuestion(e.target.value)
               }} required> </textarea>
             </label>
-
+            <br></br>
             <label>
-              <div> What is your nickname* </div>
+              <div style={{marginTop: '10px'}}> What is your nickname* </div>
               <input maxLength='60' type='text' style={{width: '90%', height: '15px'}} placeholder='Example: jackson11!' onChange={e => {
               setNickname(e.target.value)
               }} required/>
@@ -110,11 +114,11 @@ export default function QuestionModal({ productData, product, showQModal, setSho
 
             <Note>For authentication reasons, you will not be emailed.</Note>
 
-          <ModalButton type="submit">Submit Question</ModalButton>
+          <ModalButton type="submit"> Submit </ModalButton>
 
           <ModalButton onClick={() => {
             setShowQModal(!showQModal)
-          }}>Close without submission</ModalButton>
+          }}> Close </ModalButton>
 
         </ModalForm>
 

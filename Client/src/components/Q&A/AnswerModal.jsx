@@ -24,29 +24,33 @@ const AModalContent = styled.div`
   padding: 30px;
   border: 1px solid;
   width: 50%;
+  border-radius: 10px;
 `;
 
 const ModalButton = styled.button`
-  background-color: #253954;
-  color: white;
-  border: 1px solid;
+  background-color: white;
+  color: black;
+  border: 2px solid;
   height: 40px;
   width: 20%;
-  margin-right: 20px;
-  margin-top: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
   cursor: pointer;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
 `;
 
 const ModalForm = styled.form`
   overflow: auto;
+  margin-left: 7.5%;
 `;
 
 const Note = styled.p`
   font-size: 12px;
 `;
 
-export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers }) {
+export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers, nightMode }) {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -103,11 +107,11 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
     modalContent = (
       <AModal>
 
-        <AModalContent>
+        <AModalContent style={nightMode ? {backgroundColor: 'lightslategray'} : {backgroundColor: 'white'}}>
 
-          <h3>Submit your answer</h3>
+          <h3 style={{'margin-left': '7.5%'}}>Submit your answer</h3>
 
-          <p>{productData.name}: {QA.question_body}</p>
+          <h5 style={{'margin-left': '7.5%'}}>{productData.name}: {QA.question_body}</h5>
 
           <ModalForm onSubmit={() => {
               handleAddAnswer(answer, nickname, email, imageURL, QA.question_id);
@@ -123,7 +127,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
             </label>
 
             <label>
-              <div> What is your nickname* </div>
+              <div style={{marginTop: '10px'}}> What is your nickname* </div>
               <input maxLength='60' type='text' style={{width: '90%', height: '15px'}} placeholder='Example: jack543!' onChange={e => {
               setNickname(e.target.value)
               }} required/>
@@ -160,11 +164,11 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
             </label>
 
             <div>
-              <ModalButton type='submit'>Submit Answer</ModalButton>
+              <ModalButton type='submit'> Submit </ModalButton>
 
               <ModalButton onClick={() => {
                 setShowAModal(!showAModal)
-              }}>Close without submission</ModalButton>
+              }}> Close </ModalButton>
 
             </div>
 
