@@ -25,6 +25,7 @@ const RModalContent = styled.div`
   padding: 20px;
   border: 1px solid black;
   width: 50%;
+  height: 70%;
 `;
 
 const ModalButton = styled.button`
@@ -52,6 +53,7 @@ const ModalSubmitButton = styled.input`
 `;
 const ModalForm = styled.form`
   overflow: auto;
+  height: 80%;
 `;
 
 const ModalTitles = styled.div`
@@ -60,7 +62,19 @@ const ModalTitles = styled.div`
   margin-bottom: 5px;
 `;
 
-export default function NewReviewModal({ showAddReview, setShowAddReview, product, productData }) {
+const InputButtons = styled.input`
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+`;
+
+export default function NewReviewModal({ showAddReview, metaData, setShowAddReview, product, productData }) {
   const [userReview, setUserReview] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [reccomend, setReccomend] = useState(false);
@@ -70,6 +84,26 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [photos, setPhotos] = useState([]);
   const [chars, setChars] = useState({});
   const [thumbnails, setThumbnails] = useState([]);
+
+  const renderCharacteristics = (char, id) => {
+    return (
+      <div>
+        <h4>How would you describe the {char.toLowerCase()}?</h4>
+        {[1, 2, 3, 4, 5].map((val) => {
+          return (
+            <label>
+              <input
+                type="radio"
+                name={'characteristics.' + id}
+                value={String(val)}
+              />
+              {val}
+            </label>
+          )
+        })}
+      </div>
+    )
+  }
 
   const postReviewHandler = (response) => {
     let newPhotos = [];
@@ -144,7 +178,7 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
 
             <label>
             <ModalTitles>Overall Rating</ModalTitles>
-            <Stars rating={reviewRating} selectable={true} setReviewRating={setReviewRating} reviewRating={reviewRating}/>
+            <Stars rating={reviewRating} selectable={true} setReviewRating={setReviewRating} />
             </label>
 
             <label>
@@ -157,6 +191,12 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
               </ModalButton>
             </label>
 
+            <label>
+              <ModalTitles>Rate Individual Characteristics</ModalTitles>
+              {Object.keys(metaData.characteristics).map((key) =>
+                renderCharacteristics(key, metaData.characteristics[key].id)
+              )}
+            </label>
             <label>
               <ModalTitles>Summary</ModalTitles>
               <input name="summary" onChange={e => setSummary(e.target.value)} type="text" required maxLength="60" size="50" placeholder="Example: Best Purchase Ever!"/>
