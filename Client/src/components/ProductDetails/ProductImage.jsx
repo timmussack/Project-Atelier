@@ -306,17 +306,17 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
                   return (
                     <li >
                     <label key={index} htmlFor={index}>
-                      <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+                      <input key={index} type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
+                        <img key={style} data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                   )
                 }
                 return (
                   <li>
-                    <label  key={index} htmlFor={index}>
-                      <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
+                    <label key={index} htmlFor={index}>
+                      <input key={index} type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
+                        <img key={style} data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )
