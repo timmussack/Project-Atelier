@@ -6,12 +6,13 @@ width: inherit;
 height: 65px;
 font-size: 1em;
 padding: 0.25em 1em;
-background-color: #253954;
-color: white;
+background-color: white;
+color: black;
 border: 1px solid;
-border-radius: 40px;
+border-radius: 10px;
+box-shadow: black 3px 1px 5px;
 cursor: pointer;
-font-weight: bold;
+font-weight: 700;
 `;
 
 const StyledError = styled.strong`
@@ -63,7 +64,6 @@ const Dropdown = ({ currentStyle }) => {
     }
   }
 
-
   const createSizeObj = () => {
     let obj = {};
     for(const [key, value] of Object.entries(currentStyle.skus)) {
@@ -109,9 +109,9 @@ const Dropdown = ({ currentStyle }) => {
         </select>
 
 
-        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}>
+        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}  >
           {
-            disabled() ? <option data-tesid="qtyopt" value="default">-</option> : null
+            disabled() ? <option data-tesid="qtyopt" value="default" >-</option> : null
           }
 
         {

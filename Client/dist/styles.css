@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: helvetica;
+  font-family: Jost;
 }
 
 .app {
@@ -100,6 +100,7 @@ html, body {
   align-items: flex-start;
   justify-content: center;
   padding-left: 1em;
+  row-gap: 3px;
 }
 
 .right-arrow {
@@ -182,26 +183,32 @@ input[type="radio"] {
 #sizedropdown {
   width: 65%;
   height: 65px;
-  background-color: #253954;
-  color: white;
+  background-color: white;
+  color: black;
   border: 1px solid;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 40px;
+  border-radius: 10px;
   text-align: center;
+  box-shadow: black 3px 1px 5px;
 }
+
 
 #qtydropdown {
   width: 31%;
   height: inherit;
-  background-color: #253954;
-  color: white;
+  background-color: white;
+  color: black;
   cursor: pointer;
   font-weight: bold;
   font-size: 1em;
   text-align: center;
-  border-radius: 40px;
+  border-radius: 10px;
+  box-shadow: black 3px 1px 5px;
 }
+
+
+
 
 #addtocartform {
   width: -webkit-fill-available

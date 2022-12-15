@@ -8,22 +8,25 @@ import Stars from '../RnR/Stars.jsx';
 import Dropdown from './Dropdown.jsx';
 
 const SocialDiv = styled.div`
+display: flex;
+flex-flow: row wrap;
+gap: 10px;
 padding-Top: 5px;`;
 
 const Fb = styled.a`
-font-size: 1em;
+font-size: 1.5em;
 padding-right: 5px;
 color: #4267B2;
 `;
 
 const Twitter = styled.a`
-font-size: 1em;
+font-size: 1.5em;
 color: #1DA1F2;
 padding-right: 5px;
 `;
 
 const Pinterest = styled.a`
-font-size: 1em;
+font-size: 1.5em;
 color: #E60023;
 `;
 
@@ -286,15 +289,15 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
               <a  href='#' data-testid='testreview' onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} reviews</a>
             }
           </div>
-          <h1>{productData.category}</h1>
-          <h1>{productData.name}</h1>
+          <a style={{margin: '15px 0px 3px 0px'}}>{productData.category}</a>
+          <a style={{margin: '0px 0px 10px 0px', fontSize: 'xxx-large'}}>{productData.name}</a>
           {
             currentStyle.sale_price ?
             <>
-              <del>${currentStyle.original_price}</del>
-              <pre id='originalprice'>${currentStyle.sale_price}</pre>
+              <del style={{marginBottom: '0px', fontSize: 'larger'}}>${currentStyle.original_price}</del>
+              <pre style={{marginBottom: '5px', marginTop: '0px',fontSize: 'x-large'}} id='originalprice'>${currentStyle.sale_price}</pre>
             </>
-            : <a>${currentStyle.original_price}</a>
+            : <a style={{marginBottom: '5px', fontSize: 'larger'}}>${currentStyle.original_price}</a>
           }
           <SocialDiv>
               <Fb target={'_blank'} href={`https://www.facebook.com`} > <FaFacebook /> </Fb>
@@ -302,7 +305,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
               <Pinterest target={'_blank'} href={`https://www.pinterest.com`}> <FaPinterest /> </Pinterest>
           </SocialDiv>
 
-          <div style={{paddingTop: '10px'}}><a>Style > <strong>{currentStyle.name}</strong></a></div>
+          <div style={{paddingTop: '10px', fontSize: 'larger'}}><a >Style > <strong>{currentStyle.name}</strong></a></div>
           <ul className="stylelist">
             {
               styles.map((style, index) => {
