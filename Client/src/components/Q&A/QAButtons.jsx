@@ -6,6 +6,7 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
+  font-family: 'Jost', sans-serif;
   margin-right: 10px;
   background-color: white;
   color: black;
@@ -20,6 +21,7 @@ const MoreAnsweredQs = styled.button`
 `;
 
 const AddQuestion = styled.button`
+  font-family: 'Jost', sans-serif;
   background-color: white;
   color: black;
   height: 50px;
