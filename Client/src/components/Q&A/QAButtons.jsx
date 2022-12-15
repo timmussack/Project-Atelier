@@ -6,6 +6,7 @@ import React from 'react';
 const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
+  margin-right: 10px;
   background-color: #253954;
   color: white;
   height: 50px;
