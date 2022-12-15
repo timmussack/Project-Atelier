@@ -101,7 +101,7 @@ export default function App() {
         reviewMeta={metaData}
         rating={avgRating} />
 
-      <QA product={product} productData={productData}/>
+      <QA product={product} productData={productData} nightMode={nightMode}/>
 
       <MainRnR
       rating={avgRating}

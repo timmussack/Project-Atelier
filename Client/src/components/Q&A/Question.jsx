@@ -90,7 +90,7 @@ const ReportQuestion = styled.div`
   cursor: pointer;
 `;
 
-export default function Question( { QA, product, productData, getQAs }) {
+export default function Question( { QA, product, productData, getQAs, nightMode }) {
   const [answers, setAnswers] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [buttonText, setButtonText] = useState('LOAD MORE ANSWERS');
@@ -218,7 +218,7 @@ export default function Question( { QA, product, productData, getQAs }) {
       </AnswerWrapper>
       {answers.length > 2 ? <LoadMoreAnswers onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
-      <AnswerModal QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
+      <AnswerModal nightMode={nightMode} QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>
   );
 };

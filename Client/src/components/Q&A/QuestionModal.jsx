@@ -32,7 +32,7 @@ const ModalButton = styled.button`
   border: 1px solid;
   height: 40px;
   width: 20%;
-  margin-right: 20px;
+  margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
   font-weight: bold;
@@ -46,7 +46,7 @@ const Note = styled.p`
   font-size: 12px;
 `;
 
-export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs }) {
+export default function QuestionModal({ productData, product, showQModal, setShowQModal, getQAs, nightMode }) {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -72,7 +72,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
     modalContent = (
       <QModal>
 
-        <QModalContent>
+        <QModalContent style={nightMode ? {backgroundColor: 'lightslategray'} : {backgroundColor: 'white'}}>
 
           <h3>Ask Your Question</h3>
 
@@ -110,11 +110,11 @@ export default function QuestionModal({ productData, product, showQModal, setSho
 
             <Note>For authentication reasons, you will not be emailed.</Note>
 
-          <ModalButton type="submit">Submit Question</ModalButton>
+          <ModalButton type="submit"> Submit </ModalButton>
 
           <ModalButton onClick={() => {
             setShowQModal(!showQModal)
-          }}>Close without submission</ModalButton>
+          }}> Close </ModalButton>
 
         </ModalForm>
 
