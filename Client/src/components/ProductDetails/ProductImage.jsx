@@ -28,6 +28,7 @@ color: #E60023;
 `;
 
 
+
 const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const [currentImage, setCurrentImage] = useState('');
   const [currentStyle, setCurrentStyle] = useState({});
@@ -40,6 +41,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const [imageArray, setImageArray] = useState([]);
   const [isExpanded, setExpandedView] = useState(false);
   const [totalReviews, setTotalReviews] = useState(0);
+  const [styleId, setStyleSelected] = useState(0)
 
 
   const handleScroll = (e) => {
@@ -149,6 +151,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const handleStyleChange = (style) => {
     createThumbnailArray(style);
     setCurrentImage(style.photos[0].url);
+    setStyleSelected(style.style_id)
     setPhotoIndex(0);
     setShowItems(6);
     setStartingIndex(0);
@@ -168,7 +171,8 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
       setCurrentStyle(defaultStyle);
       setCurrentImage(firstImage);
       createThumbnailArray();
-      setTotalReviews(reviews.length)
+      setTotalReviews(reviews.length);
+      setStyleSelected(defaultStyle.style_id)
 
       // createThumbnailArray(defaultStyle.photos);
       // setLengthOfdefaultStyle(defaultStyle.length)
@@ -279,7 +283,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
           <div>
             <Stars rating={rating}/>
             {
-              <a  data-testid='testreview' onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} Reviews</a>
+              <a  href='#' data-testid='testreview' onClick={(e) => handleScroll(e)} style={{paddingLeft: '5px'}}>Read all {totalReviews} reviews</a>
             }
           </div>
           <h1>{productData.category}</h1>
@@ -305,18 +309,36 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
                 if (index === 0) {
                   return (
                     <li >
+<<<<<<< HEAD
                     <label key={index} htmlFor={index}>
                       <input key={index} type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img key={style} data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+=======
+                    <label style={{position: 'relative'}} key={index} htmlFor={index}>
+                      <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
+                      {
+                        style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
+                      }
+                        <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+>>>>>>> 5cb9375902bff3c30f22fe4410a05bd7dd1bf5d5
                     </label>
                   </li>
                   )
                 }
                 return (
                   <li>
+<<<<<<< HEAD
                     <label key={index} htmlFor={index}>
                       <input key={index} type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
                         <img key={style} data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
+=======
+                    <label style={{position: 'relative'}}  key={index} htmlFor={index}>
+                      <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
+                      {
+                        style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
+                      }
+                        <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
+>>>>>>> 5cb9375902bff3c30f22fe4410a05bd7dd1bf5d5
                     </label>
                   </li>
                 )

@@ -27,10 +27,15 @@ const QModalContent = styled.div`
 `;
 
 const ModalButton = styled.button`
-  background: transparent;
+  background-color: #253954;
+  color: white;
   border: 1px solid;
+  height: 40px;
+  width: 20%;
   margin-right: 20px;
   margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
 `;
 
 const ModalForm = styled.form`

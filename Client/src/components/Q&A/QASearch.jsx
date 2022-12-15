@@ -13,6 +13,7 @@ const Form = styled.form`
   display: flex;
   border: 1px solid;
   margin: 10px 0px 15px 0px;
+  background: white;
 `;
 
 export default function Search( { handleSearch, product, getQAs, searchTerm, setSearchTerm } ) {
@@ -25,8 +26,6 @@ export default function Search( { handleSearch, product, getQAs, searchTerm, set
   return (
     <Form onSubmit={(e) => {
       e.preventDefault();
-      // const clearSearchField = document.getElementById('search');
-      // clearSearchField.value = '';
     }}>
         <SearchBar
           data-testid='qaSearch'

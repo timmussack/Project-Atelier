@@ -37,8 +37,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-snap": "^1.23.0",
     "react-star-ratings": "^2.3.0",
     "styled-components": "^5.3.6",
+    "uninstall": "^0.0.0",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
