@@ -23,7 +23,7 @@ const QAWrapper = styled.div`
   padding-bottom: 40px;
 `;
 
-export default function QAContainer( { product, productData } ) {
+export default function QAContainer( { product, productData, nightMode } ) {
   const [QAs, setQAs] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
   const [loadMoreQ, setLoadMoreQ] = useState(false);
@@ -82,13 +82,13 @@ export default function QAContainer( { product, productData } ) {
         QUESTIONS & ANSWERS
       </QATitle>
 
-      <QASearch product={product} getQAs={getQAs} handleSearch={handleSearch} SearchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+      <QASearch product={product} getQAs={getQAs} handleSearch={handleSearch} SearchTerm={searchTerm} setSearchTerm={setSearchTerm} nightMode={nightMode}/>
 
-      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} getQAs={getQAs}/>
+      <QuestionList QAs={QAs} product={product} productData={productData} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} getQAs={getQAs} nightMode={nightMode}/>
 
-      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal} getQAs={getQAs}/>
+      <QuestionModal product={product} productData={productData}showQModal={showQModal} setShowQModal={setShowQModal} getQAs={getQAs} nightMode={nightMode}/>
 
-      <QAButtons QAs={QAs} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal}/>
+      <QAButtons QAs={QAs} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal} nightMode={nightMode}/>
     </QAWrapper>
   );
 };
