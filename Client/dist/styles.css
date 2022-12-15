@@ -23,15 +23,19 @@ html, body {
   border-radius: 10px;
 }
 
+.mainView {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  position: relative;
+  padding-left: 200px;
+}
+
 .container {
-  width: 75%;
-  margin-left: 12vw;
-  margin-right: 12vw;
   padding-top: 5px;
-  /* margin-left: 200px;
-  padding-top: 20px; */
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
 }
 
 .left {
@@ -91,8 +95,11 @@ html, body {
 
 .left_3 {
   position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  justify-content: center;
   padding-left: 1em;
-  width: 354px;
 }
 
 .right-arrow {
@@ -123,21 +130,22 @@ html, body {
 }
 
 .stylelist  {
-  width: 314px;
+  width: 250px;
   display: flex;
   flex-flow: row wrap;
   position: relative;
   list-style: none;
-  column-gap: 85px;
-  row-gap: 17px;
+  column-gap: 75px;
+  row-gap: 5px;
   padding-left: 0px;
   margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .stylelist :is(img) {
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   position: absolute;
 }
 
@@ -153,42 +161,50 @@ input[type="radio"] {
 }
 
 #stylecheckmark {
-  /* position: relative; */
+
   width: 29px;
   height: 25px;
-  /* top: 0px; */
-  left: 51px;
+  left: 39px;
   z-index: 1;
+}
+
+#styleitem {
+  border: 3px solid #253954
 }
 
 .Dropdown {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
+  width: 300px;
 }
 
 #sizedropdown {
   width: 65%;
-  height: 50px;
+  height: 65px;
   background-color: #253954;
   color: white;
   border: 1px solid;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 40px;
+  text-align: center;
 }
 
 #qtydropdown {
-  width: 25%;
-  height: 50px;
+  width: 31%;
+  height: inherit;
   background-color: #253954;
   color: white;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 40px;
 }
 
 #addtocartform {
-  width: 88%;
-  height: 50px;
+  width: -webkit-fill-available
 }
 
 #thumbnailArrow {

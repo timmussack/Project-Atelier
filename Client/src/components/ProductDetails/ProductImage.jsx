@@ -314,7 +314,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
                       {
                         style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
                       }
-                        <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+                        <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                   )
@@ -326,7 +326,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
                       {
                         style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
                       }
-                        <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
+                        <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
                     </label>
                   </li>
                 )
