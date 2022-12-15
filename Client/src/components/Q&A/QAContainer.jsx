@@ -15,12 +15,10 @@ const QATitle = styled.div`
   font-size: 12px;
 `;
 
-//QATitle.displayName = 'QATitle';
-
 const QAWrapper = styled.div`
   font-family: Helvetica, Sans-Serif;
   position:relative ;
-  width: 50%;
+  width: 60vw;
   margin: 0 auto;
   padding-bottom: 40px;
 `;
