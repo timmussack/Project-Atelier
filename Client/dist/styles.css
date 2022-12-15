@@ -3,7 +3,6 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: helvetica;
-
 }
 
 .app {
@@ -23,9 +22,6 @@ html, body {
   height: 600px;
   border-radius: 10px;
 }
-
-
-
 
 .container {
   width: 75%;
@@ -71,7 +67,6 @@ html, body {
   transition: width  0.2s ease-in-out;
 }
 
-
 #expandedview {
   clip-path: inset(0px 0px 0px 0px);
   z-index: 1;
@@ -79,7 +74,6 @@ html, body {
 }
 
 .left_2 img {
-
   width: 700px;
   height: 700px;
   object-fit: cover;
@@ -89,19 +83,17 @@ html, body {
   transition: width .3s ease-in-out;
 }
 
-
 #expandwidth {
   width: 1200px;
   cursor: zoom-out;
 }
-
-
 
 .left_3 {
   position: relative;
   padding-left: 0.5em;
   width: 354px;
 }
+
 .right-arrow {
   position: absolute;
   top: 50%;
@@ -112,7 +104,6 @@ html, body {
   cursor: pointer;
   user-select: none;
 }
-
 
 .left-arrow {
   position: absolute;
@@ -125,14 +116,10 @@ html, body {
   user-select: none;
 }
 
-
-
-
 .active {
   border: 2px solid red;
   border-radius: 2px;
 }
-
 
 .stylelist  {
   /* background: gray; */
@@ -164,8 +151,6 @@ input[type="radio"] {
   visibility: hidden;
   margin: auto;
 }
-
-
 
 input[type='radio']:checked + img {
   outline: 5px solid red;
@@ -200,7 +185,6 @@ input[type='radio']:checked + img {
 #addtocartform {
   width: 88%;
   height: 50px;
-  
 }
 
 #thumbnailArrow {
@@ -208,8 +192,49 @@ input[type='radio']:checked + img {
   font-size: xx-large;
 }
 
-
 #originalprice {
   color: red;
 }
 
+/* NightMode Switch Style Below */
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 60px;
+  height: 30px;
+  background: grey;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 45px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 30px;
+}
+/* End NightMode Switch Style */
