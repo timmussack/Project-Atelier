@@ -6,7 +6,6 @@ const Stars = ({rating, selectable, setReviewRating, reviewRating}) => {
 
   const onChangeHandler = (newRating) => {
     setReviewRating(newRating);
-    console.log(reviewRating)
     setSelectedRating(newRating);
   }
 

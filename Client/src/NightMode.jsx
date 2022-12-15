@@ -23,7 +23,7 @@ const NightMode = ({ nightMode, setNightMode }) => {
 
 	return (
     <NightModeContainer>
-			<NightModeText>Night Mode</NightModeText>
+			<NightModeText>Dark Mode</NightModeText>
 			<NightModeButtonWrapper>
 				<input
 					className="react-switch-checkbox"

@@ -2,10 +2,13 @@ import styled, { css } from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stars from '../Stars.jsx'
+import NewReviewThumbnail from './NewReviewThumbnail.jsx';
 
 const RModal = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -25,13 +28,28 @@ const RModalContent = styled.div`
 `;
 
 const ModalButton = styled.button`
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid black;
-  width: 50%;
+  background-color: #253954;
+  color: white;
+  border: 1px solid;
+  height: 40px;
+  width: 20%;
+  margin-right: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
 `;
 
+const ModalSubmitButton = styled.input`
+  background-color: #253954;
+  color: white;
+  border: 1px solid;
+  height: 40px;
+  width: 20%;
+  margin-right: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+`;
 const ModalForm = styled.form`
   overflow: auto;
 `;
@@ -50,6 +68,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [summary, setSummary] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [chars, setChars] = useState({});
+  const [thumbnails, setThumbnails] = useState([]);
 
   const postReviewHandler = (response) => {
     let newPhotos = [];
@@ -70,8 +90,17 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
     })
   };
 
+  const thumbnailHandler = (file) => {
+    console.log(productData)
+    let url = URL.createObjectURL(file);
+    let tempArr = thumbnails;
+    tempArr.push(url);
+    setThumbnails(tempArr);
+  }
+
   const fileChangeHandler = async (e) => {
     let url = URL.createObjectURL(e.target.files[0]);
+
     const data = await fetch(url);
     const blob = await data.blob();
     return new Promise((resolve) => {
@@ -110,7 +139,7 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
           <h2>Write Your Review</h2>
           <h4>About the {productData.name}</h4>
           <ModalForm enctype="multipart/form-data" onSubmit={(e) => {
-            photoUploadHandler(e).then((response) => postReviewHandler(response));
+            photoUploadHandler(e).then((response) => postReviewHandler(response)).then(() => setShowAddReview(!showAddReview));
           }}>
 
             <label>
@@ -145,7 +174,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
 
             <label>
               <ModalTitles>Upload Your Photos</ModalTitles>
-              <input type="file" name="images" multiple onChange={(e) => fileChangeHandler(e)}/>
+              <input type="file" name="images" accept="image/*" multiple onChange={(e) => {fileChangeHandler(e); thumbnailHandler(e.target.files[0])}}/>
+              <NewReviewThumbnail thumbnails={thumbnails} setThumbnails={setThumbnails}/>
             </label>
 
             <label>
@@ -160,8 +190,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
               <p style={{fontSize: '12px'}}>For authentication reasons, you will not be emailed</p>
             </label>
 
-            <input type="submit" value="Submit Review" name="submit"/>
-          <ModalButton type="submit" onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
+          <ModalSubmitButton type="submit" value="Submit Review" name="submit"/>
+          <ModalButton onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
           </ModalForm>
          </RModalContent>
       </RModal>

@@ -309,36 +309,24 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
                 if (index === 0) {
                   return (
                     <li >
-<<<<<<< HEAD
-                    <label key={index} htmlFor={index}>
-                      <input key={index} type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img key={style} data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
-=======
                     <label style={{position: 'relative'}} key={index} htmlFor={index}>
                       <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
                       {
                         style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
                       }
                         <img data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
->>>>>>> 5cb9375902bff3c30f22fe4410a05bd7dd1bf5d5
                     </label>
                   </li>
                   )
                 }
                 return (
                   <li>
-<<<<<<< HEAD
-                    <label key={index} htmlFor={index}>
-                      <input key={index} type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        <img key={style} data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
-=======
                     <label style={{position: 'relative'}}  key={index} htmlFor={index}>
                       <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
                       {
                         style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
                       }
                         <img data-testid='styleselection' id="testingimage" src={style.photos[0].thumbnail_url}/>
->>>>>>> 5cb9375902bff3c30f22fe4410a05bd7dd1bf5d5
                     </label>
                   </li>
                 )

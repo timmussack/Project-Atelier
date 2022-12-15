@@ -11,6 +11,7 @@ const ShowMoreButton = styled.button`
 `;
 
 const BodyFormat = styled.div`
+  font-size: 14px;
   font-strech: expanded;
   margin-bottom: 20px;
 `;

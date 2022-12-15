@@ -138,7 +138,7 @@ app.get('/qa/questions', (req, res) => {
 //Gets list of answers given a question id
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const { question_id, page, count } = req.query;
-  axios.get(`${url}qa/questions/${question_id}/answers`, {
+  axios.get(`${url}qa/questions/${question_id}/answers?page=${page}&count=${count}`, {
     headers: {
       Authorization: `${key}`,
     },
@@ -278,6 +278,7 @@ app.put('/reviews/:review_id/report', (req, res) => {
       console.error(error);
     });
 });
+
 //Marks review as helpful
 app.put('/reviews/:review_id/helpful', (req, res) => {
   var { review_id } = req.body;
@@ -294,6 +295,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 
 app.post('/reviews', (req, res) => {
   const { product_id, body, rating, recommend, name, summary, email, photos, characteristics } = req.body;
@@ -318,6 +320,31 @@ app.post('/reviews', (req, res) => {
       console.error(error);
     })
 });
+=======
+// app.post('/reviews', uploadS3.array('images', 5), (req, res) => {
+//   if (!req.files) {
+//     res.status(400).end('server error uploading photos');
+//   } else {
+//     const reviewObject = req.body;
+//     const photos = [];
+//     req.files.forEach(object => photos.push(object.location));
+//     reviewObject.photos = photos;
+//     reviewObject.productId = Number(reviewObject.productId);
+//     reviewObject.rating = Number(reviewObject.rating);
+//     reviewObject.recommend = reviewObject.recommend === 'true';
+
+//     axios({
+//       method: 'post',
+//       url: `${url}reviews`,
+//       headers: {Authorization: `${key}`},
+//       data: req.body,
+//     }).then(result => {
+//       res.end(JSON.stringify(result));
+//     }).catch(error => {
+//       console.error(error);
+//     })
+// }});
+>>>>>>> 3214c1d9440c44a0e3268fe75bda6e5b76f3f2d6
 
 app.post('/photoUpload', upload.array('images', 5), async (req, res) => {
   try {

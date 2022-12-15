@@ -7,22 +7,28 @@ const { useState, useEffect } = react;
 
 const MoreAnsweredQs = styled.button`
   margin-right: 10px;
-  background-color: #253954;
-  color: white;
+  background-color: white;
+  color: black;
   height: 50px;
-  border: 1px solid;
-  width: 220px;
+  border: 2px solid #253954;
+  border-radius: 10px;
+  width: 190px;
   cursor: pointer;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
   font-weight: bold;
 `;
 
 const AddQuestion = styled.button`
-  background-color: #253954;
-  color: white;
+  background-color: white;
+  color: black;
   height: 50px;
-  border: 1px solid;
-  width: 150px;
+  border: 2px solid #253954;
+  border-radius: 10px;
+  width: 190px;
   cursor: pointer;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
   font-weight: bold;
 `;
 
@@ -35,7 +41,7 @@ export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoa
   };
 
   let buttonText;
-  showMore ? buttonText = 'COLLAPSE QUESTIONS' : buttonText = 'MORE ANSWERED QUESTIONS'
+  showMore ? buttonText = 'COLLAPSE QUESTIONS' : buttonText = 'MORE QUESTIONS'
 
   return (
     <div>

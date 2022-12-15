@@ -12,7 +12,7 @@ const AnswerContainer = styled.div`
 `;
 
 const AnswerMain = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   padding: 0px 0px 5px 0px;
   max-width: 50vh;
 `;

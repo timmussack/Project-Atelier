@@ -5,8 +5,7 @@ import BreakdownBarChart from './charts/BreakdownBarChart.jsx';
 import BreakdownArrowChart from './charts/BreakdownArrowChart.jsx';
 
 const Formatting = styled.div`
-  font-family: Helvetica, Sans-Serif;
-  font-size: 12px;
+  font-size: 14px;
   width: 350px;
   margin-right: 100px;
   display: flex-column;
@@ -36,7 +35,7 @@ const Ratings = ({ rating, reviews, metaData }) => {
     <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 })}<Stars rating={rating}/></LargeRating>
     <PercentRecc>{recommendOrNah(reviews)}% of reviews recommended this product</PercentRecc>
     <BreakdownArrowChart metaData={metaData.characteristics}/>
-    <BreakdownBarChart />
+    <BreakdownBarChart metaData={metaData}/>
   </Formatting>
 )};
 
