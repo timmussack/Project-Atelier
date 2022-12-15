@@ -17,7 +17,6 @@ const RNRContainer = styled.div`
   width: 50%;
   margin: 0 auto;
   display: flex;
-  color: rgb(54, 54, 54);
 `;
 
 const MainRnR = ({ rating, reviews, product, metaData, productData, setReviews }) => {
