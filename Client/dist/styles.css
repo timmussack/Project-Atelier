@@ -25,7 +25,7 @@ html, body {
 
 .container {
   width: 75%;
-  margin-left: 15vw;
+  margin-left: 12vw;
   margin-right: 12vw;
   padding-top: 5px;
   /* margin-left: 200px;
@@ -75,7 +75,7 @@ html, body {
 }
 
 .left_2 img {
-  width: 700px;
+  width: 1000px;
   height: 700px;
   object-fit: cover;
   cursor: -moz-zoom-in;
