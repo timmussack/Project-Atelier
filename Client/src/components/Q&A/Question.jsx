@@ -66,12 +66,12 @@ const Answers = styled.div`
 `;
 
 const LoadMoreAnswers = styled.button`
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   background: transparent;
   border: none;
   cursor: pointer;
-  margin: 0px 0px 18px 16px;
+  margin: 0px 0px 12px 16px;
 `;
 
 const NoAnswers = styled.div`
@@ -216,7 +216,8 @@ export default function Question( { QA, product, productData, getQAs, nightMode 
           })}
         </Answers>
       </AnswerWrapper>
-      {answers.length > 2 ? <LoadMoreAnswers onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
+
+      {answers.length > 2 ? <LoadMoreAnswers style={nightMode ? {color: 'white'} : {color: 'black'}} onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
       <AnswerModal nightMode={nightMode} QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>

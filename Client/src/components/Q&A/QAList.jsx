@@ -10,6 +10,7 @@ const QAWrapper = styled.div`
   text-overflow: ellipsis;
   max-height: 70vh;
   overflow-y: auto;
+  margin-bottom: 12px;
 `;
 
 export default function QuestionList( { QAs, product, productData, loadMoreQ, setLoadMoreQ, getQAs, nightMode }) {

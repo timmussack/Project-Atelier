@@ -138,7 +138,7 @@ app.get('/qa/questions', (req, res) => {
 //Gets list of answers given a question id
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   const { question_id, page, count } = req.query;
-  axios.get(`${url}qa/questions/${question_id}/answers`, {
+  axios.get(`${url}qa/questions/${question_id}/answers?page=${page}&count=${count}`, {
     headers: {
       Authorization: `${key}`,
     },
@@ -278,6 +278,7 @@ app.put('/reviews/:review_id/report', (req, res) => {
       console.error(error);
     });
 });
+
 //Marks review as helpful
 app.put('/reviews/:review_id/helpful', (req, res) => {
   var { review_id } = req.body;
@@ -293,7 +294,6 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
       console.error(error);
     });
 });
-
 
 // app.post('/reviews', uploadS3.array('images', 5), (req, res) => {
 //   if (!req.files) {
