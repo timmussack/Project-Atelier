@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 
 const StyledAddToCart = styled.button`
 width: inherit;
@@ -58,9 +59,17 @@ const Dropdown = ({ currentStyle }) => {
       element.setAttribute('size', Object.keys(sizeObj).length);
       element.focus()
     } else {
-      console.log('Add to cart triggered');
-      console.log('size:', sizeValue);
-      console.log('qty:', qtyValue);
+      axios({
+        method: 'post',
+        url: `/cart`,
+        data: {
+          sku_id: sizeValue
+        }
+      })
+        .then((response) => {
+          console.log('Succesfuly Add To Cart')
+        })
+        .catch((err) => console.log('error in atc', err.response.data.message))
     }
   }
 
