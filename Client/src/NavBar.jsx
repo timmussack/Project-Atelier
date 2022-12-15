@@ -17,6 +17,8 @@ const HeaderContainer = styled.div`
 
 
 const SearchBarContainer = styled.div`
+  display: flex:
+  flex-flow: row wrap ;
   position: relative;
   width: 20%;
   padding-right: 50px;

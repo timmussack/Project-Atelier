@@ -29,7 +29,8 @@ html, body {
 
 .container {
   width: 75%;
-  margin-left: 20vw;
+  margin-left: 15vw;
+  margin-right: 12vw;
   padding-top: 5px;
   /* margin-left: 200px;
   padding-top: 20px; */
@@ -78,20 +79,11 @@ html, body {
   overflow-y: visible;
 }
 
-.left_2 img {
-
-  width: 700px;
-  height: 700px;
-  object-fit: cover;
-  cursor: -moz-zoom-in;
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
-  transition: width .3s ease-in-out;
-}
+.left_2 img {width: 1000px;height: 700px;object-fit: cover;cursor: -moz-zoom-in;cursor: -webkit-zoom-in;cursor: zoom-in;transition: width .3s ease-in-out;}
 
 
 #expandwidth {
-  width: 1200px;
+  width: 1300px;
   cursor: zoom-out;
 }
 
@@ -99,7 +91,7 @@ html, body {
 
 .left_3 {
   position: relative;
-  padding-left: 0.5em;
+  padding-left: 1em;
   width: 354px;
 }
 .right-arrow {
@@ -129,47 +121,48 @@ html, body {
 
 
 .active {
-  border: 2px solid red;
+  border: 2px solid #FDEEC1;
   border-radius: 2px;
 }
 
 
 .stylelist  {
-  /* background: gray; */
-  width: 300px;
-  /* height: 30%; */ /* height given for illustration */
+  width: 314px;
   display: flex;
   flex-flow: row wrap;
   position: relative;
   list-style: none;
-  gap: 7px;
-  padding-bottom: 23px;
-  padding-left: inherit;
-  margin-top: 0px;
+  column-gap: 85px;
+  row-gap: 17px;
+  padding-left: 0px;
+  margin-top: 10px;
 }
 
 .stylelist :is(img) {
-border-radius: 50%;
-width: 60px;
-height: 60px;
-z-index: -1
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  position: absolute;
 }
 
 .stylelist :is(li) {
-  flex: 0 0 0;
-  height: 58px;
+  /* flex: 0 0 0; */
+  height: 69px;
 }
 
 input[type="radio"] {
   visibility: hidden;
   margin: auto;
+  display: none;
 }
 
-
-
-input[type='radio']:checked + img {
-  outline: 5px solid red;
-  background: url('checkmark.png') no-repeat center center;
+#stylecheckmark {
+  /* position: relative; */
+  width: 29px;
+  height: 25px;
+  /* top: 0px; */
+  left: 51px;
+  z-index: 1;
 }
 
 .Dropdown {
@@ -200,7 +193,7 @@ input[type='radio']:checked + img {
 #addtocartform {
   width: 88%;
   height: 50px;
-  
+
 }
 
 #thumbnailArrow {
