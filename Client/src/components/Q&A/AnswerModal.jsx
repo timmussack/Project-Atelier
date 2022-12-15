@@ -28,6 +28,7 @@ const AModalContent = styled.div`
 `;
 
 const ModalButton = styled.button`
+  font-family: 'Jost', sans-serif;
   background-color: white;
   color: black;
   border: 2px solid;

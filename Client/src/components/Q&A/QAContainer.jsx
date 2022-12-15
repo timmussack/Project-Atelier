@@ -16,7 +16,6 @@ const QATitle = styled.div`
 `;
 
 const QAWrapper = styled.div`
-  font-family: Helvetica, Sans-Serif;
   position:relative ;
   width: 60vw;
   margin: 0 auto;
