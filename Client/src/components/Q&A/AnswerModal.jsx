@@ -21,7 +21,7 @@ const AModal = styled.div`
 const AModalContent = styled.div`
   background-color: #fefefe;
   margin: auto;
-  padding: 30px;
+  padding: 20px;
   border: 1px solid;
   width: 50%;
   border-radius: 10px;
@@ -34,8 +34,7 @@ const ModalButton = styled.button`
   border: 2px solid;
   height: 40px;
   width: 20%;
-  margin-right: 10px;
-  margin-top: 20px;
+  margin: 10px 10px 10px 0px;
   cursor: pointer;
   border-radius: 10px;
   font-weight: 700;
@@ -122,7 +121,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
 
             <label>
               <div> Your Answer* </div>
-              <textarea maxLength='1000' type='text' value={answer} style={{width: '90%', height: '200px'}} onChange={e => {
+              <textarea maxLength='1000' type='text' value={answer} style={{width: '90%', height: '100px'}} onChange={e => {
               setAnswer(e.target.value)
               }} required> </textarea>
             </label>

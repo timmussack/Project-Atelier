@@ -34,8 +34,7 @@ const ModalButton = styled.button`
   border: 2px solid;
   height: 40px;
   width: 20%;
-  margin-right: 10px;
-  margin-top: 10px;
+  margin: 10px 10px 10px 0px;
   cursor: pointer;
   border-radius: 10px;
   font-weight: 700;
