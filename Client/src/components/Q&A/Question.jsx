@@ -66,6 +66,7 @@ const Answers = styled.div`
 `;
 
 const LoadMoreAnswers = styled.button`
+  font-family: 'Jost', sans-serif;
   font-size: 12px;
   font-weight: bold;
   background: transparent;

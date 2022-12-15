@@ -3,24 +3,32 @@ import styled, { css } from 'styled-components';
 import NewReviewModal from './modals/NewReviewModal.jsx'
 
 const MoreReviews = styled.button`
-  background-color: #253954;
-  color: white;
+  font-family: Jost;
+  background-color: white;
+  color: black;
   margin: 0px 10px 60px 0px;
   height: 50px;
   width: 150px;
-  border: 1px solid;
+  border: 2px solid;
+  border-color: #253954;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
+  border-radius: 10px;
 `;
 
 const AddReviewButton = styled.button`
-  background-color: #253954;
-  color: white;
+  font-family: Jost;
+  background-color: white;
+  color: black;
   height: 50px;
-  border: 1px solid;
   width: 150px;
+  border: 2px solid;
+  border-color: #253954;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
+  box-shadow: black 3px 1px 5px;
+  border-radius: 10px;
 `;
 
 const AddReview = ({ display, reviews, metaData, rating, displayHandler, product, productData }) => {

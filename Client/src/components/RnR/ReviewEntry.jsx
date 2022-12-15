@@ -7,7 +7,6 @@ import ReviewFooter from './ReviewFooter.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 
 const Formatting = styled.div`
-  font-family: Helvetica, Sans-Serif;
   font-size: 14px;
   padding-bottom: 1em;
   &:after {

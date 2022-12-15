@@ -1,9 +1,19 @@
 import React from 'react';
+import Stars from '../Stars.jsx';
 
-const BreakdownBarChart = ({}) => {
+const BreakdownBarChart = ({ metaData }) => {
 
   return (
-    <p>Placeholder for Bar Chart</p>
+    <>
+    { Object.keys(metaData.characteristics).map((characteristic, index) => {
+      return (
+        <div key={index}>
+          {characteristic}
+          <Stars rating={metaData.characteristics[characteristic].value} selectable={true}/>
+        </div>
+      )
+    })}
+    </>
   )
 };
 

@@ -13,7 +13,7 @@ const ReviewPhotos = ({photos}) => {
         src={photo.url}
         key={index}
         alt={null}
-        style={{maxWidth: "130px", marginRight: "16px", border: "1px solid", marginBottom: "19px"}}
+        style={{maxWidth: "130px", marginRight: "16px", border: "1px solid", marginBottom: "19px", boxShadow: 'black 3px 1px 5px'}}
         onClick={() => {
           setImage(photo.url);
           setZoom(true);
