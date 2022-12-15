@@ -6,8 +6,8 @@ const Photo = styled.img`
   max-width: 130px;
   margin-right: 16px;
   margin-bottom: 0px;
-  border: 1px solid black;
   cursor: pointer;
+  box-shadow: 3px 1px 5px black;
 `;
 
 export default function AnswerPhotos({photos, showPModal, setShowPModal}) {

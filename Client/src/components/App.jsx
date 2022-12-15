@@ -12,6 +12,19 @@ export default function App() {
   const [product, setProduct] = useState(37318);
   const [productData, setProductData] = useState({});
   const [metaData, setMetaData] = useState({"characteristics": {}});
+  const [nightMode, setNightMode] = useState(false);
+
+  //The below function toggles the background and font color
+  useEffect(() => {
+    if(nightMode) {
+      document.body.style.backgroundColor = 'lightslategray';
+      document.body.style.color = 'white';
+    }
+    if(!nightMode){
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black';
+    }
+  }, [nightMode]);
 
   const getProductData = (productId) => {
     axios.get('/products/:product_id', {
@@ -81,7 +94,7 @@ export default function App() {
 
   return (
     <div id= 'app'>
-      <NavBar/>
+      <NavBar setNightMode={setNightMode} nightMode={nightMode}/>
       <MainView
         product={product}
         productData={productData}

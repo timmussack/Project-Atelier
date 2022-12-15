@@ -8,12 +8,12 @@ const { useState, useEffect } = react;
 const PModal = styled.div`
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
+  display: flex;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 `;
@@ -37,7 +37,10 @@ const ModalButton = styled.span`
 `;
 
 const ZoomPhoto = styled.img`
-  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  box-shadow: 3px 1px 5px black;
 `;
 
 export default function PhotoModal({ url, showPModal, setShowPModal }) {
@@ -50,8 +53,6 @@ export default function PhotoModal({ url, showPModal, setShowPModal }) {
         <PModalContent>
           <ZoomPhoto
             src={url}
-            height='80%'
-            width='80%'
             image-resolution= 'from-image'
             />
 
