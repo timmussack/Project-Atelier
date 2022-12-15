@@ -3,18 +3,22 @@ import styled from 'styled-components';
 
 const StyledAddToCart = styled.button`
 width: inherit;
-height: inherit;
+height: 65px;
 font-size: 1em;
 padding: 0.25em 1em;
-background-color: #253954;
-color: white;
+background-color: white;
+color: black;
 border: 1px solid;
+border-radius: 10px;
+box-shadow: black 3px 1px 5px;
 cursor: pointer;
-font-weight: bold;
+font-weight: 700;
 `;
 
 const StyledError = styled.strong`
 color: red;
+margin-left: 22px;
+font-size: smaller;
 `
 
 const Dropdown = ({ currentStyle }) => {
@@ -49,15 +53,16 @@ const Dropdown = ({ currentStyle }) => {
   const addToCart = (event) => {
     event.preventDefault();
     if (sizeValue === '') {
+      let element = document.getElementById('sizedropdown')
       setErrorMessage('Please select size')
-      document.getElementById('sizedropdown').setAttribute('size', Object.keys(sizeObj).length)
+      element.setAttribute('size', Object.keys(sizeObj).length);
+      element.focus()
     } else {
       console.log('Add to cart triggered');
       console.log('size:', sizeValue);
       console.log('qty:', qtyValue);
     }
   }
-
 
   const createSizeObj = () => {
     let obj = {};
@@ -104,9 +109,9 @@ const Dropdown = ({ currentStyle }) => {
         </select>
 
 
-        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}>
+        <select form="addtocartform" id="qtydropdown" value={qtyValue} onChange={(e) => handleQtyChange(e)} disabled={disabled()}  >
           {
-            disabled() ? <option data-tesid="qtyopt" value="default">-</option> : null
+            disabled() ? <option data-tesid="qtyopt" value="default" >-</option> : null
           }
 
         {

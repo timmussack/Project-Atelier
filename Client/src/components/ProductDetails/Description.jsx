@@ -5,7 +5,6 @@ const DataContainer = styled.div`
 position:relative ;
 width: 75%;
 max-width: 900px;
-margin-left: 287px;
 
 `
 
