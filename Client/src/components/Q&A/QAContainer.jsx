@@ -12,7 +12,7 @@ const { useState, useEffect } = react;
 
 const QATitle = styled.div`
   margin-top: 40px;
-  font-size: 12px;
+  font-size: 16px;
 `;
 
 const QAWrapper = styled.div`
