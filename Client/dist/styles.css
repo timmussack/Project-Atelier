@@ -152,7 +152,6 @@ input[type="radio"] {
   display: none;
 }
 
-<<<<<<< HEAD
 #stylecheckmark {
   /* position: relative; */
   width: 29px;
@@ -160,11 +159,6 @@ input[type="radio"] {
   /* top: 0px; */
   left: 51px;
   z-index: 1;
-=======
-input[type='radio']:checked + img {
-  outline: 5px solid red;
-  background: url('checkmark.png') no-repeat center center;
->>>>>>> 01d4aec9b27fdb18002914f10f410701a10191a0
 }
 
 .Dropdown {
@@ -195,10 +189,6 @@ input[type='radio']:checked + img {
 #addtocartform {
   width: 88%;
   height: 50px;
-<<<<<<< HEAD
-
-=======
->>>>>>> 01d4aec9b27fdb18002914f10f410701a10191a0
 }
 
 #thumbnailArrow {
