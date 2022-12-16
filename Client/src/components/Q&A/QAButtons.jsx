@@ -18,6 +18,8 @@ const MoreAnsweredQs = styled.button`
   font-weight: 700;
   box-shadow: black 3px 1px 5px;
   font-weight: bold;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const AddQuestion = styled.button`
@@ -31,6 +33,8 @@ const AddQuestion = styled.button`
   font-weight: 700;
   box-shadow: black 3px 1px 5px;
   font-weight: bold;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ, QAs, nightMode}) {

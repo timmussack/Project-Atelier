@@ -34,6 +34,8 @@ const ModalButton = styled.span`
   font-size: 40px;
   font-weight: bold;
   cursor: pointer;
+  transition: transform 250ms;
+  :hover { transform: scale(1.15); }
 `;
 
 const ZoomPhoto = styled.img`

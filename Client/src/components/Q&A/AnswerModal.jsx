@@ -34,11 +34,13 @@ const ModalButton = styled.button`
   border: 2px solid #253954;;
   height: 40px;
   width: 20%;
-  margin: 15px 10px 10px 0px;
+  margin: 15px 6px 10px 4px;
   cursor: pointer;
   border-radius: 10px;
   font-weight: 700;
   box-shadow: black 3px 1px 5px;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const ModalForm = styled.form`
@@ -55,6 +57,7 @@ const ImageInput = styled.input`
   width: 0.1px;
   height: 0.1px;
   position: absolute;
+  :hover { transform: scale(1.05); }
 `;
 
 const ImageLabel = styled.label`
@@ -65,6 +68,7 @@ const ImageLabel = styled.label`
   margin: 5px 5px 5px 0px;
   cursor: pointer;
   box-shadow: black 3px 1px 5px;
+  :hover { transform: scale(1.05); }
 `;
 
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers, nightMode }) {
