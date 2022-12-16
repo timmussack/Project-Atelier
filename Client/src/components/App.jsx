@@ -11,7 +11,7 @@ export default function App() {
   const [avgRating, setAvgRating] = useState(0);
   const [product, setProduct] = useState(37318);
   const [productData, setProductData] = useState({});
-  const [metaData, setMetaData] = useState({"characteristics": {}});
+  const [metaData, setMetaData] = useState({"characteristics": {}, "ratings":{}});
   const [nightMode, setNightMode] = useState(false);
 
   //The below function toggles the background and font color
@@ -48,7 +48,6 @@ export default function App() {
       },
     })
     .then((response) => {
-      //console.log('Successful request for meta data');
       setMetaData(response.data);
     })
     .catch((error) => {

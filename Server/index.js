@@ -303,7 +303,7 @@ app.post('/reviews', (req, res) => {
       headers: {Authorization: `${key}`},
       data: {
         product_id: product_id,
-        characteristics: characteristics,
+        characteristics: {},
         body:body ,
         rating: rating,
         recommend: recommend,

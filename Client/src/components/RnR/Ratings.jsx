@@ -6,18 +6,28 @@ import BreakdownArrowChart from './charts/BreakdownArrowChart.jsx';
 
 const Formatting = styled.div`
   font-size: 14px;
-  width: 350px;
+  width: 430px;
   margin-right: 100px;
-  display: flex-column;
 `;
 const LargeRating = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 10px;
   font-size: 70px;
   font-weight: bold;
+  height: 10%;
 `
+const RatingAndStars = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const PercentRecc = styled.div`
   padding-bottom: 1em;
 `
-const Ratings = ({ rating, reviews, metaData }) => {
+const Ratings = ({ rating, reviews, metaData, setReviews, product }) => {
   const recommendOrNah = (reviewData) => {
     let recommended = 0;
 
@@ -32,10 +42,18 @@ const Ratings = ({ rating, reviews, metaData }) => {
 
   return (
   <Formatting>
-    <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 })}<Stars rating={rating}/></LargeRating>
+    <RatingAndStars>
+      <LargeRating>{rating.toLocaleString(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 })}</LargeRating>
+      <Stars rating={rating}/>
+    </RatingAndStars>
     <PercentRecc>{recommendOrNah(reviews)}% of reviews recommended this product</PercentRecc>
+    <hr/>
+    RATING BREAKDOWN
+    <br/>
+    <BreakdownBarChart metaData={metaData.ratings} reviews={reviews} setReviews={setReviews} product={product}/>
+    <br/>
+    PRODUCT BREAKDOWN
     <BreakdownArrowChart metaData={metaData.characteristics}/>
-    <BreakdownBarChart metaData={metaData}/>
   </Formatting>
 )};
 
