@@ -265,3 +265,11 @@ input[type="radio"] {
   width: 30px;
 }
 /* End NightMode Switch Style */
+
+#atcwidth {
+  width: 550px;
+}
+
+#transitionback {
+  width: 0px;
+}
