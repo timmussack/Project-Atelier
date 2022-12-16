@@ -71,9 +71,9 @@ const Dropdown = ({ currentStyle }) => {
         .then((response) => {
           setAddedToCart(true);
           setTimeout(() => {
-            setSizeValue('');
+            setAddedToCart(false);
+            // setSizeValue('');
             setQtyValue('default');
-            // setAddedToCart(false)
           }, 5000)
           console.log('Succesfuly Add To Cart')
         })

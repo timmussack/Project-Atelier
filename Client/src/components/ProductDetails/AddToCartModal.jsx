@@ -85,7 +85,7 @@ const AddToCartModal = ({ addedToCart, currentStyle, sizeValue, qtyValue, sizeOb
             <DetailContainer>
               <strong>{currentStyle.name}</strong>
               <a>${currentStyle.sale_price ? currentStyle.sale_price : currentStyle.original_price}</a>
-              <a>Size: {sizeValue && currentStyle.skus[sizeValue]['size']}</a>
+              <a>Size: {sizeValue && currentStyle.skus[sizeValue] && currentStyle.skus[sizeValue]['size']}</a>
               <a>Quantity: {qtyValue === 'default' ? '1' : qtyValue}</a>
             </DetailContainer>
             <Divider/>
