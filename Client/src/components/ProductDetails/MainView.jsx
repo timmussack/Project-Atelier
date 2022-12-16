@@ -29,7 +29,17 @@ const MainView = ({ product, productData, reviewMeta, rating}) => {
 
 
   const listen = (e) => {
-    console.log('This element was clicked')
+    const clickTime = new Date();
+    axios.post('/interactions', {
+      element: e.target.outerHTML,
+      time: clickTime,
+      widget: 'Product Overview'
+    })
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.log(error, 'Error in client from Product Overview interaction post request');
+      });
   }
 
 
