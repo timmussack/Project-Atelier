@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Stars from '../RnR/Stars.jsx';
 import Dropdown from './Dropdown.jsx';
 
+
 const SocialDiv = styled.div`
 display: flex;
 flex-flow: row wrap;
