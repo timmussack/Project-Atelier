@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 const DataContainer = styled.div`
 position:relative ;
-width: 75%;
-max-width: 900px;
+align-self: center
 
 `
 
