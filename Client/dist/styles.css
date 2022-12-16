@@ -278,11 +278,7 @@ input[type="radio"] {
 /* End NightMode Switch Style */
 
 #atcwidth {
-  width: 550px;
-}
-
-#transitionback {
-  width: 0px;
+  transform: translateX(-591px);
 }
 
   /* Designing for scroll-bar */

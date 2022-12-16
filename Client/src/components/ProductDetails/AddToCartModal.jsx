@@ -2,18 +2,6 @@ import react from 'react';
 import styled from 'styled-components';
 
 
-const ATCModal = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  z-index: 1;
-  top: 25vh;
-  width: 0px;
-  right: 0px;
-  overflow: auto;
-  transition: width 1.5s ease-in-out 0s;
-  box-shadow: black 3px 1px 5px;
-`;
 
 const ATCContent = styled.div`
   background-color: #fefefe;
@@ -23,7 +11,13 @@ const ATCContent = styled.div`
   width: 550px;
   height: 25vh;
   border-radius: 10px;
-  /* transition: width 2s ease-in-out 0s; */
+  position: fixed;
+  top: 25vh;
+  right: 0px;
+  translate: 100%;
+  transition: transform 2s ease-in-out;
+  box-shadow: black 3px 1px 5px;
+  z-index: 1;
 `;
 
 const ContentContainer = styled.div`
@@ -77,8 +71,8 @@ const AddToCartModal = ({ addedToCart, currentStyle, sizeValue, qtyValue, sizeOb
   return (
   <>
     { currentStyle.photos &&
-      <ATCModal id={addedToCart ? 'atcwidth' : ''}>
-        <ATCContent >
+      // <ATCModal >
+        <ATCContent id={addedToCart ? 'atcwidth' : ''}>
         <StyledTitle>SUCCESFULLY ADDED TO BAG!</StyledTitle>
           <ContentContainer>
             <CartImage src={currentStyle.photos[0].thumbnail_url}/>
@@ -110,7 +104,7 @@ const AddToCartModal = ({ addedToCart, currentStyle, sizeValue, qtyValue, sizeOb
             </TotalCostContainer>
           </ContentContainer>
         </ATCContent>
-      </ATCModal>
+      // </ATCModal>
     }
   </>
 
