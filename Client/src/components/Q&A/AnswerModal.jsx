@@ -57,7 +57,6 @@ const ImageInput = styled.input`
   width: 0.1px;
   height: 0.1px;
   position: absolute;
-  :hover { transform: scale(1.05); }
 `;
 
 const ImageLabel = styled.label`
@@ -68,7 +67,6 @@ const ImageLabel = styled.label`
   margin: 5px 5px 5px 0px;
   cursor: pointer;
   box-shadow: black 3px 1px 5px;
-  :hover { transform: scale(1.05); }
 `;
 
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers, nightMode }) {
