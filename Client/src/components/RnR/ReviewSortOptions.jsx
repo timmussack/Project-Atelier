@@ -11,7 +11,9 @@ const DropdownMenu = styled.select`
   text-decoration: underline;
   font-size: 16px;
   font-weight: bold;
+  font-family: Jost;
 `;
+
 const ReviewSortOptions = ({ reviews, optionHandler }) => {
 
   return (

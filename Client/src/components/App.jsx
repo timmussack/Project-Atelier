@@ -48,7 +48,6 @@ export default function App() {
       },
     })
     .then((response) => {
-      console.log('Successful request for meta data', response.data);
       setMetaData(response.data);
     })
     .catch((error) => {
