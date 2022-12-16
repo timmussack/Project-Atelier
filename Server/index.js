@@ -357,6 +357,24 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/dist', 'Index.html'))
 })
 
+app.post('/cart', (req, res) => {
+  const { sku_id } = req.body;
+  axios({
+    method: 'post',
+    url: `${url}cart`,
+    data: {
+      sku_id: sku_id
+    },
+    headers: {Authorization: `${key}`}
+  })
+    .then((response) => {
+      response.status === 201 ?
+      res.status(201).send('Succesful Add To Cart')
+      : null;
+    })
+    .catch((err) => {throw err})
+})
+
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

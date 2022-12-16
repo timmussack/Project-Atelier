@@ -1,5 +1,7 @@
 import {React, useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import AddToCartModal from './AddToCartModal.jsx';
 
 const StyledAddToCart = styled.button`
 width: inherit;
@@ -26,7 +28,8 @@ const Dropdown = ({ currentStyle }) => {
   const [qtyValue, setQtyValue] = useState('default');
   const [sizeObj, setSizeObj] = useState({});
   const [qtyLength, setQtylength] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
+  const [addedToCart, setAddedToCart] = useState(false);
 
 
   const handleSizeChange = (e) => {
@@ -58,9 +61,23 @@ const Dropdown = ({ currentStyle }) => {
       element.setAttribute('size', Object.keys(sizeObj).length);
       element.focus()
     } else {
-      console.log('Add to cart triggered');
-      console.log('size:', sizeValue);
-      console.log('qty:', qtyValue);
+      axios({
+        method: 'post',
+        url: `/cart`,
+        data: {
+          sku_id: sizeValue
+        }
+      })
+        .then((response) => {
+          setAddedToCart(true);
+          setTimeout(() => {
+            setAddedToCart(false);
+            // setSizeValue('');
+            setQtyValue('default');
+          }, 5000)
+          console.log('Succesfuly Add To Cart')
+        })
+        .catch((err) => console.log('error in atc', err.response.data.message))
     }
   }
 
@@ -83,16 +100,23 @@ const Dropdown = ({ currentStyle }) => {
     if (Object.keys(currentStyle).length > 0 ) {
       createSizeObj();
       setSizeValue('');
-      setQtyValue('default')
+      setQtyValue('default');
     }
   }, [currentStyle])
 
 
   return (
   <>
-    {
+
+      <AddToCartModal
+        addedToCart={addedToCart}
+        currentStyle={currentStyle}
+        sizeValue={sizeValue}
+        qtyValue={qtyValue}
+        sizeObj={sizeObj}
+      />
+
       <StyledError data-testid='errortest'>{errorMessage}</StyledError>
-    }
     { (currentStyle.original_price || Object.keys(sizeObj).length > 0) &&
       <div className="Dropdown" data-testid="dropdowntest">
         <select data-testid='sizedropdowntest' form="addtocartform" id="sizedropdown" value={sizeValue} onChange={(e) => handleSizeChange(e)}>
