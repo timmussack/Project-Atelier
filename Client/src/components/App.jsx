@@ -17,8 +17,8 @@ export default function App() {
   //The below function toggles the background and font color
   useEffect(() => {
     if(nightMode) {
-      document.body.style.backgroundColor = 'lightslategray';
-      document.body.style.color = 'white';
+      document.body.style.backgroundColor = '#404258';
+      document.body.style.color = '#DCD7C9';
     }
     if(!nightMode){
       document.body.style.backgroundColor = 'white';

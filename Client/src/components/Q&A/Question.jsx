@@ -218,7 +218,7 @@ export default function Question( { QA, product, productData, getQAs, nightMode 
         </Answers>
       </AnswerWrapper>
 
-      {answers.length > 2 ? <LoadMoreAnswers style={nightMode ? {color: 'white'} : {color: 'black'}} onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
+      {answers.length > 2 ? <LoadMoreAnswers style={nightMode ? {color: '#DCD7C9'} : {color: 'black'}} onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
       <AnswerModal nightMode={nightMode} QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>

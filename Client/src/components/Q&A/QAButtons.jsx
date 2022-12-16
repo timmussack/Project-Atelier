@@ -22,7 +22,6 @@ const MoreAnsweredQs = styled.button`
 
 const AddQuestion = styled.button`
   font-family: 'Jost', sans-serif;
-  background-color: white;
   color: black;
   height: 50px;
   border: 2px solid #253954;
@@ -34,7 +33,7 @@ const AddQuestion = styled.button`
   font-weight: bold;
 `;
 
-export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ, QAs }) {
+export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoadMoreQ, QAs, nightMode}) {
   const [showMore, setShowMore] = useState(false);
 
   const handleMoreAnsweredQs = () => {
@@ -47,9 +46,9 @@ export default function QAButton( { showQModal, setShowQModal, loadMoreQ, setLoa
 
   return (
     <div>
-      {QAs.length > 2 ? <MoreAnsweredQs data-testid='moreQuestionsButton' onClick={()=> handleMoreAnsweredQs()}>{buttonText}</MoreAnsweredQs> : null}
+      {QAs.length > 2 ? <MoreAnsweredQs style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}}data-testid='moreQuestionsButton' onClick={()=> handleMoreAnsweredQs()}>{buttonText}</MoreAnsweredQs> : null}
 
-      <AddQuestion data-testid='addQuestionButton'  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
+      <AddQuestion style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} data-testid='addQuestionButton'  onClick={()=> setShowQModal(!showQModal)}>ADD A QUESTION +</AddQuestion>
     </div>
   )
 };

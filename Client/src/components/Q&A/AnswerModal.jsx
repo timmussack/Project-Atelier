@@ -22,7 +22,7 @@ const AModalContent = styled.div`
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid;
+  border: 2px solid;
   width: 50%;
   border-radius: 10px;
 `;
@@ -31,10 +31,10 @@ const ModalButton = styled.button`
   font-family: 'Jost', sans-serif;
   background-color: white;
   color: black;
-  border: 2px solid;
+  border: 2px solid #253954;;
   height: 40px;
   width: 20%;
-  margin: 10px 10px 10px 0px;
+  margin: 15px 10px 10px 0px;
   cursor: pointer;
   border-radius: 10px;
   font-weight: 700;
@@ -48,6 +48,23 @@ const ModalForm = styled.form`
 
 const Note = styled.p`
   font-size: 12px;
+`;
+
+const ImageInput = styled.input`
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+`;
+
+const ImageLabel = styled.label`
+  font-family: 'Jost', sans-serif;
+  border: 2px solid;
+  border-radius: 7px;
+  padding: 0px 15px;
+  margin: 5px 5px 5px 0px;
+  cursor: pointer;
+  box-shadow: black 3px 1px 5px;
 `;
 
 export default function AnswerModal({ productData, product, showAModal, setShowAModal, QA, getAnswers, nightMode }) {
@@ -107,7 +124,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
     modalContent = (
       <AModal>
 
-        <AModalContent style={nightMode ? {backgroundColor: 'lightslategray'} : {backgroundColor: 'white'}}>
+        <AModalContent style={nightMode ? {backgroundColor: '#404258'} : {backgroundColor: 'white'}}>
 
           <h3 style={{'margin-left': '7.5%'}}>Submit your answer</h3>
 
@@ -121,7 +138,7 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
 
             <label>
               <div> Your Answer* </div>
-              <textarea maxLength='1000' type='text' value={answer} style={{width: '90%', height: '100px'}} onChange={e => {
+              <textarea maxLength='1000' type='text' value={answer} style={{width: '90%', height: '50px'}} onChange={e => {
               setAnswer(e.target.value)
               }} required> </textarea>
             </label>
@@ -144,32 +161,47 @@ export default function AnswerModal({ productData, product, showAModal, setShowA
 
             <Note>For authentication reasons, you will not be emailed.</Note>
 
-            <label>
-            <div> You can upload up to 5 images </div>
-              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
-              uploadPhoto(URL.createObjectURL(event.target.files[0]));
-              }} />
-              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
-              uploadPhoto(URL.createObjectURL(event.target.files[0]));
-              }} />
-              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
-              uploadPhoto(URL.createObjectURL(event.target.files[0]));
-              }} />
-              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
-              uploadPhoto(URL.createObjectURL(event.target.files[0]));
-              }} />
-              <input type='file' name='files[]' accept="image/png, image/jpeg" style={{width: '90%'}} onChange={event => {
-              uploadPhoto(URL.createObjectURL(event.target.files[0]));
-              }} />
-            </label>
+            <div style={{marginBottom: '10px'}}> Image upload (PNG, JPEG) </div>
 
             <div>
-              <ModalButton type='submit'> Submit </ModalButton>
+              <ImageLabel style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} for='img1'> {imageURL[0] ? '1 Ready' : 'Select'}
+              <ImageInput id='img1' type='file' name='files[]' accept="image/png, image/jpeg" onChange={event => {
+                uploadPhoto(URL.createObjectURL(event.target.files[0]));
+                }} />
+              </ImageLabel>
 
-              <ModalButton onClick={() => {
+              {imageURL[0] ? <ImageLabel style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} for='img2'> {imageURL[1] ? '2 Ready' : 'Select'}
+              <ImageInput id='img2' type='file' name='files[]' accept="image/png, image/jpeg" onChange={event => {
+                uploadPhoto(URL.createObjectURL(event.target.files[0]));
+                }} />
+              </ImageLabel> : null}
+
+              {imageURL[1] ? <ImageLabel style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} for='img3'> {imageURL[2] ? '3 Ready' : 'Select'}
+              <ImageInput id='img3' type='file' name='files[]' accept="image/png, image/jpeg" onChange={event => {
+                uploadPhoto(URL.createObjectURL(event.target.files[0]));
+                }} />
+              </ImageLabel> : null}
+
+              {imageURL[2] ? <ImageLabel style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} for='img4'> {imageURL[3] ? '4 Ready' : 'Select'}
+              <ImageInput id='img4' type='file' name='files[]' accept="image/png, image/jpeg" onChange={event => {
+                uploadPhoto(URL.createObjectURL(event.target.files[0]));
+                }} />
+              </ImageLabel> : null}
+
+              {imageURL[3] ? <ImageLabel style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} for='img3'> {imageURL[4] ? '5 Ready' : 'Select'}
+              <ImageInput id='img3' type='file' name='files[]' accept="image/png, image/jpeg" onChange={event => {
+                uploadPhoto(URL.createObjectURL(event.target.files[0]));
+                }} />
+              </ImageLabel> : null}
+            </div>
+
+            <div>
+              <ModalButton style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} type='submit'> Submit </ModalButton>
+
+              <ModalButton style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} onClick={() => {
                 setShowAModal(!showAModal)
+                setImageURL([]);
               }}> Close </ModalButton>
-
             </div>
 
           </ModalForm>

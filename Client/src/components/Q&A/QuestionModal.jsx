@@ -22,16 +22,14 @@ const QModalContent = styled.div`
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid;
+  border: 2px solid;
   width: 50%;
   border-radius: 10px;
 `;
 
 const ModalButton = styled.button`
   font-family: 'Jost', sans-serif;
-  background-color: white;
-  color: black;
-  border: 2px solid;
+  border: 2px solid #253954;;
   height: 40px;
   width: 20%;
   margin: 10px 10px 10px 0px;
@@ -76,7 +74,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
     modalContent = (
       <QModal>
 
-        <QModalContent style={nightMode ? {backgroundColor: 'lightslategray'} : {backgroundColor: 'white'}}>
+        <QModalContent style={nightMode ? {backgroundColor: '#404258'} : {backgroundColor: 'white'}}>
 
           <h3 style={{'margin-left': '7.5%'}}>Ask Your Question</h3>
 
@@ -91,7 +89,7 @@ export default function QuestionModal({ productData, product, showQModal, setSho
 
             <label>
               <div> Your question* </div>
-              <textarea maxLength='1000' type='text' value={question} style={{width: '90%', height: '200px'}} onChange={e => {
+              <textarea maxLength='1000' type='text' value={question} style={{width: '90%', height: '50px'}} onChange={e => {
               setQuestion(e.target.value)
               }} required> </textarea>
             </label>
@@ -114,13 +112,13 @@ export default function QuestionModal({ productData, product, showQModal, setSho
 
             <Note>For authentication reasons, you will not be emailed.</Note>
 
-          <ModalButton type="submit"> Submit </ModalButton>
+            <ModalButton style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} type="submit"> Submit </ModalButton>
 
-          <ModalButton onClick={() => {
+            <ModalButton style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}} onClick={() => {
             setShowQModal(!showQModal)
-          }}> Close </ModalButton>
+            }}> Close </ModalButton>
 
-        </ModalForm>
+          </ModalForm>
 
         </QModalContent>
 
