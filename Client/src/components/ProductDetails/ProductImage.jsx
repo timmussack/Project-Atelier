@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Stars from '../RnR/Stars.jsx';
 import Dropdown from './Dropdown.jsx';
 
+
 const SocialDiv = styled.div`
 display: flex;
 flex-flow: row wrap;
@@ -203,6 +204,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   return (
     <div className="container" data-testid='carousel'>
       <div className="left" style={ isExpanded ? {cursor: 'zoom-out'}: {}}>
+        <div className="left_2" id={isExpanded ? 'expandedview' : ''}>
         <div className="left_1">
           {
             thumbnailArray.length && photoIndex !== 0 &&
@@ -264,7 +266,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
             </div>
           }
         </div>
-        <div className="left_2" id={isExpanded ? 'expandedview' : ''}>
+
           {
             photoIndex !== 0 &&
             <FaAngleLeft
