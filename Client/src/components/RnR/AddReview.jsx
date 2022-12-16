@@ -40,12 +40,12 @@ const AddReview = ({ display, reviews, metaData, rating, displayHandler, product
         <div>
           <MoreReviews onClick={() => displayHandler()}>MORE REVIEWS</MoreReviews>
           <AddReviewButton onClick={() => setShowAddReview(!showAddReview)}>ADD A REVIEW +</AddReviewButton>
-          <NewReviewModal showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
+          <NewReviewModal metaData={metaData} showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
         </div>
       ) : (
         <div>
           <AddReviewButton onClick={() => setShowAddReview(!showAddReview)}>ADD A REVIEW +</AddReviewButton>
-          <NewReviewModal showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
+          <NewReviewModal metaData={metaData} showAddReview={showAddReview} setShowAddReview={setShowAddReview} product={product} productData={productData}/>
         </div>
       ) }
     </div>

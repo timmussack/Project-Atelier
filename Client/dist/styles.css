@@ -285,6 +285,29 @@ input[type="radio"] {
   width: 0px;
 }
 
+  /* Designing for scroll-bar */
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: gainsboro;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(180, 180, 180);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @media (max-width: 450px) {
   .mainimage {
     width: 100vw;

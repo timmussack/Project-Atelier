@@ -1,66 +1,14 @@
 import styled, { css } from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { RModal, RModalContent, ModalButton, ModalSubmitButton, ModalForm, ModalTitles } from './ModalStyling';
+import { CharButtons, CharContainer } from './ModalStyling';
+import { ImageLabel, ImageInput } from './ModalStyling';
+
 import axios from 'axios';
 import Stars from '../Stars.jsx'
 import NewReviewThumbnail from './NewReviewThumbnail.jsx';
 
-const RModal = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-`;
-
-const RModalContent = styled.div`
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid black;
-  width: 50%;
-`;
-
-const ModalButton = styled.button`
-  background-color: #253954;
-  color: white;
-  border: 1px solid;
-  height: 40px;
-  width: 20%;
-  margin-right: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-weight: bold;
-`;
-
-const ModalSubmitButton = styled.input`
-  background-color: #253954;
-  color: white;
-  border: 1px solid;
-  height: 40px;
-  width: 20%;
-  margin-right: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-weight: bold;
-`;
-const ModalForm = styled.form`
-  overflow: auto;
-`;
-
-const ModalTitles = styled.div`
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
-export default function NewReviewModal({ showAddReview, setShowAddReview, product, productData }) {
+export default function NewReviewModal({ showAddReview, metaData, setShowAddReview, product, productData }) {
   const [userReview, setUserReview] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [reccomend, setReccomend] = useState(false);
@@ -71,13 +19,36 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
   const [chars, setChars] = useState({});
   const [thumbnails, setThumbnails] = useState([]);
 
+  const characteristicsHandler = (characteristic, id) => {
+    return (
+      <>
+      <ModalTitles>Describe the {characteristic.toLowerCase()}</ModalTitles>
+      <CharContainer>
+        {[1, 2, 3, 4 ,5].map((num, index) => {
+          return (
+              <CharButtons key={index} onClick={(e) => {
+                let newCharObj = chars;
+                newCharObj[id.toString()] = num
+                setChars(newCharObj)
+                console.log(chars)
+              }}>
+                <input type="radio" name='characteristics' value={num}/>{num}
+              </CharButtons>
+          )
+        })}
+      </CharContainer>
+      </>
+    )
+  }
+
   const postReviewHandler = (response) => {
+    console.log('post', chars)
     let newPhotos = [];
     const newUrlArr = response.forEach(object => newPhotos.push(object.Location));
     axios.post('/reviews', {
       product_id: product,
       body: userReview,
-      characteristics: {},
+      characteristics: chars,
       rating: reviewRating,
       recommend: reccomend,
       name: nickname,
@@ -88,6 +59,7 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
     .then((res) => {
       console.log('success', res);
     })
+    setShowAddReview(!showAddReview);
   };
 
   const thumbnailHandler = (file) => {
@@ -136,15 +108,15 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
     return (
       <RModal>
         <RModalContent>
-          <h2>Write Your Review</h2>
-          <h4>About the {productData.name}</h4>
           <ModalForm enctype="multipart/form-data" onSubmit={(e) => {
             photoUploadHandler(e).then((response) => postReviewHandler(response)).then(() => setShowAddReview(!showAddReview));
           }}>
+          <h1>Write Your Review</h1>
+          <h3>About the {productData.name}</h3>
 
             <label>
             <ModalTitles>Overall Rating</ModalTitles>
-            <Stars rating={reviewRating} selectable={true} setReviewRating={setReviewRating} reviewRating={reviewRating}/>
+            <Stars rating={reviewRating} selectable={true} setReviewRating={setReviewRating} />
             </label>
 
             <label>
@@ -156,6 +128,11 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
                 <input required type="radio" value="no" onClick={() => setReccomend(false)}/>No
               </ModalButton>
             </label>
+
+
+              {Object.keys(metaData.characteristics).map((characteristic) =>
+                characteristicsHandler(characteristic, metaData.characteristics[characteristic].id)
+              )}
 
             <label>
               <ModalTitles>Summary</ModalTitles>
@@ -172,15 +149,15 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
               ) }
             </label>
 
-            <label>
-              <ModalTitles>Upload Your Photos</ModalTitles>
-              <input type="file" name="images" accept="image/*" multiple onChange={(e) => {fileChangeHandler(e); thumbnailHandler(e.target.files[0])}}/>
-              <NewReviewThumbnail thumbnails={thumbnails} setThumbnails={setThumbnails}/>
-            </label>
+            <ModalTitles>Upload Your Photos</ModalTitles>
+            <ImageLabel style={{backgroundColor: 'white', color: 'black'}}>Click Here to Upload!
+              <ImageInput type="file" name="images" accept="image/*" multiple onChange={(e) => {fileChangeHandler(e)}}/>
+            </ImageLabel>
+            <NewReviewThumbnail thumbnails={thumbnails} setThumbnails={setThumbnails} onChange={(e) => thumbnailHandler(e.target.files[0])}/>
 
             <label>
               <ModalTitles>Your Nickname</ModalTitles>
-              <input name="name" type="text" maxLength="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)} required/>
+              <input id='img1' name="name" type="text" maxLength="60" placeholder="Example: jackson11!" onChange={e => setNickname(e.target.value)} required/>
               <p style={{fontSize: '12px'}}>For privacy reasons, do not use your full name or email address</p>
             </label>
 
@@ -190,8 +167,8 @@ export default function NewReviewModal({ showAddReview, setShowAddReview, produc
               <p style={{fontSize: '12px'}}>For authentication reasons, you will not be emailed</p>
             </label>
 
-          <ModalSubmitButton type="submit" value="Submit Review" name="submit"/>
-          <ModalButton onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
+            <ModalSubmitButton type="submit" value="Submit Review" name="submit"/>
+            <ModalButton onClick={() => setShowAddReview(!showAddReview)}>Cancel Review</ModalButton>
           </ModalForm>
          </RModalContent>
       </RModal>
