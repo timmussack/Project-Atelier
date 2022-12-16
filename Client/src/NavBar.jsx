@@ -36,7 +36,7 @@ const SearchBar = styled.input`
 `
 
 const Logo = styled.img`
-  font-size: 2em;
+  font-size: 1em;
   margin-left: 10px;
 `
 

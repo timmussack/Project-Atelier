@@ -13,6 +13,9 @@ export const BarBackground = styled.div`
 export const BarForeground = styled.div`
     width: 40%;
     color: rgb(54, 54, 54);
+    display: inline-flex;
+    justify-content: center;
+    align-items: self-end;
 `;
 
 export const BarContainer = styled.div`

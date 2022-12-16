@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DataContainer = styled.div`
-position:relative ;
-align-self: center
-
-`
+  position:relative ;
+  align-self: center;
+`;
 
 const Description = ({ productData }) => {
 

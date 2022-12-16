@@ -1,31 +1,15 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { SortOptionsFormatting, DropdownMenu } from './RnRStyling';
 
-const Formatting = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 35px;
-`;
-const DropdownMenu = styled.select`
-  border: none;
-  text-decoration: underline;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Jost;
-`;
-
-const ReviewSortOptions = ({ reviews, optionHandler }) => {
-
+export default function ReviewSortOptions({ reviews, optionHandler }) {
   return (
-    <Formatting>
-      {reviews.length} reviews, sorted by
-      <DropdownMenu onChange={(e) => optionHandler(e)}>
-        <option value='relevant'>relevance</option>
-        <option value='helpful'>helpful</option>
-        <option value='newest'>newest</option>
-      </DropdownMenu>
-    </Formatting>
+    <SortOptionsFormatting>
+    {reviews.length} reviews, sorted by
+    <DropdownMenu onChange={(e) => optionHandler(e)}>
+      <option value='relevant'>relevance</option>
+      <option value='helpful'>helpful</option>
+      <option value='newest'>newest</option>
+    </DropdownMenu>
+  </SortOptionsFormatting>
   )
 }
-
-export default ReviewSortOptions;
