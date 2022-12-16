@@ -8,6 +8,8 @@ const Photo = styled.img`
   margin-bottom: 0px;
   cursor: pointer;
   box-shadow: 3px 1px 5px black;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 export default function AnswerPhotos({photos, showPModal, setShowPModal}) {

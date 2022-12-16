@@ -32,6 +32,8 @@ const Yes = styled.div`
   padding-right: 5px;
   text-decoration: underline;
   cursor: pointer;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const Votes = styled.div`
@@ -45,6 +47,9 @@ const Spacer1 = styled.div`
 const AddAnswer = styled.div`
   text-decoration: underline;
   cursor: pointer;
+  margin-right: 3px;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const AnswerWrapper = styled.div`
@@ -73,6 +78,8 @@ const LoadMoreAnswers = styled.button`
   border: none;
   cursor: pointer;
   margin: 0px 0px 12px 16px;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const NoAnswers = styled.div`
@@ -89,6 +96,8 @@ const ReportQuestion = styled.div`
   padding-right: 8px;
   text-decoration: underline;
   cursor: pointer;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 export default function Question( { QA, product, productData, getQAs, nightMode }) {
@@ -218,7 +227,7 @@ export default function Question( { QA, product, productData, getQAs, nightMode 
         </Answers>
       </AnswerWrapper>
 
-      {answers.length > 2 ? <LoadMoreAnswers style={nightMode ? {color: 'white'} : {color: 'black'}} onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
+      {answers.length > 2 ? <LoadMoreAnswers style={nightMode ? {color: '#DCD7C9'} : {color: 'black'}} onClick={() => handleShowMore()}>{buttonText}</LoadMoreAnswers> : null}
 
       <AnswerModal nightMode={nightMode} QA={QA} product={product} productData={productData} showAModal={showAModal} setShowAModal={setShowAModal} getAnswers={getAnswers}/>
     </>

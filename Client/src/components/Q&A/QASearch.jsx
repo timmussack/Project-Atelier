@@ -18,7 +18,7 @@ const Form = styled.form`
   background: white;
 `;
 
-export default function Search( { handleSearch, product, getQAs, searchTerm, setSearchTerm } ) {
+export default function Search( { handleSearch, product, getQAs, searchTerm, setSearchTerm, nightMode } ) {
 
   const styleIcon = {
     "paddingTop": "13px",
@@ -29,8 +29,11 @@ export default function Search( { handleSearch, product, getQAs, searchTerm, set
   return (
     <Form onSubmit={(e) => {
       e.preventDefault();
-    }}>
+    }}
+    style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}}
+    >
         <SearchBar
+          style={nightMode ? {backgroundColor: '#253954', color: '#DCD7C9'} : {backgroundColor: 'white', color: 'black'}}
           data-testid='qaSearch'
           id='search'
           type='text'

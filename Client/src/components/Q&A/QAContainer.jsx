@@ -16,9 +16,10 @@ const QATitle = styled.div`
 `;
 
 const QAWrapper = styled.div`
-  position:relative ;
-  width: 60vw;
-  margin: 0 auto;
+  position: relative;
+  width: 1200px;
+  margin: auto;
+  align-self: center;
   padding-bottom: 40px;
 `;
 
@@ -76,6 +77,7 @@ export default function QAContainer( { product, productData, nightMode } ) {
   };
 
   return (
+    <div style={{width: '100%'}}>
     <QAWrapper id='QA'>
       <QATitle data-testid='qaTitle'>
         QUESTIONS & ANSWERS
@@ -89,5 +91,6 @@ export default function QAContainer( { product, productData, nightMode } ) {
 
       <QAButtons QAs={QAs} loadMoreQ={loadMoreQ} setLoadMoreQ={setLoadMoreQ} showQModal={showQModal} setShowQModal={setShowQModal} nightMode={nightMode}/>
     </QAWrapper>
+    </div>
   );
 };

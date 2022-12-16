@@ -40,6 +40,8 @@ const Yes = styled.div`
   padding-right: 5px;
   text-decoration: underline;
   cursor: pointer;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const Votes = styled.div`
@@ -57,6 +59,8 @@ const Spacer2 = styled.div`
 const ReportAnswer = styled.div`
   text-decoration: underline;
   cursor: pointer;
+  :hover { transform: scale(1.05); }
+  transition: transform 250ms;
 `;
 
 const APhotos = styled.div`
