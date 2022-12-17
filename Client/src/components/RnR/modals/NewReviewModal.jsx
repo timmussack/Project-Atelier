@@ -21,23 +21,23 @@ export default function NewReviewModal({ showAddReview, metaData, setShowAddRevi
 
   const characteristicsHandler = (characteristic, id) => {
     return (
-      <>
-      <ModalTitles>Describe the {characteristic.toLowerCase()}</ModalTitles>
-      <CharContainer>
-        {[1, 2, 3, 4 ,5].map((num, index) => {
-          return (
-              <CharButtons key={index} onClick={(e) => {
-                let newCharObj = chars;
-                newCharObj[id.toString()] = num
-                setChars(newCharObj)
-                console.log(chars)
-              }}>
-                <input type="radio" name='characteristics' value={num}/>{num}
-              </CharButtons>
-          )
-        })}
-      </CharContainer>
-      </>
+      <React.Fragment>
+        <ModalTitles>Describe the {characteristic.toLowerCase()}</ModalTitles>
+        <CharContainer>
+          {[1, 2, 3, 4 ,5].map((num, index) => {
+            return (
+                <CharButtons key={index} onClick={(e) => {
+                  let newCharObj = chars;
+                  newCharObj[id.toString()] = num
+                  setChars(newCharObj)
+                  console.log(chars)
+                }}>
+                  <input type="radio" name='characteristics' value={num}/>{num}
+                </CharButtons>
+            )
+          })}
+        </CharContainer>
+      </React.Fragment>
     )
   }
 
@@ -121,18 +121,19 @@ export default function NewReviewModal({ showAddReview, metaData, setShowAddRevi
 
             <label>
               <ModalTitles>Would You Reccomend This Product?</ModalTitles>
+            </label>
               <ModalButton>
                 <input required type="radio" value="yes" onClick={() => setReccomend(true)}/>Yes
               </ModalButton>
               <ModalButton>
                 <input required type="radio" value="no" onClick={() => setReccomend(false)}/>No
               </ModalButton>
-            </label>
 
-
-              {Object.keys(metaData.characteristics).map((characteristic) =>
-                characteristicsHandler(characteristic, metaData.characteristics[characteristic].id)
-              )}
+              <React.Fragment>
+                {Object.keys(metaData.characteristics).map((characteristic) =>
+                  characteristicsHandler(characteristic, metaData.characteristics[characteristic].id)
+                )}
+              </React.Fragment>
 
             <label>
               <ModalTitles>Summary</ModalTitles>

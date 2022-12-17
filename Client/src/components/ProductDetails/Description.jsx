@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const DataContainer = styled.div`
 position:relative ;
 align-self: center
-
 `
 
 const Description = ({ productData }) => {

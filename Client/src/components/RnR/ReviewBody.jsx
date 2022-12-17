@@ -1,22 +1,7 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import { ShowMoreButton, BodyFormat } from './RnRStyling';
 
-const ShowMoreButton = styled.button`
-  background: transparent;
-  border: 1px solid;
-  cursor: pointer;
-  text-decoration: underline;
-  border: none;
-  margin-bottom: 10px;
-`;
-
-const BodyFormat = styled.div`
-  font-size: 14px;
-  font-strech: expanded;
-  margin-bottom: 20px;
-`;
-
-const ReviewBody = ({body}) => {
+export default function ReviewBody({body}) {
   const [showMore, setShowMore] = useState(false);
 
   if (showMore) {
@@ -40,5 +25,3 @@ const ReviewBody = ({body}) => {
     )
   }
 };
-
-export default ReviewBody;
