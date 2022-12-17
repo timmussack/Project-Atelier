@@ -16,10 +16,8 @@
 ![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
 ![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
 
-## How to contribute
-Create your own branch:
-
-    git checkout -b <branchName>
+## Setup
+Fork or clone this repo onto your local machine first
 
 Install dependencies:
 
@@ -31,6 +29,10 @@ Start your server and client
     npm run client-dev
 
 ## Git Work Flow
+
+Create your own branch:
+
+    git checkout -b <branchName>
 
 Update your repo daily or whenever a change to the main branch is made:
 
