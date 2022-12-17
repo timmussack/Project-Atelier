@@ -4,24 +4,24 @@ import axios from 'axios';
 import AddToCartModal from './AddToCartModal.jsx';
 
 const StyledAddToCart = styled.button`
-  width: inherit;
-  height: 65px;
-  font-size: 1em;
-  padding: 0.25em 1em;
-  background-color: white;
-  color: black;
-  border: 1px solid;
-  border-radius: 10px;
-  box-shadow: black 3px 1px 5px;
-  cursor: pointer;
-  font-weight: 700;
+width: inherit;
+height: 65px;
+font-size: 1em;
+padding: 0.25em 1em;
+background-color: white;
+color: black;
+border: 1px solid;
+border-radius: 10px;
+box-shadow: black 3px 1px 5px;
+cursor: pointer;
+font-weight: 700;
 `;
 
 const StyledError = styled.strong`
-  color: red;
-  margin-left: 22px;
-  font-size: smaller;
-`;
+color: red;
+margin-left: 22px;
+font-size: smaller;
+`
 
 const Dropdown = ({ currentStyle }) => {
   const [sizeValue, setSizeValue] = useState('');

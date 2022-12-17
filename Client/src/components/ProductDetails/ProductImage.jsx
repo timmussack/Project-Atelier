@@ -47,11 +47,13 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
   const [totalReviews, setTotalReviews] = useState(0);
   const [styleId, setStyleSelected] = useState(0)
 
+
   const handleScroll = (e) => {
     e.preventDefault();
     var test = document.getElementById('ratings');
     test.scrollIntoView({behavior: 'smooth'})
   }
+
 
   const onZoom = useCallback((e) => {
     let x = (e.clientX - e.target.offsetLeft) / e.target.width * 100;
@@ -213,56 +215,48 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
               <MdArrowCircleUp id="thumbnailArrow"/>
             </div>
           }
-          <React.Fragment>
-            { thumbnailArray.length &&
-              thumbnailArray.map((image, index) => {
-                if (thumbnailDown) {
-                    while (index >= startingIndex &&  index <= showItems) {
-                      return (
-                        <React.Fragment>
-                          <div
-                            className={index === photoIndex ? "img_wrap active" : "img_wrap"}
-                            key={index}
-                            onClick={() => handleClick(image, index)}
-                            >
-                            <img src={image} alt="" />
-                          </div>
-                        </React.Fragment>
-                      )
-                    }
-                } else if (thumbnailUp) {
-                  while (index >= startingIndex && index <= showItems) {
+          { thumbnailArray.length &&
+            thumbnailArray.map((image, index) => {
+              if (thumbnailDown) {
+                  while (index >= startingIndex &&  index <= showItems) {
                     return (
-                      <React.Fragment>
-                        <div
-                          className={index === photoIndex ? "img_wrap active" : "img_wrap"}
-                          key={index}
-                          onClick={() => handleClick(image, index)}
-                          >
-                          <img src={image} alt="" />
-                        </div>
-                      </React.Fragment>
+                      <div
+                        className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                        key={index}
+                        onClick={() => handleClick(image, index)}
+                        >
+                        <img src={image} alt="" />
+                      </div>
                     )
                   }
-                } else {
-                  while (index <= showItems) {
-                    return (
-                      <React.Fragment>
-                        <div
-                          data-testid='thumbnails'
-                          className={index === photoIndex ? "img_wrap active" : "img_wrap"}
-                          key={index}
-                          onClick={() => handleClick(image, index)}
-                          >
-                          <img src={image} alt="" />
-                        </div>
-                      </React.Fragment>
-                    )
-                  }
+              } else if (thumbnailUp) {
+                while (index >= startingIndex && index <= showItems) {
+                  return (
+                    <div
+                      className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                      key={index}
+                      onClick={() => handleClick(image, index)}
+                      >
+                      <img src={image} alt="" />
+                    </div>
+                  )
                 }
-              })
-            }
-          </React.Fragment>
+              } else {
+                while (index <= showItems) {
+                  return (
+                    <div
+                      data-testid='thumbnails'
+                      className={index === photoIndex ? "img_wrap active" : "img_wrap"}
+                      key={index}
+                      onClick={() => handleClick(image, index)}
+                      >
+                      <img src={image} alt="" />
+                    </div>
+                  )
+                }
+              }
+            })
+          }
           {
             thumbnailArray.length && photoIndex !== thumbnailArray.length -1 &&
             <div data-testid='thumbnaildown'
@@ -298,7 +292,7 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
             }
           </div>
           <a style={{margin: '15px 0px 3px 0px'}}>{productData.category}</a>
-          <a style={{margin: '0px 0px 10px 0px', fontSize: 'xxx-large', fontWeight: 'bold'}}>{productData.name}</a>
+          <a style={{margin: '0px 0px 10px 0px', fontSize: 'xxx-large'}}>{productData.name}</a>
           {
             currentStyle.sale_price ?
             <>
@@ -315,40 +309,34 @@ const ProductImage = ({styles, defaultStyle, productData, rating, reviews}) => {
 
           <div style={{paddingTop: '10px', fontSize: 'larger'}}><a >Style > <strong>{currentStyle.name}</strong></a></div>
           <ul className="stylelist">
-          <React.Fragment>
             {
               styles.map((style, index) => {
                 if (index === 0) {
                   return (
-                    <React.Fragment>
-                      <li >
-                      <label style={{position: 'relative'}} key={index} htmlFor={index}>
-                        <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
-                        {
-                          style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
-                        }
-                          <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
-                      </label>
-                    </li>
-                  </React.Fragment>
+                    <li >
+                    <label style={{position: 'relative'}} key={index} htmlFor={index}>
+                      <input type="radio"  name="style" defaultChecked id={index} onChange={() => {handleStyleChange(style)}}/>
+                      {
+                        style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
+                      }
+                        <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+                    </label>
+                  </li>
                   )
                 }
                 return (
-                  <React.Fragment>
-                    <li>
-                      <label style={{position: 'relative'}}  key={index} htmlFor={index}>
-                        <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
-                        {
-                          style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
-                        }
-                          <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
-                      </label>
-                    </li>
-                  </React.Fragment>
+                  <li>
+                    <label style={{position: 'relative'}}  key={index} htmlFor={index}>
+                      <input type="radio"  name="style" id={index} onChange={() => {handleStyleChange(style)}}/>
+                      {
+                        style.style_id === styleId ? <img src="checkmark2.png" id="stylecheckmark"/> : null
+                      }
+                        <img id="styleitem" data-testid='styleselection' src={style.photos[0].thumbnail_url}/>
+                    </label>
+                  </li>
                 )
               })
             }
-          </React.Fragment>
           </ul>
           <div className="addToCartContainer">
             <Dropdown currentStyle={currentStyle}/>
