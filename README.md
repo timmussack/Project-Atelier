@@ -47,6 +47,9 @@ If you get a divergent branch error:
 git pull upstream main
 
     git push origin <branchName>
+
+## Product Overview Demo
+<img src="Assets/9B377FC5-1AF1-450A-BB53-E8BF5F6D1BF8.gif" width="100%"/>
     
 ## Product Overview Demo
 <img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671297664/REALLY_SUPER_FAST_PO_DEMO_bcnegz.gif'/>
