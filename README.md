@@ -32,21 +32,20 @@ Start your server and client
 
 ## Git Work Flow
 
-Give git a reference to this repo:
+Update your repo daily or whenever a change to the main branch is made:
 
-    git remote add upstream https://github.com/RFE2210-Amaryllis/FEC.git
-
-Update your repo daily:
-
-    git pull upstream main
+    git pull origin main
 
 If you get a divergent branch error:
 
     git config pull.rebase false
 
-git pull upstream main
+Push changes only to your branch:
 
     git push origin <branchName>
+    
+Add tests for any new code you've written and make sure they pass before submitting a pull request to the main branch.
+All pull requests must be reviewed by at least 1 other team member before being able to be merged.
     
 ## Product Overview Demo
 <img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671297664/REALLY_SUPER_FAST_PO_DEMO_bcnegz.gif'/>
