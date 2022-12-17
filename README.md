@@ -6,6 +6,12 @@ A project created by...
     Joe Lin - Ratings & Reviews
     Darrien Willig - Product Overview
 
+## Technologies
+    - [React](https://reactjs.org/)
+    - [Node.js](https://nodejs.org/en/)
+    - [Express](https://expressjs.com/)
+    - [Styled Components](https://styled-components.com/)
+
 ## How to contribute
 Create your own branch:
 
