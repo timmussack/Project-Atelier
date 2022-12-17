@@ -51,3 +51,6 @@ git pull upstream main
 
 ## Ratings & Reviews Demo
 <img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293953/Fast_RR_Demo_teku9h.gif'/>
+
+## Dark Mode Demo
+<img src='http://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293933/Dark_Mode_Demo_vbpoey.gif'/>
