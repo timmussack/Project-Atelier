@@ -6,10 +6,11 @@
    •[Darrien Willig](https://github.com/darrienwillig) - Product Overview<br />
 
 ## Technologies
-•[React](https://reactjs.org/)<br />
-    •[Node.js](https://nodejs.org/en/)<br />
-    •[Express](https://expressjs.com/)<br />
-    •[Styled Components](https://styled-components.com/)<br />
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![Node](https://img.shields.io/badge/-Node-9ACD32?logo=node.js&logoColor=white&style=for-the-badge)
+![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
+![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
 
 ## How to contribute
 Create your own branch:
