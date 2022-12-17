@@ -5,7 +5,7 @@ Tim Mussack - Questions and Answers
 Joe Lin - Ratings & Reviews
 Darrien Willig - Product Overview
 
-## Git Work Flow
+## How to contribute
 Create your own branch:
 
     git checkout -b <branchName>
@@ -19,7 +19,7 @@ Start your server and client
     npm run server-dev
     npm run client-dev
 
-## Updating the Repo
+## Git Work Flow
 
 Give git a reference to this repo:
 
