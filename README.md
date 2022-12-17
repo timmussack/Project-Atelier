@@ -1,16 +1,15 @@
 # Front End Capstone - Hack Reactor
 
-A project created by...
-
-    Tim Mussack - Questions and Answers
-    Joe Lin - Ratings & Reviews
-    Darrien Willig - Product Overview
+## Contributors<br />
+•[Tim Mussack](https://github.com/timmussack) - Questions and Answers<br />
+   •[Joe Lin](https://github.com/joelinnn) - Ratings & Reviews<br />
+   •[Darrien Willig](https://github.com/darrienwillig) - Product Overview<br />
 
 ## Technologies
-    - [React](https://reactjs.org/)
-    - [Node.js](https://nodejs.org/en/)
-    - [Express](https://expressjs.com/)
-    - [Styled Components](https://styled-components.com/)
+•[React](https://reactjs.org/)<br />
+    •[Node.js](https://nodejs.org/en/)<br />
+    •[Express](https://expressjs.com/)<br />
+    •[Styled Components](https://styled-components.com/)<br />
 
 ## How to contribute
 Create your own branch:
