@@ -50,7 +50,7 @@ Add tests for any new code you've written and make sure they pass before submitt
 All pull requests must be reviewed by at least 1 other team member before being merged.
     
 ## Product Overview Demo
-<img src="Assets/REALLY SUPER FAST DEMO 2.gif" width="80%"/>
+<img src="Assets/REALLY SUPER FAST DEMO 2.gif" width="100%"/>
 
 ## Questions & Answers Demo
 <img src="Assets/Fast QA Demo.gif" width="100%"/>
