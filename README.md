@@ -6,8 +6,6 @@ Joe Lin - Ratings & Reviews
 Darrien Willig - Product Overview
 
 ## Git Work Flow
-# Before Starting Work on this Repo
-
 Create your own branch:
 
     git checkout -b <branchName>
