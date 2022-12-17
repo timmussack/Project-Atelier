@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PhotoModal from './modals/PhotoModal.jsx';
 
-const ReviewPhotos = ({photos}) => {
+export default function ReviewPhotos({photos}) {
   const [zoom, setZoom] = useState(false);
   const [image, setImage] = useState('');
 
@@ -26,5 +26,3 @@ const ReviewPhotos = ({photos}) => {
     )
   }
 };
-
-export default ReviewPhotos;

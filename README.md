@@ -16,10 +16,8 @@
 ![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
 ![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
 
-## How to contribute
-Create your own branch:
-
-    git checkout -b <branchName>
+## Setup
+Fork or clone this repo onto your local machine first
 
 Install dependencies:
 
@@ -32,22 +30,25 @@ Start your server and client
 
 ## Git Work Flow
 
-Give git a reference to this repo:
+Create your own branch:
 
-    git remote add upstream https://github.com/RFE2210-Amaryllis/FEC.git
+    git checkout -b <branchName>
 
-Update your repo daily:
+Update your repo daily or whenever a change to the main branch is made:
 
-    git pull upstream main
+    git pull origin main
 
 If you get a divergent branch error:
 
     git config pull.rebase false
 
-git pull upstream main
+Push changes only to your branch:
 
     git push origin <branchName>
-
+    
+Add tests for any new code you've written and make sure they pass before submitting a pull request to the main branch.
+All pull requests must be reviewed by at least 1 other team member before being merged.
+    
 ## Product Overview Demo
 <img src="Assets/ProductOverview.gif" width="100%"/>
 

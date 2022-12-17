@@ -1,52 +1,32 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 import axios from 'axios';
+import { Helpful, Yes, Spacer2, FooterFormatting } from './RnRStyling';
 
-const Helpful = styled.div`
-  padding-right: 5px;
-`;
+const reviewHelpful = (id) => {
+  setHelpful(true);
 
-const Yes = styled.div`
-  padding-right: 5px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+  axios.put('/reviews/:review_id/helpful', { review_id: id })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      console.log('Error marking review as helpful', err)
+    });
+};
 
-const Spacer2 = styled.div`
-  padding-right: 8px;
-`;
+const reportReview = (id) => {
+  setReported(true);
 
-const FooterFormatting = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-size: 11px;
-`;
+  axios.put('/reviews/:review_id/report', { review_id: id })
+    .then(info => info)
+    .catch((err) => {
+      console.log('Error reporting review', err)
+    });
+};
 
-const ReviewFooter = ({helpfulness, reviewID}) => {
+export default function ReviewFooter({helpfulness, reviewID}) {
   const [helpful, setHelpful] = useState(false);
   const [reported, setReported] = useState(false);
-
-  const reviewHelpful = (id) => {
-    setHelpful(true);
-
-    axios.put('/reviews/:review_id/helpful', { review_id: id })
-      .then((response) => {
-        return response;
-      })
-      .catch((err) => {
-        console.log('Error marking review as helpful', err)
-      });
-  };
-
-  const reportReview = (id) => {
-    setReported(true);
-
-    axios.put('/reviews/:review_id/report', { review_id: id })
-      .then(info => info)
-      .catch((err) => {
-        console.log('Error reporting review', err)
-      });
-  };
 
   return (
     <FooterFormatting>
@@ -57,5 +37,3 @@ const ReviewFooter = ({helpfulness, reviewID}) => {
     </FooterFormatting>
   )
 };
-
-export default ReviewFooter;

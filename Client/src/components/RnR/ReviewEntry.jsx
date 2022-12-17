@@ -1,32 +1,12 @@
-import styled, { css } from 'styled-components';
 import React from 'react';
 import Stars from './Stars.jsx';
 import ReviewHeader from './ReviewHeader.jsx';
 import ReviewBody from './ReviewBody.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
+import { EntryFormatting, EntryTitleMain } from './RnRStyling';
 
-const Formatting = styled.div`
-  font-size: 14px;
-  padding-bottom: 1em;
-  &:after {
-    content: '';
-    background: black;
-    height: 1px;
-    width: 100%;
-    display: flex;
-    margin-top: 2em;
-    margin-bottom: 2em;
-  }
-`;
-
-const TitleMain = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-  padding-bottom: 1em;
-`;
-
-const ReviewEntry = ({review, rating}) => {
+export default function ReviewEntry({review, rating}) {
 
   const formatDate = (data) => {
     let date = new Date(data);
@@ -37,10 +17,10 @@ const ReviewEntry = ({review, rating}) => {
   }
 
   return (
-    <Formatting>
+    <EntryFormatting>
       <ReviewHeader summary={review.summary} rating={review.rating} user={review.reviewer_name} date={formatDate(review.date)}/>
 
-      <TitleMain>{review.summary.slice(0, 60)}</TitleMain>
+      <EntryTitleMain>{review.summary.slice(0, 60)}</EntryTitleMain>
 
       <ReviewBody body={review.body} summary={review.summary.slice(0, 60)}/>
 
@@ -59,8 +39,6 @@ const ReviewEntry = ({review, rating}) => {
       </div>
 
       <ReviewFooter helpfulness={review.helpfulness} reviewID={review.review_id}/>
-    </Formatting>
+    </EntryFormatting>
   )
 }
-
-export default ReviewEntry;

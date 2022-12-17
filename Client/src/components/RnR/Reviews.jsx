@@ -1,14 +1,10 @@
-import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
+import axios from 'axios';
 import ReviewTiles from './ReviewTiles.jsx';
 import ReviewSortOptions from './ReviewSortOptions.jsx'
-import axios from 'axios';
+import { ReviewsFormatting } from './RnRStyling';
 
-const Formatting = styled.div`
-  width:100%
-`;
-
-const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
+export default function Reviews({reviews, metaData, product, productData, setReviews}) {
 
   const optionHandler = (e) => {
     axios.get('/reviews', {
@@ -25,10 +21,9 @@ const Reviews = ({reviews, metaData, product, productData, setReviews}) => {
   };
 
   return (
-  <Formatting>
+  <ReviewsFormatting>
     <ReviewSortOptions optionHandler={optionHandler} reviews={reviews} />
     <ReviewTiles reviews={reviews} metaData={metaData} product={product} productData={productData}/>
-  </Formatting>
+  </ReviewsFormatting>
 )};
 
-export default Reviews;
