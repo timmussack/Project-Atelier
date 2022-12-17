@@ -47,16 +47,16 @@ Push changes only to your branch:
     git push origin <branchName>
     
 Add tests for any new code you've written and make sure they pass before submitting a pull request to the main branch.
-All pull requests must be reviewed by at least 1 other team member before being able to be merged.
+All pull requests must be reviewed by at least 1 other team member before being merged.
     
 ## Product Overview Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671297664/REALLY_SUPER_FAST_PO_DEMO_bcnegz.gif'/>
+<img src="Assets/ProductOverview.gif" width="100%"/>
 
 ## Questions & Answers Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671292667/Fast_QA_Demo_tmejzu.gif'/>
+<img src="Assets/QuestionsAnswers.gif" width="100%"/>
 
 ## Ratings & Reviews Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293953/Fast_RR_Demo_teku9h.gif'/>
+<img src="Assets/RatingsReviews.gif" width="100%"/>
 
 ## Dark Mode Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293933/Dark_Mode_Demo_vbpoey.gif'/>
+<img src="Assets/DarkMode.gif" width="100%"/>
