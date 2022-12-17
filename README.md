@@ -1,9 +1,6 @@
 # Front End Capstone - Hack Reactor
 
 ## Contributors<br />
-
-&nbsp;
-
 <a href="https://github.com/RFE2210-Amaryllis/Project-Atelier/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=RFE2210-Amaryllis/Project-Atelier" />
 </a>
