@@ -59,4 +59,4 @@ All pull requests must be reviewed by at least 1 other team member before being 
 <img src="Assets/RatingsReviews.gif" width="100%"/>
 
 ## Dark Mode Demo
-<img src="Assets/DarkMode.gif" width="100%"/>
+<img src="Assets/Dark Mode Demo.gif" width="100%"/>
