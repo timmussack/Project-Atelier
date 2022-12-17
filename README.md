@@ -49,16 +49,13 @@ git pull upstream main
     git push origin <branchName>
 
 ## Product Overview Demo
-<img src="Assets/9B377FC5-1AF1-450A-BB53-E8BF5F6D1BF8.gif" width="100%"/>
-    
-## Product Overview Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671297664/REALLY_SUPER_FAST_PO_DEMO_bcnegz.gif'/>
+<img src="Assets/ProductOverview.gif" width="100%"/>
 
 ## Questions & Answers Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671292667/Fast_QA_Demo_tmejzu.gif'/>
+<img src="Assets/QuestionsAnswers.gif" width="100%"/>
 
 ## Ratings & Reviews Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293953/Fast_RR_Demo_teku9h.gif'/>
+<img src="Assets/RatingsReviews.gif" width="100%"/>
 
 ## Dark Mode Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671293933/Dark_Mode_Demo_vbpoey.gif'/>
+<img src="Assets/DarkMode.gif" width="100%"/>
