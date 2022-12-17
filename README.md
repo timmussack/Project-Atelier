@@ -1,9 +1,10 @@
 # Front End Capstone - Hack Reactor
 
 A project created by...
-Tim Mussack - Questions and Answers
-Joe Lin - Ratings & Reviews
-Darrien Willig - Product Overview
+
+    Tim Mussack - Questions and Answers
+    Joe Lin - Ratings & Reviews
+    Darrien Willig - Product Overview
 
 ## How to contribute
 Create your own branch:
