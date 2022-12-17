@@ -44,7 +44,7 @@ git pull upstream main
     git push origin <branchName>
     
 ## Product Overview Demo
-<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671294812/Fast_PO_Demo_gkuiv7.gif'/>
+<img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_100,w_200/v1671294812/Fast_PO_Demo_gkuiv7.gif'/>
 
 ## Questions & Answers Demo
 <img src='https://res.cloudinary.com/dfxzjeut8/video/upload/c_scale,h_402,w_758/v1671292667/Fast_QA_Demo_tmejzu.gif'/>
