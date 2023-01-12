@@ -20,13 +20,13 @@
 <img src="Assets/REALLY SUPER FAST PO DEMO 2.gif" width="50%" height="50%"/>
 
 ## Questions & Answers Demo
-<img src="Assets/Fast QA Demo.gif" width="100%"/>
+<img src="Assets/Fast QA Demo.gif" width="50%" height="50%"/>
 
 ## Ratings & Reviews Demo
-<img src="Assets/Fast RR Demo.gif" width="100%"/>
+<img src="Assets/Fast RR Demo.gif" width="50%" height="50%"/>
 
 ## Dark Mode Demo
-<img src="Assets/Dark Mode Demo.gif" width="100%"/>
+<img src="Assets/Dark Mode Demo.gif" width="50%" height="50%"/>
 
 ## Setup
 Fork or clone this repo onto your local machine first
