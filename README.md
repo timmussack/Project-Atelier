@@ -16,6 +16,18 @@
 ![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
 ![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
 
+## Product Overview Demo
+<img src="Assets/REALLY SUPER FAST PO DEMO 2.gif" width="50%" height="50%"/>
+
+## Questions & Answers Demo
+<img src="Assets/Fast QA Demo.gif" width="100%"/>
+
+## Ratings & Reviews Demo
+<img src="Assets/Fast RR Demo.gif" width="100%"/>
+
+## Dark Mode Demo
+<img src="Assets/Dark Mode Demo.gif" width="100%"/>
+
 ## Setup
 Fork or clone this repo onto your local machine first
 
@@ -48,15 +60,3 @@ Push changes only to your branch:
     
 Add tests for any new code you've written and make sure they pass before submitting a pull request to the main branch.
 All pull requests must be reviewed by at least 1 other team member before being merged.
-    
-## Product Overview Demo
-<img src="Assets/REALLY SUPER FAST PO DEMO 2.gif" width="100%"/>
-
-## Questions & Answers Demo
-<img src="Assets/Fast QA Demo.gif" width="100%"/>
-
-## Ratings & Reviews Demo
-<img src="Assets/Fast RR Demo.gif" width="100%"/>
-
-## Dark Mode Demo
-<img src="Assets/Dark Mode Demo.gif" width="100%"/>
